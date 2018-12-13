@@ -17,9 +17,10 @@ type: page
 * [张鑫旭（腾讯）](http://www.zhangxinxu.com/wordpress/)
 * [小火柴的蓝色理想](http://www.cnblogs.com/xiaohuochai/)
 
-## 工具
+## OAuth 2.0
 
 * [理解OAuth2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
+* [Springboot集成第三方登录(facebook,linkedin,github)](https://blog.csdn.net/iverson2010112228/article/details/53673132)
 
 
 
