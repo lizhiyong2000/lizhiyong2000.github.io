@@ -19,6 +19,8 @@ type: page
 
 ## 工具
 
+* [理解OAuth2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
+
 
 
 
