@@ -26,8 +26,8 @@ type: page
 
 ## Markdown
 * [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
-
-
+* [Atom编辑markdown-图片上传](https://www.jianshu.com/p/fa30b769c5cc)
+*
 
 ## Comments
 
