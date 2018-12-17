@@ -15,7 +15,7 @@ tags: Markdown Atom
 
 ## Atom安装
 下载安装Atom：https://atom.io/
-![](http://pjpst7ucp.bkt.clouddn.com/2018-9ed086df.png)
+
 Atom安装完成后，对Markdown的支持比较基础，在Atom庞大的插件库里有很多有用的小插件，可以用来提高我们的写作效率。以下插件列表是在比较了多个类似功能插件后的选择，可以根据个人喜好进行更换。
 
 ## 编辑器增强([markdown-writer](https://atom.io/packages/markdown-writer))
