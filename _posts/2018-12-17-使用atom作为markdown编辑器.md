@@ -14,7 +14,7 @@ tags: Markdown Atom
 > “Atom是由GitHub开发的自由及开放源代码的文字与代码编辑器，支持macOS、Windows和Linux操作系统，本文将介绍如何用Atom作为Markdown编辑器。”
 
 ## Atom安装
-下载安装Atom：https://atom.io/
+下载安装Atom：[https://atom.io/](https://atom.io/)
 
 Atom安装完成后，对Markdown的支持比较基础，在Atom庞大的插件库里有很多有用的小插件，可以用来提高我们的写作效率。以下插件列表是在比较了多个类似功能插件后的选择，可以根据个人喜好进行更换。
 
