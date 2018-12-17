@@ -21,6 +21,7 @@ Atom安装完成后，对Markdown的支持比较基础，在Atom庞大的插件�
 
 ## 编辑器增强([markdown-writer](https://atom.io/packages/markdown-writer))
 ![](http://pjpst7ucp.bkt.clouddn.com/2018-7afd4ee4.gif)
+
 Markdown-Writer for Atom 是一款Markdown编辑器插件，其主要目的是：
 
     将 Atom 变成一个“更好”的 Markdown 编辑器；
