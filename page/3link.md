@@ -13,11 +13,8 @@ type: page
 </div>
 
 
-## 收集优质的中文前端博客
+## 收集优质的中文博客
 
-* [阮一峰的网络日志（蚂蚁金服）](http://www.ruanyifeng.com/blog/)
-* [张鑫旭（腾讯）](http://www.zhangxinxu.com/wordpress/)
-* [小火柴的蓝色理想](http://www.cnblogs.com/xiaohuochai/)
 
 ## OAuth 2.0
 
@@ -27,8 +24,11 @@ type: page
 ## Markdown
 * [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
 * [Atom编辑markdown-图片上传](https://www.jianshu.com/p/fa30b769c5cc)
-*
 
+
+## Ubuntu
+* [Ubuntu屏幕录制工具 SimpleScreenRecorder](https://blog.csdn.net/Draonly/article/details/74898031)
+* [超好用的录屏gif软件 Peek](https://www.jianshu.com/p/9069991bbce6)
 ## Comments
 
 {% include comments.html %}33

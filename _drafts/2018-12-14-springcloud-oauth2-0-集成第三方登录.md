@@ -11,9 +11,9 @@ tags: SpringCloud OAuth ScribeJava
 <div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/auth2.jpg)"></div>
 > “Spring Cloud Security OAuth2 是 Spring 对 OAuth2 的开源实现，与Spring Cloud技术栈无缝集成，使用默认配置，开发者只需要添加注解就能完成 OAuth2 授权服务的搭建。”
 
+![test](images/auth2.jpg)
 
 ## OAuth 2.0
-
 
 ## Spring Security
 
@@ -30,8 +30,11 @@ tags: SpringCloud OAuth ScribeJava
 
 
 
+
+
 3. **为什么要Nginx反向代理**
 2018-12-14
+
 
 
 ## 前端可以用Nginx做些什么
