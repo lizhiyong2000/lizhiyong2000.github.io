@@ -8,7 +8,7 @@ tags: Markdown Atom
 ---
 
 * content
-{:toc}:
+{:toc}
 
 <div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/2018-9ed086df.png)"></div>
 > “Atom是由GitHub开发的自由及开放源代码的文字与代码编辑器，支持macOS、Windows和Linux操作系统，本文将介绍如何用Atom作为Markdown编辑器。”
