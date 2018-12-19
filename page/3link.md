@@ -13,12 +13,18 @@ type: page
 </div>
 
 
-## 收集优质的中文博客
+## 收集优质的博客
 
 
 ## OAuth 2.0
 
 * [理解OAuth2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
+
+* [Using Spring Oauth2 to secure REST](http://www.tinmegali.com/en/2017/06/25/oauth2-using-spring/)
+
+* [Spring Security系列博客](https://www.jianshu.com/u/fb66b7412d27)
+
+* [Spring Boot OAuth2 Social Login with Google, Facebook, and Github](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
 
 * [Springboot集成第三方登录(facebook,linkedin,github)](https://blog.csdn.net/iverson2010112228/article/details/53673132)
 
@@ -29,7 +35,13 @@ type: page
 
 * [CAS单点登录-第三方登录(QQ、微信、CSDN、GitHub)](https://blog.csdn.net/u010475041/article/details/78300586)
 
-* [Spring Boot OAuth2 Social Login with Google, Facebook, and Github](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
+
+
+
+
+
+
+
 
 ## Markdown
 * [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
