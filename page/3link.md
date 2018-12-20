@@ -35,7 +35,7 @@ type: page
 
 * [CAS单点登录-第三方登录(QQ、微信、CSDN、GitHub)](https://blog.csdn.net/u010475041/article/details/78300586)
 
-
+* [Multiple Entry Points in Spring Security](https://www.baeldung.com/spring-security-multiple-entry-points)
 
 
 
