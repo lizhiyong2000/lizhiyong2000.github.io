@@ -10,7 +10,7 @@ tags: SpringCloud OAuth SSO
 -   content
     {:toc}
 
-<div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/auth2.jpg)" ></div>
+<div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/2018-dc55c005.png)" ></div>
 
 > “Spring Cloud Security OAuth2 是 Spring 对 OAuth2 的开源实现，与Spring Cloud技术栈无缝集成，使用默认配置，开发者只需要添加注解就能完成 OAuth2 授权服务的搭建。”
 
@@ -126,6 +126,7 @@ security:
 ### 3.结果测试
 通过Oauth2进行登录验证，结果：
 ![](http://pjpst7ucp.bkt.clouddn.com/2018-43a98728.gif)
+
 
 验证过程中碰到的问题：
 1.未设置Client Secret导致授权页面无法授权。
