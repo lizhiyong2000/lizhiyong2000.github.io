@@ -7,7 +7,7 @@ description: SpringCloud OAuth2.0
 tags: SpringCloud OAuth
 ---
 
--   content
+*   content
     {:toc}
 
 <div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/auth2.jpg)" ></div>
