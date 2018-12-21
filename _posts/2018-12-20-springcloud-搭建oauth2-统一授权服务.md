@@ -8,7 +8,7 @@ tags: SpringCloud OAuth
 ---
 
 * content
-    {:toc}
+{:toc}
 
 <div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/auth2.jpg)" ></div>
 
