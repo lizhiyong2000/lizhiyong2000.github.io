@@ -37,6 +37,8 @@ type: page
 
 * [Multiple Entry Points in Spring Security](https://www.baeldung.com/spring-security-multiple-entry-points)
 
+* [Spring Security Oauth2 单点登录案例实现和执行流程剖析](https://www.cnblogs.com/xifengxiaoma/p/10043173.html)
+
 
 
 
