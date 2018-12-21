@@ -24,6 +24,7 @@ tags: SpringCloud OAuth SSO
 2. 资源服务器1（Client1）
 3. 资源服务器2（Client2）
 
+## 服务器配置
 ### 1. 授权服务器配置
 授权服务器配置AuthorizationServerConfig添加如下配置：
 ```java
