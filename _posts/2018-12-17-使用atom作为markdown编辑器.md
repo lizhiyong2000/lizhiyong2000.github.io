@@ -7,7 +7,7 @@ description: 使用Atom作为Markdown编辑器
 tags: Markdown Atom
 ---
 
-*   content
+* content
     {:toc}
 
 <div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/2018-9ed086df.png)"></div>
