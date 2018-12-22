@@ -86,3 +86,7 @@ JWT token编码前示例：
 * 不应该在jwt的payload部分存放敏感信息，因为该部分是客户端可解密的部分。
 * 保护好secret私钥，该私钥非常重要。
 * 如果可以，请使用https协议
+
+
+## 参考链接
+* [Using JWT with Spring Security OAuth](https://www.baeldung.com/spring-security-oauth-jwt)
