@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "SpringCloud 搭建OAuth2 统一授权服务"
-date: "2018-12-14 15:25"
+date: "2018-12-20 15:25"
 categories: SpringCloud OAuth
 description: SpringCloud OAuth2.0
 tags: SpringCloud OAuth
@@ -112,7 +112,7 @@ public class DemoController {
 }
 ```
 
-运行工程后使用浏览器访问地址：[http://loccalhost:8080/](http://loccalhost:8080/)，发现接口已经加入了安全控制，默认需要输入用户名密码进行验证。
+运行工程后使用浏览器访问地址：[http://localhost:8080/](http://localhost:8080/)，发现接口已经加入了安全控制，默认需要输入用户名密码进行验证。
 
 ![](http://pjpst7ucp.bkt.clouddn.com/2018-6cc06dad.png)
 
