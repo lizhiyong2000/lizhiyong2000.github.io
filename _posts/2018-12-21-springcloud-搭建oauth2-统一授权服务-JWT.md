@@ -103,7 +103,8 @@ JWT token编码前示例：
 3.  如果可以，请使用https协议
 
 ## SpringCloud OAuth2集成JWT
-
+源代码地址：
+[https://github.com/lizhiyong2000/tutorials/tree/master/oauth-demo](https://github.com/lizhiyong2000/tutorials/tree/master/oauth-demo)
 ### 1. 授权服务器配置
 
 修改授权服务器配置AuthorizationServerConfig添加如下配置：
