@@ -7,8 +7,8 @@ description: SpringCloud OAuth2.0 JWT集成
 tags: SpringCloud OAuth JWT
 ---
 
--   content
-    {:toc}
+* content
+{:toc}
 
 <div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/2018-35454f38.png)" ></div>
 
@@ -175,4 +175,3 @@ JWT token编码前示例：
 *  [Using Spring Oauth2 to secure REST](http://www.tinmegali.com/en/2017/06/25/oauth2-using-spring/)
 *  [Using JWT with Spring Security OAuth](https://www.baeldung.com/spring-security-oauth-jwt)
 *  [Spring Boot,Spring Security实现OAuth2 + JWT认证](https://www.jianshu.com/p/2c231c96a29b)
-
