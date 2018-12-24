@@ -86,6 +86,7 @@ JWT token编码前示例：
 
 使用JWT token时，服务器验证token真实性后，token的其他信息可以直接获取，减少了token权限校验的存储时间，服务端可以通过内嵌的声明信息，很容易地获取用户的会话信息，而不需要去访问用户或会话的数据库。在一个分布式的面向服务的框架中，这一点非常有用。
 
+
 ### 4. 为什么使用JWT
 
 -   优点
@@ -172,4 +173,6 @@ JWT token编码前示例：
 
 ## 参考链接
 *  [Using Spring Oauth2 to secure REST](http://www.tinmegali.com/en/2017/06/25/oauth2-using-spring/)
+*  [Using JWT with Spring Security OAuth](https://www.baeldung.com/spring-security-oauth-jwt)
 *  [Spring Boot,Spring Security实现OAuth2 + JWT认证](https://www.jianshu.com/p/2c231c96a29b)
+
