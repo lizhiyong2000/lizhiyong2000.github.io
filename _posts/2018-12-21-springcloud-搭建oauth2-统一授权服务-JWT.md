@@ -176,3 +176,4 @@ JWT token编码前示例：
 *  [Using Spring Oauth2 to secure REST](http://www.tinmegali.com/en/2017/06/25/oauth2-using-spring/)
 *  [Using JWT with Spring Security OAuth](https://www.baeldung.com/spring-security-oauth-jwt)
 *  [Spring Boot,Spring Security实现OAuth2 + JWT认证](https://www.jianshu.com/p/2c231c96a29b)
+*  [spring security 整合jwt](https://liguanhua.com/article/001513500678404192dc0ebd730470e945b018bf485780d000)
