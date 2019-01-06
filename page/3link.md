@@ -41,8 +41,8 @@ type: page
 
 
 
-
-
+## 系统配置
+* [在光猫上配置6to4接入IPv6的方法](http://koolshare.cn/thread-30834-1-1.html)
 
 
 ## Markdown
