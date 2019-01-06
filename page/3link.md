@@ -43,7 +43,8 @@ type: page
 
 ## 系统配置
 * [在光猫上配置6to4接入IPv6的方法](http://koolshare.cn/thread-30834-1-1.html)
-
+* [烽火HG2201U 5.0/5.01 版本 光猫改桥接 | 设置IPV6 | 超级管理员获取](https://blog.acesheep.com/index.php/archives/608/)
+* [烽火HG220G-U 2.03+ / HG2201U 5.0+光猫改桥接教程](https://guanggai.org/thread-459-1-1.html)
 
 ## Markdown
 * [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
