@@ -39,11 +39,16 @@ type: page
 
 * [Spring Security Oauth2 单点登录案例实现和执行流程剖析](https://www.cnblogs.com/xifengxiaoma/p/10043173.html)
 
+* [Spring Security基于JWT实现SSO单点登录](https://blog.csdn.net/qq_36144258/article/details/79425942)
 
+## SpringCloud
+* [spring-cloud 分布式日志采集](https://blog.csdn.net/guduyishuai/article/details/79228306)
 
+## MongoDB
+* [用了11个Docker容器，搭建出的最精简数据库分片集群](https://www.toutiao.com/a6641517937695916551/)
 
-
-
+## ELK
+* [Spring Boot使用Logback通过Kafka实现日志收集](http://blog.microservice4.net/2018/08/23/springboot-logback-kafka/)
 
 ## Markdown
 * [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
@@ -57,4 +62,4 @@ type: page
 * [超好用的录屏gif软件 Peek](https://www.jianshu.com/p/9069991bbce6)
 ## Comments
 
-{% include comments.html %}33
+{% include comments.html %}
