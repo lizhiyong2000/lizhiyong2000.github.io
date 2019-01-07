@@ -44,11 +44,18 @@ type: page
 ## SpringCloud
 * [spring-cloud 分布式日志采集](https://blog.csdn.net/guduyishuai/article/details/79228306)
 
+<<<<<<< HEAD
 ## MongoDB
 * [用了11个Docker容器，搭建出的最精简数据库分片集群](https://www.toutiao.com/a6641517937695916551/)
 
 ## ELK
 * [Spring Boot使用Logback通过Kafka实现日志收集](http://blog.microservice4.net/2018/08/23/springboot-logback-kafka/)
+=======
+## 系统配置
+* [在光猫上配置6to4接入IPv6的方法](http://koolshare.cn/thread-30834-1-1.html)
+* [烽火HG2201U 5.0/5.01 版本 光猫改桥接 | 设置IPV6 | 超级管理员获取](https://blog.acesheep.com/index.php/archives/608/)
+* [烽火HG220G-U 2.03+ / HG2201U 5.0+光猫改桥接教程](https://guanggai.org/thread-459-1-1.html)
+>>>>>>> bb9241a4507abe5be31e121bb07ce259ef8585c7
 
 ## Markdown
 * [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
