@@ -44,28 +44,11 @@ type: page
 ## SpringCloud
 * [spring-cloud 分布式日志采集](https://blog.csdn.net/guduyishuai/article/details/79228306)
 
-## Python
-* [Python任务调度模块APScheduler](https://segmentfault.com/a/1190000011084828)
-* [python logging模块使用教程](https://www.jianshu.com/p/feb86c06c4f4)
-* [python 日志模块 logging 详解](https://my.oschina.net/leejun2005/blog/126713)
-
 ## MongoDB
 * [用了11个Docker容器，搭建出的最精简数据库分片集群](https://www.toutiao.com/a6641517937695916551/)
 
 ## ELK
 * [Spring Boot使用Logback通过Kafka实现日志收集](http://blog.microservice4.net/2018/08/23/springboot-logback-kafka/)
-* [filebeat+kafka+logstash+elasticsearch](https://my.oschina.net/u/3707537/blog/1840798)
-
-
-## RabbitMQ
-* [RabbitMQ集群搭建](http://blog.51cto.com/wangwq/1951185)
-
-## 系统配置
-* [在光猫上配置6to4接入IPv6的方法](http://koolshare.cn/thread-30834-1-1.html)
-* [烽火HG2201U 5.0/5.01 版本 光猫改桥接 | 设置IPV6 | 超级管理员获取](https://blog.acesheep.com/index.php/archives/608/)
-* [烽火HG220G-U 2.03+ / HG2201U 5.0+光猫改桥接教程](https://guanggai.org/thread-459-1-1.html)
-
-* [路由器芯的秘密全在这里了](http://www.cfan.com.cn/2017/1115/129723.shtml)
 
 ## Markdown
 * [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
