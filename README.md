@@ -1,15 +1,8 @@
 # 我的 Jekyll 博客
 
-[![GitHub stars](https://img.shields.io/github/stars/likonion/likonion.github.io.svg)](https://github.com/Gaohaoyang/gaohaoyang.github.io/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/likonion/likonion.github.io.svg)](https://github.com/likonion/likonion.github.io/network)
-[![GitHub issues](https://img.shields.io/github/issues/likonion/likonion.github.io.svg)](https://github.com/likonion/likonion.github.io/issues)
-[![GitHub release](https://img.shields.io/github/release/likonion/likonion.github.io.svg)](https://github.com/likonion/likonion.github.io/releases)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/likonion/likonion.github.io/master/LICENSE)
+**博客访问地址：[http://lizhiyong2000.github.io/](http://lizhiyong2000.github.io/)**。若您喜欢这个新的博客主题，请给我个star以示鼓励吧，欢迎大家使用。
 
-
-**博客访问地址：[http://likonion.github.io/](http://likonion.github.io/)**。若您喜欢这个新的博客主题，请给我个star以示鼓励吧，欢迎大家使用。
-
-## 目录 
+## 目录
 
 * [预览图](#预览图)
 * [各部分详情](#各部分详情)
@@ -178,7 +171,7 @@ gem install jekyll
 title: 文阁style
 brief-intro: Front-end Dev Engineer
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://likonion.club" # the base hostname & protocol for your site
+url: "http://lizhiyong2000.club" # the base hostname & protocol for your site
 ```
 
 #### 链接信息
@@ -187,10 +180,10 @@ url: "http://likonion.club" # the base hostname & protocol for your site
 
 ```yml
 # other links
-twitter_username: likonion
+twitter_username: lizhiyong2000
 facebook_username:
-github_username:  likonion
-email: likonion@outlook.com
+github_username:  lizhiyong2000
+email: lizhiyong2000@outlook.com
 weibo_username:
 zhihu_username:
 linkedIn_username:
@@ -300,6 +293,4 @@ Configuration file: E:/GitWorkSpace/blog/_config.yml
 
 ## License
 
-[MIT License](https://github.com/likonion/likonion.github.io/blob/master/LICENSE.md)
-
-
+[MIT License](https://github.com/lizhiyong2000/lizhiyong2000.github.io/blob/master/LICENSE.md)
