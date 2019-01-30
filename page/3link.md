@@ -12,8 +12,20 @@ type: page
     {% include search.html %}
 </div>
 
+## Ambari
+* [Ambari Metrics 详解](https://www.ibm.com/developerworks/cn/opensource/os-cn-ambari-metrics/index.html)
+## ELK
+* [Spring Boot使用Logback通过Kafka实现日志收集](http://blog.microservice4.net/2018/08/23/springboot-logback-kafka/)
 
-## 收集优质的博客
+## Markdown
+* [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
+
+* [Atom编辑markdown-图片上传](https://www.jianshu.com/p/fa30b769c5cc)
+
+
+## MongoDB
+* [用了11个Docker容器，搭建出的最精简数据库分片集群](https://www.toutiao.com/a6641517937695916551/)
+
 
 
 ## OAuth 2.0
@@ -44,22 +56,12 @@ type: page
 ## SpringCloud
 * [spring-cloud 分布式日志采集](https://blog.csdn.net/guduyishuai/article/details/79228306)
 
-## MongoDB
-* [用了11个Docker容器，搭建出的最精简数据库分片集群](https://www.toutiao.com/a6641517937695916551/)
-
-## ELK
-* [Spring Boot使用Logback通过Kafka实现日志收集](http://blog.microservice4.net/2018/08/23/springboot-logback-kafka/)
-
-## Markdown
-* [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
-
-* [Atom编辑markdown-图片上传](https://www.jianshu.com/p/fa30b769c5cc)
 
 
 ## Ubuntu
 * [Ubuntu屏幕录制工具 SimpleScreenRecorder](https://blog.csdn.net/Draonly/article/details/74898031)
 
 * [超好用的录屏gif软件 Peek](https://www.jianshu.com/p/9069991bbce6)
-## Comments
 
+## 评论
 {% include comments.html %}
