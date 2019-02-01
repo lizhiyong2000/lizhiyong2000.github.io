@@ -22,7 +22,6 @@ type: page
 
 * [Atom编辑markdown-图片上传](https://www.jianshu.com/p/fa30b769c5cc)
 
-
 ## MongoDB
 * [用了11个Docker容器，搭建出的最精简数据库分片集群](https://www.toutiao.com/a6641517937695916551/)
 
