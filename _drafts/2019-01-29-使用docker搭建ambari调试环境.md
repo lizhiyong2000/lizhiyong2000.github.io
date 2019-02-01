@@ -264,7 +264,6 @@ spec:
 在server中命令行执行以下命令对ambari server进行配置：
 
 ```shell
-export buildNumber=2.7.3.0
 ambari-server setup
 ```
 其中ambari-server setup命令执行后，会有JDK及数据库配置，JDK使用已安装的JDK，数据库配置使用默认配置即可。
@@ -378,7 +377,6 @@ root@ambari-server-7d7cfcb886-vg82j:/opt/ambari#
 
 ```shell
 sed -i "s/localhost/10.42.2.62/g" /etc/ambari-agent/conf/ambari-agent.ini
-export buildNumber=2.7.3.0
 ambari-agent start
 ```
 
