@@ -380,7 +380,7 @@ sed -i "s/localhost/10.42.2.62/g" /etc/ambari-agent/conf/ambari-agent.ini
 ambari-agent start
 ```
 
-
+  >将命令中的10.42.2.62 换成ambari server实际IP地址
 
 ## 远程调试配置
 
