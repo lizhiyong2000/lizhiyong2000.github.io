@@ -14,6 +14,10 @@ tags: SpringCloud OAuth JWT
 
 > “Spring Cloud Security OAuth2 是 Spring 对 OAuth2 的开源实现，与Spring Cloud技术栈无缝集成，使用默认配置，开发者只需要添加注解就能完成 OAuth2 授权服务的搭建。”
 
+
+
+
+
 ## JSON Web Token (JWT)介绍
 
 JWT是一个定义一种紧凑的，自包含的并且提供防篡改机制的传递数据的方式的标准协议。

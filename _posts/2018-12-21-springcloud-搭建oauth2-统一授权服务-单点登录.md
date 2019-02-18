@@ -14,6 +14,10 @@ tags: SpringCloud OAuth SSO
 
 > “Spring Cloud Security OAuth2 是 Spring 对 OAuth2 的开源实现，与Spring Cloud技术栈无缝集成，使用默认配置，开发者只需要添加注解就能完成 OAuth2 授权服务的搭建。”
 
+
+
+
+
 ## Demo工程准备
 在上篇文章[SpringCloud 搭建OAuth2 统一授权服务](https://lizhiyong2000.github.io/2018/12/14/springcloud-%E6%90%AD%E5%BB%BAoauth2-%E7%BB%9F%E4%B8%80%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1/)中，使用SpingCloud OAuth2搭建了基础的授权服务器，本文将基于OAuth2授权搭建单点登录服务。
 
