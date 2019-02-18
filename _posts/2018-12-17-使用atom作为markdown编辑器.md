@@ -10,7 +10,7 @@ tags: Markdown Atom
 * content
 {:toc}
 
-<div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/2018-9ed086df.png)"></div>
+<div class="postImg" style="background-image:url(http://carforeasy.cn/2018-9ed086df.png)"></div>
 > “Atom是由GitHub开发的自由及开放源代码的文字与代码编辑器，支持macOS、Windows和Linux操作系统，本文将介绍如何用Atom作为Markdown编辑器。”
 
 ## Atom安装
@@ -21,7 +21,7 @@ Atom安装完成后，对Markdown的支持比较基础，在Atom庞大的插件�
 
 ## 编辑器增强([markdown-writer](https://atom.io/packages/markdown-writer))
 
-![](http://pjpst7ucp.bkt.clouddn.com/2018-7afd4ee4.gif)
+![](http://carforeasy.cn/2018-7afd4ee4.gif)
 
 Markdown-Writer for Atom 是一款Markdown编辑器插件，其主要目的是：
 
@@ -32,7 +32,7 @@ Markdown-Writer for Atom 是一款Markdown编辑器插件，其主要目的是�
 
 ## 预览增强([markdown-preview-enhanced](https://atom.io/packages/markdown-preview-enhanced))
 
-![](http://pjpst7ucp.bkt.clouddn.com/2018-47fbbb15.png)
+![](http://carforeasy.cn/2018-47fbbb15.png)
 Atom自带的Markdown预览插件markdown-preview功能比较简单，Markdown Preview Enhanced 则提供了更多功能扩展，如滚动条同步, 数学公式支持, mermaid图形支持, PlantUML支持, pandoc支持, PDF导出, 代码块支持等，其功能与 Markdown Preview Plus类似。
 
 ## 图片插入([insert-img](https://atom.io/packages/insert-img))
@@ -50,7 +50,7 @@ insert-image插件提供截图自动保存并上传到七牛云的功能，在�
 
 tree-view-copy-project-path插件提供从Atom的TreeView视图中获取文件路径的功能，配合insert-img插件，可以将TreeView视图中的图片文件直接复制文件名后通过ctrl+alt+v进行上传并插入。
 
-![](http://pjpst7ucp.bkt.clouddn.com/2018-09f2ca7f.gif)
+![](http://carforeasy.cn/2018-09f2ca7f.gif)
 
 ## 参考链接
 

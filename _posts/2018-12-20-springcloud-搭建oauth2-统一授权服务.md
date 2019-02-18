@@ -10,7 +10,7 @@ tags: SpringCloud OAuth
 * content
 {:toc}
 
-<div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/auth2.jpg)" ></div>
+<div class="postImg" style="background-image:url(http://carforeasy.cn/auth2.jpg)" ></div>
 
 > “Spring Cloud Security OAuth2 是 Spring 对 OAuth2 的开源实现，与Spring Cloud技术栈无缝集成，使用默认配置，开发者只需要添加注解就能完成 OAuth2 授权服务的搭建。”
 
@@ -114,7 +114,7 @@ public class DemoController {
 
 运行工程后使用浏览器访问地址：[http://localhost:8080/](http://localhost:8080/)，发现接口已经加入了安全控制，默认需要输入用户名密码进行验证。
 
-![](http://pjpst7ucp.bkt.clouddn.com/2018-6cc06dad.png)
+![](http://carforeasy.cn/2018-6cc06dad.png)
 
 要更改默认的安全配置，通过WebSecurityConfigurerAdapter进行扩展即可，我们首先配置内存中保存的用户名密码进行验证。
 
@@ -185,7 +185,7 @@ public class DemoController {;
 }
 ```
 基本的表单登录功能演示：
-![](http://pjpst7ucp.bkt.clouddn.com/2018-0abaeef6.gif)
+![](http://carforeasy.cn/2018-0abaeef6.gif)
 
 ## 添加OAuth2 验证
 
@@ -287,7 +287,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 ```
 ### 3.结果测试
 通过Oauth2获取token后访问接口，结果：
-![](http://pjpst7ucp.bkt.clouddn.com/2018-888525af.gif)
+![](http://carforeasy.cn/2018-888525af.gif)
 
 
 ## 小结

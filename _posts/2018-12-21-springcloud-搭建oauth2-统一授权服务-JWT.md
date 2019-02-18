@@ -10,7 +10,7 @@ tags: SpringCloud OAuth JWT
 * content
 {:toc}
 
-<div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/2018-35454f38.png)" ></div>
+<div class="postImg" style="background-image:url(http://carforeasy.cn/2018-35454f38.png)" ></div>
 
 > “Spring Cloud Security OAuth2 是 Spring 对 OAuth2 的开源实现，与Spring Cloud技术栈无缝集成，使用默认配置，开发者只需要添加注解就能完成 OAuth2 授权服务的搭建。”
 
@@ -161,15 +161,15 @@ JWT token编码前示例：
 ### 3.测试结果
 1) 访问授权接口获取token
 [localhost:8080/auth/oauth/token?grant_type=password&username=user&password=password&client_id=test_client&client_secret=test_client](localhost:8080/auth/oauth/token?grant_type=password&username=user&password=password&client_id=test_client&client_secret=test_client)
-![](http://pjpst7ucp.bkt.clouddn.com/2018-b3590329.png)
+![](http://carforeasy.cn/2018-b3590329.png)
 
 2) 对获取到的token进行验证
 [https://py-jwt-decoder.appspot.com](https://py-jwt-decoder.appspot.com)
-![](http://pjpst7ucp.bkt.clouddn.com/2018-9342810b.png)
+![](http://carforeasy.cn/2018-9342810b.png)
 3) 使用获取到的token访问资源接口
 [http://localhost:8080/auth/user/me?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2VfaWQiXSwidXNlcl9uYW1lIjoidXNlciIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsImFsbCJdLCJleHAiOjE1NDU2MzM0OTQsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiIzZTE3NTA1ZC0yOWRkLTQ5MGItYWYzYy0zZmQ3NzRhNjE1OTYiLCJjbGllbnRfaWQiOiJ0ZXN0X2NsaWVudCJ9.UrHohYNqO8Y4OvcVSG5Zpi7gsUT6FHmcFZpy3kQFZtM](http://localhost:8080/auth/user/me?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2VfaWQiXSwidXNlcl9uYW1lIjoidXNlciIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsImFsbCJdLCJleHAiOjE1NDU2MzM0OTQsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiIzZTE3NTA1ZC0yOWRkLTQ5MGItYWYzYy0zZmQ3NzRhNjE1OTYiLCJjbGllbnRfaWQiOiJ0ZXN0X2NsaWVudCJ9.UrHohYNqO8Y4OvcVSG5Zpi7gsUT6FHmcFZpy3kQFZtM)
 
-![](http://pjpst7ucp.bkt.clouddn.com/2018-85f87696.png)
+![](http://carforeasy.cn/2018-85f87696.png)
 
 
 ## 参考链接

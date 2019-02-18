@@ -10,7 +10,7 @@ tags: Docker Ambari
 * content
 {:toc}
 
-<div class="postImg" style="background-image:url(http://pjpst7ucp.bkt.clouddn.com/2018-9ed086df.png)"></div>
+<div class="postImg" style="background-image:url(http://carforeasy.cn/2018-9ed086df.png)"></div>
 > “Ambari是Hadoop（指Hadoop生态圈，包括HBase，Hive等）集群管理软件，其具有创建、管理、监视Hadoop集群的功能。Ambari也是Apache软件基金会中的顶级项目，目前最新的发布版本是2.7.3。”
 
 <br />
@@ -42,7 +42,7 @@ popd
 mvn -B clean install package jdeb:jdeb -DnewVersion=2.0.0.0 -DskipTests -Dpython.ver="python >= 2.6"
 ```
 
-![](http://pjpst7ucp.bkt.clouddn.com/使用docker搭建ambari调试环境-a40a2baa.png)
+![](http://carforeasy.cn/使用docker搭建ambari调试环境-a40a2baa.png)
 
 + 2 编译所用Dockerfile
 ```yaml
@@ -120,7 +120,7 @@ RUN mkdir $AMBARI_HOME && cd $AMBARI_HOME && cp $AMBARI_SRC_HOME/ambari-server/t
 ## Ambari Docker镜像制作
 将Docker中编译完成的Ambari-Server、Ambari-Agent 安装文件拷贝出来，分别制作镜像
 
-![](http://pjpst7ucp.bkt.clouddn.com/使用docker搭建ambari调试环境-b13f3cc8.png)
+![](http://carforeasy.cn/使用docker搭建ambari调试环境-b13f3cc8.png)
 
 + 1 Ambari-Server镜像
 ```yaml
@@ -256,7 +256,7 @@ spec:
               cpu: 100m
 ```
 在Rancher中导入配置，确认Ambari-Server 和Ambari-Agent正常启动
-![](http://pjpst7ucp.bkt.clouddn.com/使用docker搭建ambari调试环境-599df03a.png)
+![](http://carforeasy.cn/使用docker搭建ambari调试环境-599df03a.png)
 
 ## Ambari Server及Agent配置
 
@@ -364,11 +364,11 @@ root@ambari-server-7d7cfcb886-vg82j:/opt/ambari#
 ```
 
 访问Ambari Server web页面：
-![](http://pjpst7ucp.bkt.clouddn.com/使用docker搭建ambari调试环境-e2207cda.png)
+![](http://carforeasy.cn/使用docker搭建ambari调试环境-e2207cda.png)
 
 输入默认的用户名密码（admin/amdin）即可进入。
 
-![](http://pjpst7ucp.bkt.clouddn.com/使用docker搭建ambari调试环境-6d3c5761.png)
+![](http://carforeasy.cn/使用docker搭建ambari调试环境-6d3c5761.png)
 
 
 + 2 Agent 配置
