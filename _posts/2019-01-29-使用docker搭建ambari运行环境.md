@@ -1,21 +1,21 @@
 ---
 layout: "post"
-title: "使用Docker搭建Ambari调试环境"
+title: "使用Docker搭建Ambari运行环境"
 date: "2019-01-29 10:37"
 categories: Ambari
-description: 使用Docker搭建Ambari调试环境
+description: 使用Docker搭建Ambari运行环境
 tags: Docker Ambari
 ---
 
 * content
 {:toc}
 
-<div class="postImg" style="background-image:url(http://carforeasy.cn/2018-9ed086df.png)"></div>
+<div class="postImg" style="background-image:url(http://carforeasy.cn/2019-26bd29c0.png)"></div>
 > “Ambari是Hadoop（指Hadoop生态圈，包括HBase，Hive等）集群管理软件，其具有创建、管理、监视Hadoop集群的功能。Ambari也是Apache软件基金会中的顶级项目，目前最新的发布版本是2.7.3。”
 
-<br />
 
->本文所用代码请参考：<https://github.com/lizhioyng2000/docker-k8s>
+
+
 
 ## 使用Docker编译Ambari源码
 + 1 源码编译环境准备
@@ -119,14 +119,13 @@ RUN mkdir $AMBARI_HOME && cd $AMBARI_HOME && cp $AMBARI_SRC_HOME/ambari-server/t
   原因：未安装git，安装git即可
 ## Ambari Docker镜像制作
 将Docker中编译完成的Ambari-Server、Ambari-Agent 安装文件拷贝出来，分别制作镜像
-
 ![](http://carforeasy.cn/使用docker搭建ambari调试环境-b13f3cc8.png)
 
+具体配置请参考：https://github.com/lizhiyong2000/docker-k8s/tree/master/docker/ambari
 + 1 Ambari-Server镜像
 ```yaml
 FROM lizhiyong2000/ubuntu:18.04
 #MAINTAINER lizhiyong2000@gmail.com
-
 # AMBARI
 ENV AMBARI_VERSION=2.7.3 \
     AMBARI_HOME=/opt/ambari
@@ -145,12 +144,18 @@ COPY dist/ambari-server_2.7.3.0-0-dist.deb $AMBARI_HOME/
 
 RUN dpkg -i $AMBARI_HOME/ambari-server_2.7.3.0-0-dist.deb
 
+
+ADD init/init-server.sh /opt/ambari/init-server.sh
+RUN chmod u+x /opt/ambari/init-server.sh
+
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
 
 RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
 
-EXPOSE 8080
+EXPOSE 8080 8440 8441 5432 5005
 
+ENV buildNumber=2.7.3.0
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 ```
@@ -193,9 +198,23 @@ spec:
   selector:
     component: ambari-server
   ports:
-    - port: 8080
-      targetPort: 8080
-      name: http
+  - port: 8080
+    targetPort: 8080
+    name: http
+  clusterIP: None
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ambari-agent
+spec:
+  selector:
+    component: ambari-agent
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+  clusterIP: None
 ---
 kind: Service
 apiVersion: v1
@@ -211,11 +230,12 @@ spec:
       name: http
       nodePort: 31080
 ---
-kind: Deployment
+kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: ambari-server
 spec:
+  serviceName: ambari-server
   replicas: 1
   selector:
     matchLabels:
@@ -234,11 +254,12 @@ spec:
             requests:
               cpu: 100m
 ---
-kind: Deployment
+kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: ambari-agent
 spec:
+  serviceName: ambari-agent
   replicas: 3
   selector:
     matchLabels:
@@ -258,131 +279,19 @@ spec:
 在Rancher中导入配置，确认Ambari-Server 和Ambari-Agent正常启动
 ![](http://carforeasy.cn/使用docker搭建ambari调试环境-599df03a.png)
 
-## Ambari Server及Agent配置
+## Ambari Server及Agent配置问题
++ ambari卡在设置集群名称的下一步
 
-+ 1 Server 配置
-在server中命令行执行以下命令对ambari server进行配置：
+设置好集群名称，卡在了NEXT这一步，换句话说，就是select version那个页面不能被我们访问到。
 
-```shell
-ambari-server setup
-```
-其中ambari-server setup命令执行后，会有JDK及数据库配置，JDK使用已安装的JDK，数据库配置使用默认配置即可。
+分析：
 
-```
-root@ambari-server-7d7cfcb886-vg82j:/# export buildNumber=2.7.3.0
-root@ambari-server-7d7cfcb886-vg82j:/opt/ambari# ambari-server setup
-Using python  /usr/bin/python
-Setup ambari-server
-Checking SELinux...
-WARNING: Could not run /usr/sbin/sestatus: OK
-Customize user account for ambari-server daemon [y/n] (n)? n
-Adjusting ambari-server permissions and ownership...
-Checking firewall status...
-/bin/bash: ufw: command not found
-Checking JDK...
-[1] Oracle JDK 1.8 + Java Cryptography Extension (JCE) Policy Files 8
-[2] Custom JDK
-==============================================================================
-Enter choice (1):
-To download the Oracle JDK and the Java Cryptography Extension (JCE) Policy Files you must accept the license terms found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html and not accepting will cancel the Ambari Server setup and you must install the JDK and JCE files manually.
-Do you accept the Oracle Binary Code License Agreement [y/n] (y)? n
-Exiting...
-root@ambari-server-7d7cfcb886-vg82j:/opt/ambari# dpkg -i ambari-server_2.7.3.0-0-dist.deb
-(Reading database ... 13820 files and directories currently installed.)
-Preparing to unpack ambari-server_2.7.3.0-0-dist.deb ...
-Backing up Ambari properties: /etc/ambari-server/conf/ambari.properties -> /etc/ambari-server/conf/ambari.properties.rpmsave
-Backing up Ambari properties: /var/lib/ambari-server/ambari-env.sh -> /var/lib/ambari-server/ambari-env.sh.rpmsave
-Backing up JAAS login file: /etc/ambari-server/conf/krb5JAASLogin.conf -> /etc/ambari-server/conf/krb5JAASLogin.conf.rpmsave
-Backing up stacks directory: /var/lib/ambari-server/resources/stacks -> /var/lib/ambari-server/resources/stacks_31_01_19_02_14.old
-Backing up common-services directory: /var/lib/ambari-server/resources/common-services -> /var/lib/ambari-server/resources/common-services_31_01_19_02_14.old
-Backing up Ambari view jars: /var/lib/ambari-server/resources/views/*.jar -> /var/lib/ambari-server/resources/views/backups/
-Backing up Ambari server jar: /usr/lib/ambari-server/ambari-server-2.7.3.0.0.jar -> /usr/lib/ambari-server-backups/
-Unpacking ambari-server (2.7.3.0-0) over (2.7.3.0-0) ...
-grep: Invalid content of \{\}
-Setting up ambari-server (2.7.3.0-0) ...
-grep: Invalid content of \{\}
-root@ambari-server-7d7cfcb886-vg82j:/opt/ambari# ambari-server setup
-Using python  /usr/bin/python
-Setup ambari-server
-Checking SELinux...
-WARNING: Could not run /usr/sbin/sestatus: OK
-Customize user account for ambari-server daemon [y/n] (n)? n
-Adjusting ambari-server permissions and ownership...
-Checking firewall status...
-/bin/bash: ufw: command not found
-Checking JDK...
-[1] Oracle JDK 1.8 + Java Cryptography Extension (JCE) Policy Files 8
-[2] Custom JDK
-==============================================================================
-Enter choice (1): 2
-WARNING: JDK must be installed on all hosts and JAVA_HOME must be valid on all hosts.
-WARNING: JCE Policy files are required for configuring Kerberos security. If you plan to use Kerberos,please make sure JCE Unlimited Strength Jurisdiction Policy Files are valid on all hosts.
-Path to JAVA_HOME: /opt/jdk1.8.0_191
-Validating JDK on Ambari Server...done.
-Check JDK version for Ambari Server...
-JDK version found: 8
-Minimum JDK version is 8 for Ambari. Skipping to setup different JDK for Ambari Server.
-Checking GPL software agreement...
-GPL License for LZO: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
-Enable Ambari Server to download and install GPL Licensed LZO packages [y/n] (n)? y
-Completing setup...
-Configuring database...
-Enter advanced database configuration [y/n] (n)? n
-Configuring database...
-Default properties detected. Using built-in database.
-Configuring ambari database...
-Checking PostgreSQL...
-Configuring local database...
-Configuring PostgreSQL...
-Backup for pg_hba found, reconfiguration not required
-Creating schema and user...
-done.
-Creating tables...
-done.
-Extracting system views...
-ambari-admin-2.7.3.0.0.jar
+进入select version页面是访问的HDP-3.0，但是发现/var/lib/ambari-server/resources/stacks/HDP/没有3.0这个目录，所以select version页面打不开。
 
-Ambari repo file doesn't contain latest json url, skipping repoinfos modification
-Adjusting ambari-server permissions and ownership...
-Ambari Server 'setup' completed successfully.
-root@ambari-server-7d7cfcb886-vg82j:/opt/ambari# ambari-server start
-Using python  /usr/bin/python
-Starting ambari-server
-Ambari Server running with administrator privileges.
-Organizing resource files at /var/lib/ambari-server/resources...
-Ambari database consistency check started...
-Server PID at: /var/run/ambari-server/ambari-server.pid
-Server out at: /var/log/ambari-server/ambari-server.out
-Server log at: /var/log/ambari-server/ambari-server.log
-Waiting for server start.................................
-Server started listening on 8080
+解决办法：
 
-DB configs consistency check: no errors and warnings were found.
-Ambari Server 'start' completed successfully.
-root@ambari-server-7d7cfcb886-vg82j:/opt/ambari#
+链接: https://pan.baidu.com/s/1lsR04M6n7_zNEy2jANFrpQ 提取码: tzre
 
-```
-
-访问Ambari Server web页面：
-![](http://carforeasy.cn/使用docker搭建ambari调试环境-e2207cda.png)
-
-输入默认的用户名密码（admin/amdin）即可进入。
-
-![](http://carforeasy.cn/使用docker搭建ambari调试环境-6d3c5761.png)
-
-
-+ 2 Agent 配置
-
-在server中命令行执行以下命令对ambari server进行配置：
-
-```shell
-sed -i "s/localhost/10.42.2.62/g" /etc/ambari-agent/conf/ambari-agent.ini
-ambari-agent start
-```
-
-  >将命令中的10.42.2.62 换成ambari server实际IP地址
-
-## 远程调试配置
 
 ## 参考链接
 - [Installation Guide for Ambari 2.7.3](https://cwiki.apache.org/confluence/display/AMBARI/Installation+Guide+for+Ambari+2.7.3)
