@@ -390,3 +390,5 @@ ambari-agent start
 - [Ambari 2.6.1源码编译问题汇总](https://blog.csdn.net/ZhouyuanLinli/article/details/79399287)
 
 - [ambari-2.6.2源码编译](https://www.jianshu.com/p/addca5fca73c)
+
+- [Ambari2.7整体编译+安装使用](https://blog.csdn.net/create_17/article/details/84000772)
