@@ -45,7 +45,8 @@ mvn -B clean install package jdeb:jdeb -DnewVersion=2.0.0.0 -DskipTests -Dpython
 ![](http://carforeasy.cn/使用docker搭建ambari调试环境-a40a2baa.png)
 
 + 2 编译所用Dockerfile
-```dockerfile
+
+```
 FROM lizhiyong2000/ubuntu:18.04
 #MAINTAINER lizhiyong2000@gmail.com
 
@@ -67,8 +68,6 @@ RUN mkdir $MAVEN_HOME && curl -fSL --retry 3 \
   "http://www.apache.org/dist/ambari/ambari-$AMBARI_VERSION/apache-ambari-$AMBARI_VERSION-src.tar.gz" \
   | tar --strip-components=1 -zxf - -C $AMBARI_SRC_HOME \
   && rm -rf /tmp/* /var/tmp/*
- # && chown -R root:root $AMBARI_HOME
-
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
@@ -93,6 +92,7 @@ RUN cd $AMBARI_SRC_HOME \
 RUN mkdir $AMBARI_HOME && cd $AMBARI_HOME && cp $AMBARI_SRC_HOME/ambari-server/target/*.deb $AMBARI_HOME && cp $AMBARI_SRC_HOME/ambari-agent/target/*.deb $AMBARI_HOME  \
     && rm -rf $AMBARI_SRC_HOME && rm -rf /root/.m2 && rm -rf /tmp/* /var/tmp/*
 ```
+
 + 3 编译问题
   1). ambari-admin 编译错误：
   ```
@@ -123,7 +123,8 @@ RUN mkdir $AMBARI_HOME && cd $AMBARI_HOME && cp $AMBARI_SRC_HOME/ambari-server/t
 
 具体配置请参考：https://github.com/lizhiyong2000/docker-k8s/tree/master/docker/ambari
 + 1 Ambari-Server镜像
-```dockerfile
+
+```
 FROM lizhiyong2000/ubuntu:18.04
 #MAINTAINER lizhiyong2000@gmail.com
 # AMBARI
@@ -159,8 +160,10 @@ ENV buildNumber=2.7.3.0
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 ```
+
 + 2 Ambari-Agent镜像
-```dockerfile
+
+```
 FROM lizhiyong2000/ubuntu:16.04
 #MAINTAINER lizhiyong2000@gmail.com
 
@@ -184,7 +187,6 @@ COPY dist/ambari-agent_2.7.3.0-0.deb $AMBARI_HOME/
 
 RUN dpkg -i $AMBARI_HOME/ambari-agent_2.7.3.0-0.deb
 
-# COPY conf/slaves conf/core-site.xml conf/hdfs-site.xml conf/mapred-site.xml conf/yarn-site.xml $AMBARI_CONF_DIR/
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
 
@@ -197,6 +199,7 @@ ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 ```
 
 + 3 Kubernetes 配置
+
 ```yaml
 kind: Service
 apiVersion: v1
@@ -284,6 +287,7 @@ spec:
             requests:
               cpu: 100m
 ```
+
 在Rancher中导入配置，确认Ambari-Server 和Ambari-Agent正常启动
 ![](http://carforeasy.cn/使用docker搭建ambari调试环境-599df03a.png)
 
