@@ -45,7 +45,7 @@ mvn -B clean install package jdeb:jdeb -DnewVersion=2.0.0.0 -DskipTests -Dpython
 ![](http://carforeasy.cn/使用docker搭建ambari调试环境-a40a2baa.png)
 
 + 2 编译所用Dockerfile
-```yaml
+```dockerfile
 FROM lizhiyong2000/ubuntu:18.04
 #MAINTAINER lizhiyong2000@gmail.com
 
@@ -123,7 +123,7 @@ RUN mkdir $AMBARI_HOME && cd $AMBARI_HOME && cp $AMBARI_SRC_HOME/ambari-server/t
 
 具体配置请参考：https://github.com/lizhiyong2000/docker-k8s/tree/master/docker/ambari
 + 1 Ambari-Server镜像
-```yaml
+```dockerfile
 FROM lizhiyong2000/ubuntu:18.04
 #MAINTAINER lizhiyong2000@gmail.com
 # AMBARI
@@ -160,11 +160,12 @@ ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 ```
 + 2 Ambari-Agent镜像
-```yaml
-FROM lizhiyong2000/ubuntu:18.04
+```dockerfile
+FROM lizhiyong2000/ubuntu:16.04
 #MAINTAINER lizhiyong2000@gmail.com
 
 # AMBARI
+
 ENV AMBARI_VERSION=2.7.3 \
     AMBARI_HOME=/opt/ambari
 
@@ -176,15 +177,22 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+
 RUN mkdir $AMBARI_HOME && cd $AMBARI_HOME
 COPY dist/ambari-agent_2.7.3.0-0.deb $AMBARI_HOME/
 
+
 RUN dpkg -i $AMBARI_HOME/ambari-agent_2.7.3.0-0.deb
 
+# COPY conf/slaves conf/core-site.xml conf/hdfs-site.xml conf/mapred-site.xml conf/yarn-site.xml $AMBARI_CONF_DIR/
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-
 RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
 
+ADD init/init-agent.sh /opt/ambari/init-agent.sh
+RUN chmod u+x /opt/ambari/init-agent.sh
+
+
+ENV buildNumber=2.7.3.0
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 ```
 
