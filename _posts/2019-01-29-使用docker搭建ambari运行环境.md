@@ -304,6 +304,21 @@ spec:
 
 链接: https://pan.baidu.com/s/1lsR04M6n7_zNEy2jANFrpQ 提取码: tzre
 
++ ambari安装HDP时提示smartsense-hst无法安装
+```
+; stderr: E: Unable to locate package smartsense-hst
+dpkg: error processing archive /var/lib/ambari-agent/cache/stacks/HDP/3.0/services/SMARTSENSE/package/files/deb/*.deb (--install):
+ cannot access archive: No such file or directory
+Errors were encountered while processing:
+ /var/lib/ambari-agent/cache/stacks/HDP/3.0/services/SMARTSENSE/package/files/deb/*.deb
+ ```
+解决办法：
+```
+wget -O /etc/apt/sources.list.d/ambari.list http://public-repo-1.hortonworks.com/ambari/ubuntu16/2.x/updates/2.7.3.0/ambari.list
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com B9733A7A07513CAD
+apt-get update
+```
+
 
 ## 参考链接
 - [Installation Guide for Ambari 2.7.3](https://cwiki.apache.org/confluence/display/AMBARI/Installation+Guide+for+Ambari+2.7.3)
