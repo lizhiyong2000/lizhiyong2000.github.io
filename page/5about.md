@@ -33,11 +33,11 @@ type: page
 ## 华为技术有限公司 （ 2009年9月 ~ 2017年7月）
 
 
-## 关于本站
+# 关于本站
 
 **若您想使用这个 jekyll 博客主题，请访问：[https://github.com/likonion/likonion.github.io](https://github.com/likonion/likonion.github.io)**
 
 
-## 评论
+# 评论
 
 {% include comments.html %}
