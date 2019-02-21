@@ -291,6 +291,11 @@ spec:
 在Rancher中导入配置，确认Ambari-Server 和Ambari-Agent正常启动
 ![](http://carforeasy.cn/使用docker搭建ambari调试环境-599df03a.png)
 
+## 利用Ambari安装Hadoop
+ambari 服务器及agent启动正常后，便可使用安装向导进行服务安装了，安装hadoop集群如下：
+
+![](http://carforeasy.cn/2019-f12375f1.png)
+
 ## Ambari Server及Agent配置问题
 + ambari卡在设置集群名称的下一步
 
