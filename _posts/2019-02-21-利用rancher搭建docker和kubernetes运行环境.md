@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "利用rancher搭建docker和kubernetes运行环境"
+title: "利用Rancher搭建Docker和Kubernetes运行环境"
 date: "2019-02-21 10:14"
 categories: Docker Kubernetes
 description: 使用Atom作为Markdown编辑器
@@ -176,7 +176,7 @@ spec:
 
 
 ## 参考链接
--   [Docker：Ubuntu 18.04 LTS上的安装和基本使用](https://www.howtoing.com/ubuntu-docker)
--   [Docker使用阿里云镜像加速器](https://www.jianshu.com/p/200cce574163)
--   [升级Rancher Server](
+- [Docker：Ubuntu 18.04 LTS上的安装和基本使用](https://www.howtoing.com/ubuntu-docker)
+- [Docker使用阿里云镜像加速器](https://www.jianshu.com/p/200cce574163)
+- [升级Rancher Server](
 https://rancher.com/docs/rancher/v1.6/zh/upgrading/)
