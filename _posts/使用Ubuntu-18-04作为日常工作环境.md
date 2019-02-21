@@ -1,0 +1,148 @@
+---
+layout: "post"
+title: "使用Ubuntu 18.04作为日常工作环境"
+date: "2019-02-21 15:14"
+categories: Ubuntu
+description: 使用Ubuntu 18.04作为日常工作环境
+tags: Ubuntu
+---
+
+* content
+{:toc}
+
+<div class="postImg" style="background-image:url(http://carforeasy.cn/使用Ubuntu-639eabd1.png)"></div>
+> “Ubuntu 18.04 是自 2016 年以来的第一个长期支持版本。Ubuntu 长期支持版本可以获得 Canonical 官方长达五年的技术支持，这意味着在 2023 年之前所有用户都可以放心使用 Ubuntu 18.04 LTS。”
+
+
+
+
+
+## 系统设置
+### 安装中文输入法
+>编辑配置文件，将en_US.UTF-8 改为 zh_CN.UTF-8
+
+    sudo nano /etc/default/locale
+    LANG="zh_CN.UTF-8"
+    LANGUAGE="en_US.UTF-8"
+
+
+    sudo apt-get install ibus-pinyin
+
+    sudo fc-cache -f -v
+
+    sudo apt-get install gnome-tweak-tool
+
+### 修改 /etc/resolv.conf
+    sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+### rc.local启动
+    cd /etc/systemd/system/
+    cat rc-local.service
+> rc-local.service
+
+    #  SPDX-License-Identifier: LGPL-2.1+
+    #
+    #  This file is part of systemd.
+    #
+    #  systemd is free software; you can redistribute it and/or modify it
+    #  under the terms of the GNU Lesser General Public License as published by
+    #  the Free Software Foundation; either version 2.1 of the License, or
+    #  (at your option) any later version.
+
+    # This unit gets pulled automatically into multi-user.target by
+    # systemd-rc-local-generator if /etc/rc.local is executable.
+    [Unit]
+    Description=/etc/rc.local Compatibility
+    Documentation=man:systemd-rc-local-generator(8)
+    ConditionFileIsExecutable=/etc/rc.local
+    After=network.target
+
+    [Service]
+    Type=forking
+    ExecStart=/etc/rc.local start
+    TimeoutSec=0
+    RemainAfterExit=yes
+    GuessMainPID=no
+
+    [Install]
+    WantedBy=multi-user.target
+    Alias=rc-local.service
+>rc.local
+
+    touch /etc/rc.local
+    chmod 755 /etc/rc.local
+
+>test
+
+    #!/bin/bash
+    echo "test rc " > /var/test.log
+
+### 修改 vm.max_map_count
+>Shell
+    sudo sysctl -w vm.max_map_count=655360
+>/etc/sysctl.conf
+    add vm.max_map_count=655360
+### 32位支持
+    sudo dpkg --add-architecture i386
+    sudo apt-get install libc6-i386
+### 安装net-tools
+### 编辑 /etc/sudoers
+>编辑 /etc/sudoers
+    lizhiyong ALL=(ALL) NOPASSWD:ALL
+
+## IDE相关
+### 安装 JDK
+    sudo add-apt-repository ppa:linuxuprising/java
+    sudo apt update
+    sudo apt install oracle-java10-installer
+
+### IDEA 2018
+参考[如何永久激活(破解) IntelliJ IDEA 2018.1.3](https://blog.csdn.net/zhige_me/article/details/80369336)
+
+
+### SublimeText 3
+参考[Sublime Text3 注册码激活码](https://blog.csdn.net/qq_29819449/article/details/80130327)
+
+## 科学上网工具
+### 安装 shadowsocks-qt5
+
+    sudo add-apt-repository ppa:hzwhuang/ss-qt5
+    sudo apt-get update
+    sudo apt-get install shadowsocks-qt5
+>原来的如下:
+    http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu bionic main
+
+>改成如下:
+    http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu artful main
+
+
+### 安装tsocks
+    apt-get install tsocks
+
+>使用前设置conf文件
+
+    vi /etc/tsocks.conf
+
+>做一个简单的配置就好了：
+
+    local = 192.168.1.0/255.255.255.0  #local表示本地的网络，也就是不使用socks代理的网络
+    local = 127.0.0.0/255.0.0.0
+    server = 127.0.0.1   #socks服务器的IP
+    server_type = 5  #socks服务版本
+    server_port = 1080  ＃socks服务使用的端口
+
+
+## Kubectl
+>Add apt key
+
+    sudo tsocks curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+
+>Next add a repository by creating the file /etc/apt/sources.list.d/kubernetes.list and enter the following content:
+
+    deb http://apt.kubernetes.io/ kubernetes-xenial main
+
+
+>Save and close that file. Install Kubernetes with the following commands:
+
+    sudo tsocks apt-get update
+    sudo tsocks apt-get install -y kubectl
