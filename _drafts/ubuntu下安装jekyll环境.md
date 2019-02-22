@@ -5,7 +5,21 @@ date: "2019-02-19 08:40"
 ---
 
 ## 安装ruby环境
+```shell
+~$ sudo apt install ruby ruby-dev
 
-sudo apt install ruby ruby-dev
+~$ sudo gem install jekyll bundler minima
 
-sudo gem install jekyll
+~$ jekyll --version
+```
+
+
+```shell
+~$ jekyll new myblog
+
+~$ cd myblog
+
+~/myblog $ jekyll serve
+
+# => Now browse to http://localhost:4000
+```
