@@ -12,6 +12,12 @@ type: page
     {% include search.html %}
 </div>
 
+
+
+
+## 电子书
+* [Go语言圣经 《The Go Programming Language》 中文版本](https://docs.hacknode.org/gopl-zh/)
+
 ## Ambari
 * [Ambari Metrics 详解](https://www.ibm.com/developerworks/cn/opensource/os-cn-ambari-metrics/index.html)
 
