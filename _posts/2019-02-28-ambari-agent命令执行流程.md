@@ -18,6 +18,7 @@ tags: Ambari
 
 
 ## Agent目录结构
+分析命令执行过程前先熟悉下Agent的目录结构，了解下命令脚本在哪里，掌握脚本执行过程中的输入输出。
 ### 1. 运行脚本目录
 + /var/lib/ambari-agent目录
 /var/lib/ambari-agent目录下保存了agent运行的主要脚本，其中bin目录下包含agent主执行文件ambari-agent，其他目录包含agent运行过程中的辅助脚本和数据。
