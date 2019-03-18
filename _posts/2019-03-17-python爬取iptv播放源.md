@@ -57,34 +57,34 @@ def curl(self, url):
 ```
 + 网页解析器：使HTMLParser进行HTTP页面解析，获取页面中的频道URL地址。
 ```python
-      class AhndHrefParser(HTMLParser):
-            """
-            Parser that extracts hrefs
-            """
-            is_parsing_url = False
-            parsing_url = None
+class AhndHrefParser(HTMLParser):
+      """
+      Parser that extracts hrefs
+      """
+      is_parsing_url = False
+      parsing_url = None
 
-            url_channel_names = dict()
+      url_channel_names = dict()
 
-            def handle_starttag(self, tag, attrs):
+      def handle_starttag(self, tag, attrs):
 
-                if tag == 'a':
-                    dict_attrs = dict(attrs)
-                    if dict_attrs.get('href'):
-                        href = dict_attrs['href']
-                        if href.startswith('aplayer.html'):
-                            self.parsing_url = href
-                            self.is_parsing_url = True
-                            # self.hrefs.add(dict_attrs['href'])
+          if tag == 'a':
+              dict_attrs = dict(attrs)
+              if dict_attrs.get('href'):
+                  href = dict_attrs['href']
+                  if href.startswith('aplayer.html'):
+                      self.parsing_url = href
+                      self.is_parsing_url = True
+                      # self.hrefs.add(dict_attrs['href'])
 
-            def handle_endtag(self, tag):
-                self.parsing_url = None
-                self.is_parsing_url = False
+      def handle_endtag(self, tag):
+          self.parsing_url = None
+          self.is_parsing_url = False
 
-            def handle_data(self, data):
-                if self.is_parsing_url:
-                    print("channel:{}, url:{}".format(data, self.parsing_url))
-                    self.url_channel_names[self.parsing_url] = data
+      def handle_data(self, data):
+          if self.is_parsing_url:
+              print("channel:{}, url:{}".format(data, self.parsing_url))
+              self.url_channel_names[self.parsing_url] = data
 
 ```
 + 调度器、URL管理器：本爬虫仅对单一URL进行爬取，爬取其中的频道分类，频道列表数据
