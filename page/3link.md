@@ -62,7 +62,8 @@ type: page
 ## SpringCloud
 * [spring-cloud 分布式日志采集](https://blog.csdn.net/guduyishuai/article/details/79228306)
 
-
+## Linux
+* [Linux 包管理基础：apt、yum、dnf 和 pkg](https://linux.cn/article-8782-1.html)
 
 ## Ubuntu
 * [Ubuntu屏幕录制工具 SimpleScreenRecorder](https://blog.csdn.net/Draonly/article/details/74898031)
