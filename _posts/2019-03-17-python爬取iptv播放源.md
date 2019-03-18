@@ -32,6 +32,7 @@ Python爬虫架构主要由五个部分组成，分别是调度器、URL管理�
 ### 2、代码示例
 以下代码将展示具体的爬虫模块代码。
 + 网页下载器：使urllib进行HTTP访问。
+
 ```python
 def curl(self, url):
     """
@@ -54,7 +55,9 @@ def curl(self, url):
         print("error %s: %s" % (url, e))
         return ''
 ```
+
 + 网页解析器：使HTMLParser进行HTTP页面解析，获取页面中的频道URL地址。
+
 ```python
 class AhndHrefParser(HTMLParser):
       """
@@ -86,7 +89,9 @@ class AhndHrefParser(HTMLParser):
               self.url_channel_names[self.parsing_url] = data
 
 ```
+
 + 调度器、URL管理器：本爬虫仅对单一URL进行爬取，爬取其中的频道分类，频道列表数据
+
 ```python
 def _crawl(self, url):
     html = self.curl(url)
@@ -105,7 +110,9 @@ def _crawl(self, url):
 
     print("{} crawled".format(url))
 ```
+
 + 应用数据：爬取到的是频道和对应URL的dict数据，从而生产m3u8格式的playlist。
+
 ```python
 def generate_me8u_file(channel_map):
     for channel, url in channel_map.items():
@@ -125,6 +132,7 @@ def generate_me8u_file(channel_map):
                 f.write(link.encode(encoding='utf8'))
 
 ```
+
 ## 爬取示例
 ###  1、[安徽农大源](http://itv.ahau.edu.cn/)
 之前使用的北方交大IPTV源这几天不能访问了，搜索后发现了安徽农大源，使用爬虫爬下来，效果还不错
