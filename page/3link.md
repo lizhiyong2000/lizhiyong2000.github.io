@@ -15,27 +15,11 @@ type: page
 
 
 
-## 电子书
+## 1 电子书
 * [Go语言圣经 《The Go Programming Language》 中文版本](https://docs.hacknode.org/gopl-zh/)
-
-## Ambari
-* [Ambari Metrics 详解](https://www.ibm.com/developerworks/cn/opensource/os-cn-ambari-metrics/index.html)
-
-## ELK
-* [Spring Boot使用Logback通过Kafka实现日志收集](http://blog.microservice4.net/2018/08/23/springboot-logback-kafka/)
-
-## Markdown
-* [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
-
-* [Atom编辑markdown-图片上传](https://www.jianshu.com/p/fa30b769c5cc)
-
-## MongoDB
-* [用了11个Docker容器，搭建出的最精简数据库分片集群](https://www.toutiao.com/a6641517937695916551/)
-
-
-
-## OAuth 2.0
-
+## 2 后端组件
+### 2.1 SpringCloud
+* [spring-cloud 分布式日志采集](https://blog.csdn.net/guduyishuai/article/details/79228306)
 * [理解OAuth2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
 
 * [Using Spring Oauth2 to secure REST](http://www.tinmegali.com/en/2017/06/25/oauth2-using-spring/)
@@ -58,18 +42,35 @@ type: page
 * [Spring Security Oauth2 单点登录案例实现和执行流程剖析](https://www.cnblogs.com/xifengxiaoma/p/10043173.html)
 
 * [Spring Security基于JWT实现SSO单点登录](https://blog.csdn.net/qq_36144258/article/details/79425942)
+### 2.2 Ambari
+* [Ambari Metrics 详解](https://www.ibm.com/developerworks/cn/opensource/os-cn-ambari-metrics/index.html)
 
-## SpringCloud
-* [spring-cloud 分布式日志采集](https://blog.csdn.net/guduyishuai/article/details/79228306)
+### 2.3 ELK
+* [Spring Boot使用Logback通过Kafka实现日志收集](http://blog.microservice4.net/2018/08/23/springboot-logback-kafka/)
 
-## Linux
+
+### 2.4 MongoDB
+* [用了11个Docker容器，搭建出的最精简数据库分片集群](https://www.toutiao.com/a6641517937695916551/)
+### 2.5 Prometheus
+* [JMX exporter+Prometheus+Grafana监控Hadoop集群](https://www.cnblogs.com/caizhenghui/p/9132414.html)
+
+
+## 3 Linux系统
 * [Linux 包管理基础：apt、yum、dnf 和 pkg](https://linux.cn/article-8782-1.html)
 
-## Ubuntu
+### 3.1 Ubuntu
 * [Ubuntu屏幕录制工具 SimpleScreenRecorder](https://blog.csdn.net/Draonly/article/details/74898031)
 
 * [超好用的录屏gif软件 Peek](https://www.jianshu.com/p/9069991bbce6)
 * [Ubuntu 16.04下Shadowsocks服务器端安装及优化](https://www.polarxiong.com/archives/Ubuntu-16-04%E4%B8%8BShadowsocks%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96.html)
+
+## 4 Markdown
+* [使用Atom打造无懈可击的Markdown编辑器](https://www.cnblogs.com/fanzhidongyzby/p/6637084.html)
+
+* [Atom编辑markdown-图片上传](https://www.jianshu.com/p/fa30b769c5cc)
+
+
+
 
 ## 评论
 {% include comments.html %}
