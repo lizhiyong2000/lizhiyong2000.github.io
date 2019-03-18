@@ -7,8 +7,7 @@ description: "Python爬取IPTV播放源"
 tags: "Python IPTV"
 ---
 * content
-{:toc}:
-
+{:toc}
 
 <div class="postImg" style="background-image:url(http://carforeasy.cn/python爬取iptv播放源-aba03b31.png)"></div>
 > “前些天入了个AppleTV 4K，通过苹果设备airplay播放视频自然不在话下，通过电视直播软件用AppleTV看高清电视也是可以的。iPlayTV是AppleTV上很好用的直播软件，以简单的网络地址直接导入直播源，就可以在AppleTV上看电视了。本文将介绍使用Python简单抓取直播源m3u地址，制作可以在iPlayTV中播放的频道列表。”
