@@ -17,7 +17,10 @@ type: page
 
 ## 1 电子书
 * [Go语言圣经 《The Go Programming Language》 中文版本](https://docs.hacknode.org/gopl-zh/)
+
 ## 2 后端组件
+
+
 ### 2.1 SpringCloud
 * [spring-cloud 分布式日志采集](https://blog.csdn.net/guduyishuai/article/details/79228306)
 * [理解OAuth2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
@@ -42,7 +45,9 @@ type: page
 * [Spring Security Oauth2 单点登录案例实现和执行流程剖析](https://www.cnblogs.com/xifengxiaoma/p/10043173.html)
 
 * [Spring Security基于JWT实现SSO单点登录](https://blog.csdn.net/qq_36144258/article/details/79425942)
+
 ### 2.2 Ambari
+
 * [Ambari Metrics 详解](https://www.ibm.com/developerworks/cn/opensource/os-cn-ambari-metrics/index.html)
 
 ### 2.3 ELK
@@ -55,10 +60,22 @@ type: page
 * [JMX exporter+Prometheus+Grafana监控Hadoop集群](https://www.cnblogs.com/caizhenghui/p/9132414.html)
 
 
+### 2.6 Hadoop
+* [Hadoop NameNode 高可用 (High Availability) 实现解析](https://www.ibm.com/developerworks/cn/opensource/os-cn-hadoop-name-node/index.html)
+
+* [Livy：基于Apache Spark的REST服务](http://jerryshao.me/2018/01/05/livy-spark-based-rest-service/)
+
+* [hadoop-HA(高可用)集群搭建](http://www.codebusy.cc/2018/04/16/hadoop-HA\(%E9%AB%98%E5%8F%AF%E7%94%A8\)%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/)
+
+* [YARN-RM的高可用（High Availability）](https://www.zybuluo.com/changedi/note/675439)
+
 ## 3 Linux系统
 * [Linux 包管理基础：apt、yum、dnf 和 pkg](https://linux.cn/article-8782-1.html)
 
 ### 3.1 Ubuntu
+
+* [如何在Ubuntu 18.04中安装Oracle Java JDK 8/10](https://www.linuxidc.com/Linux/2018-06/152667.htm)
+
 * [Ubuntu屏幕录制工具 SimpleScreenRecorder](https://blog.csdn.net/Draonly/article/details/74898031)
 
 * [超好用的录屏gif软件 Peek](https://www.jianshu.com/p/9069991bbce6)
