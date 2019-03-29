@@ -35,10 +35,15 @@ V4: / -sec=sys
 
 ### 1.2 控制服务
 ``sudo nfsd enable  ``
+
 ``sudo nfsd disable  ``
+
 ``sudo nfsd start  ``
+
 ``sudo nfsd stop  ``
+
 ``sudo nfsd restart  ``
+
 ``sudo nfsd status  ``
 
 ### 1.3 查看共享状态
@@ -71,7 +76,7 @@ security.
 
 最后在Rancher中配置挂载NFS存储，确实挂载成功：
 
-![](http://carforeasy.cn/mac中配置nfs-dae6bb84.png)
+![](http://carforeasy.cn/mac中配置nfs-dae6bb84.png)
 
 ## 参考链接
 
