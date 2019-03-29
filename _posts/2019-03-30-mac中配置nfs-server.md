@@ -7,7 +7,7 @@ description: "Mac中配置NFS server"
 tags: "Mac NFS"
 ---
 * content
-{:toc}:
+{:toc}
 
 
 <div class="postImg" style="background-image:url(http://carforeasy.cn/mac中配置nfs-a611059f.png)"></div>
