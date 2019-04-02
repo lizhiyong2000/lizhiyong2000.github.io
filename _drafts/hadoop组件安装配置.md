@@ -24,6 +24,11 @@ tags: Hadoop HDFS YARN MAPRED
 
 ### 2.3 NameNode HA 配置
 
+JournalNode start:
+```
+sudo su hdfs -l -s /bin/bash -c 'ulimit -c unlimited ;  /opt/cdh/hadoop/sbin/hadoop-daemon.sh --config /opt/cdh/hadoop/etc/hadoop start journalnode 2>&1 '
+```
+
 ```
 sudo su hdfs -l -s /bin/bash -c 'ulimit -c unlimited ;  /opt/cdh/hadoop/sbin/hadoop-daemon.sh --config /opt/cdh/hadoop/etc/hadoop start namenode 2>&1 '
 ```
@@ -41,3 +46,9 @@ standby
 ```
 
 ## 4. MAPRED组件配置
+
+
+## 参考链接
+* [hadoop-HA(高可用)集群搭建](http://www.codebusy.cc/2018/04/16/hadoop-HA\(%E9%AB%98%E5%8F%AF%E7%94%A8\)%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/)
+
+* [YARN-RM的高可用（High Availability）](https://www.zybuluo.com/changedi/note/675439)
