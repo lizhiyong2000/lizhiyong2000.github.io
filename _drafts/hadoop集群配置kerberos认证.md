@@ -2,7 +2,20 @@
 layout: "post"
 title: "Hadoop集群配置kerberos认证"
 date: "2019-04-01 14:54"
+categories: Hadoop
+description: Hadoop集群配置kerberos认证
+tags: Hadoop Kerberos
 ---
+
+* content
+{:toc}
+
+<div class="postImg" style="background-image:url(http://carforeasy.cn/2018-9ed086df.png)"></div>
+> “Atom是由GitHub开发的自由及开放源代码的文字与代码编辑器，支持macOS、Windows和Linux操作系统，本文将介绍如何用Atom作为Markdown编辑器。”
+
+
+
+
 
 ## 1. KDC安装
 ### 1.1 Centos下安装KDC
