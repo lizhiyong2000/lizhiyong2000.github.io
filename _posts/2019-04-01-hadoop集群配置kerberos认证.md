@@ -10,8 +10,8 @@ tags: Hadoop Kerberos
 * content
 {:toc}
 
-<div class="postImg" style="background-image:url(http://carforeasy.cn/2018-9ed086df.png)"></div>
-> “Atom是由GitHub开发的自由及开放源代码的文字与代码编辑器，支持macOS、Windows和Linux操作系统，本文将介绍如何用Atom作为Markdown编辑器。”
+<div class="postImg" style="background-image:url(http://carforeasy.cn/hadoop集群配置kerberos认证-df5986fb.png)"></div>
+> “Kerberos是诞生于上个世纪90年代的计算机认证协议，被广泛应用于各大操作系统和Hadoop生态系统中，本文将介绍如何搭建和配置KDC服务器，并以Namenode为例在HDFS组件中启用kerberos认证。”
 
 
 
@@ -149,7 +149,8 @@ KVNO Timestamp           Principal
   2 2019-04-01T19:07:38 HTTP/lizhiyong-pc@CTYUN.COM (des-cbc-md5)
 ```
 
-## Hadoop组件配置
+## 3. Hadoop组件配置
+以HDFS namenode为例，配置namenode使用kerberos认证。
 + core-site.xml
 ```xml
   <property>
@@ -201,6 +202,24 @@ KVNO Timestamp           Principal
    </property>
 ```
 
++ hdfs_jaas.conf
+```ini
+com.sun.security.jgss.krb5.initiate {
+    com.sun.security.auth.module.Krb5LoginModule required
+    renewTGT=false
+    doNotPrompt=true
+    useKeyTab=true
+    keyTab="/opt/cdh/hadoop/etc/hadoop/hdfs.keytab"
+    principal="hdfs/lizhiyong-pc@CTYUN.COM"
+    storeKey=true
+    useTicketCache=false;
+};
+```
++ hadoop-env.sh
+hadoop-env.sh中加入：
+```sh
+export HDFS_NAMENODE_OPTS="${SHARED_HDFS_NAMENODE_OPTS} -Djava.security.auth.login.config=/opt/cdh/hadoop/etc/hadoop/hdfs_jaas.conf"
+```
 ## 参考链接
 
 + [hadoop使用kerberos增加权限验证功能](http://www.aboutyun.com/blog-1330-933.html)
