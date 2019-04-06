@@ -20,16 +20,16 @@ tags: Hadoop Kerberos
 ## 1. KDC安装
 ### 1.1 Centos下安装KDC
 
-```
-sudo yum install -y krb5-server krb5-lib krb5-workstation
-```
+  ```
+  sudo yum install -y krb5-server krb5-lib krb5-workstation
+  ```
 
 ### 1.2 KDC配置
 + /var/kerberos/krb5kdc/kadm5.acl
 
-```
-*/admin@CTYUN.COM	*
-```
+  ```
+  */admin@CTYUN.COM	*
+  ```
 
 + /var/kerberos/krb5kdc/kdc.conf
 
@@ -113,29 +113,28 @@ sudo yum install -y krb5-server krb5-lib krb5-workstation
   sudo kadmin -p root/admin  -q "xst -k hdfs.keytab HTTP/lizhiyong-pc@CTYUN.COM"
   ```
 + 查看生成的keytab
-
-```
-sudo klist -ket hdfs.keytab
-Keytab name: FILE:hdfs.keytab
-KVNO Timestamp           Principal
----- ------------------- ------------------------------------------------------
-  2 2019-04-01T18:32:31 hdfs/lizhiyong-pc@CTYUN.COM (aes256-cts-hmac-sha1-96)
-  2 2019-04-01T18:32:31 hdfs/lizhiyong-pc@CTYUN.COM (aes128-cts-hmac-sha1-96)
-  2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (des3-cbc-sha1)
-  2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (arcfour-hmac)
-  2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (camellia256-cts-cmac)
-  2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (camellia128-cts-cmac)
-  2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (des-hmac-sha1)
-  2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (des-cbc-md5)
-  2 2019-04-01T19:07:36 HTTP/lizhiyong-pc@CTYUN.COM (aes256-cts-hmac-sha1-96)
-  2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (aes128-cts-hmac-sha1-96)
-  2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (des3-cbc-sha1)
-  2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (arcfour-hmac)
-  2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (camellia256-cts-cmac)
-  2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (camellia128-cts-cmac)
-  2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (des-hmac-sha1)
-  2 2019-04-01T19:07:38 HTTP/lizhiyong-pc@CTYUN.COM (des-cbc-md5)
-```
+  ```
+  sudo klist -ket hdfs.keytab
+  Keytab name: FILE:hdfs.keytab
+  KVNO Timestamp           Principal
+  ---- ------------------- ------------------------------------------------------
+    2 2019-04-01T18:32:31 hdfs/lizhiyong-pc@CTYUN.COM (aes256-cts-hmac-sha1-96)
+    2 2019-04-01T18:32:31 hdfs/lizhiyong-pc@CTYUN.COM (aes128-cts-hmac-sha1-96)
+    2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (des3-cbc-sha1)
+    2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (arcfour-hmac)
+    2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (camellia256-cts-cmac)
+    2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (camellia128-cts-cmac)
+    2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (des-hmac-sha1)
+    2 2019-04-01T18:32:32 hdfs/lizhiyong-pc@CTYUN.COM (des-cbc-md5)
+    2 2019-04-01T19:07:36 HTTP/lizhiyong-pc@CTYUN.COM (aes256-cts-hmac-sha1-96)
+    2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (aes128-cts-hmac-sha1-96)
+    2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (des3-cbc-sha1)
+    2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (arcfour-hmac)
+    2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (camellia256-cts-cmac)
+    2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (camellia128-cts-cmac)
+    2 2019-04-01T19:07:37 HTTP/lizhiyong-pc@CTYUN.COM (des-hmac-sha1)
+    2 2019-04-01T19:07:38 HTTP/lizhiyong-pc@CTYUN.COM (des-cbc-md5)
+  ```
 
 + 客户端中使用keytab
   ```
