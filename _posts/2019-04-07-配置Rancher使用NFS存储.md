@@ -29,8 +29,7 @@ $ sudo apt-get install -y nfs-kernel-server
 配置 nfs 目录和读写权限相关配置。
 
 ```
-$ cd ~
-$ mkdir nfs
+$ sudo mkdir /opt/data/k8s
 $ sudo vi /etc/exports
 ```
 
@@ -43,8 +42,7 @@ $ sudo vi /etc/exports
 + 启动服务
 
 ```
-$ sudo /etc/init.d/rpcbind restart
-$ sudo /etc/init.d/nfs-kernel-server restart
+$ sudo systemctl start nfs-kernel-server
 ```
 
 ### 1.2 在其他服务器进行挂载验证
