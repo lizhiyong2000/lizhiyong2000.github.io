@@ -193,3 +193,5 @@ KVNO Timestamp           Principal
 + [hadoop使用kerberos增加权限验证功能](http://www.aboutyun.com/blog-1330-933.html)
 
 + [图解Kerberos协议原理](http://www.nosqlnotes.com/technotes/kerberos-protocol/)
+
++ [kerberos_and_hadoop- Error Messages to Fear](https://github.com/steveloughran/kerberos_and_hadoop/blob/master/sections/errors.md)

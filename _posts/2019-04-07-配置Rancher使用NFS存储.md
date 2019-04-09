@@ -49,7 +49,7 @@ $ sudo systemctl start nfs-kernel-server
 
 ```
 $ sudo apt-get install -y nfs-common
-$ showmount -e 192.168.2.42
+$ sudo showmount -e 192.168.2.42
 $ sudo mount -t nfs 192.168.2.42:/opt/data/k8s /mnt
 $ sudo umount /mnt
 ```
@@ -194,7 +194,8 @@ spec:
         claimName: test-claim
 ```
 
-
+### 2.5 配置结果
+![](http://carforeasy.cn/配置Rancher使用NFS存储-f5176818.png)
 
 
 ## 3. 参考链接
