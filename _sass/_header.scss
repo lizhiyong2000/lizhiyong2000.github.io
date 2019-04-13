@@ -1,8 +1,8 @@
 header {
   position: relative;
-  height: 70px;
-  padding-top: 10px;
-  margin-bottom: 20px;
+  height: 100px;
+  padding-top: 30px;
+  margin-bottom: 30px;
   color: #ffffff;
   background: #0767c8;
   background: -webkit-linear-gradient(top, #086ed5, #055db5);
@@ -38,7 +38,7 @@ header {
     line-height: 52px;
     .brand {
       font-weight: 600;
-      font-size: 26px;
+      font-size: 36px;
       color: #ffffff;
     }
     small {
@@ -100,6 +100,8 @@ header {
       width: 90%;
       line-height: 50px;
       .brand {
+        margin-left: 10px;
+        font-size: 20px;
       }
       small {
         margin-left: 15px;
