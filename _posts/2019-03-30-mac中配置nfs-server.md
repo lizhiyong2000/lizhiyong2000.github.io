@@ -2,7 +2,7 @@
 layout: "post"
 title: "Mac中配置NFS server"
 date: "2019-03-30 01:44"
-categories: "Mac"
+categories: "Mac系统"
 description: "Mac中配置NFS server"
 tags: "Mac NFS"
 ---

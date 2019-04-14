@@ -2,7 +2,7 @@
 layout: "post"
 title: "配置Rancher使用NFS存储"
 date: "2019-04-07 16:41"
-categories: "Docker"
+categories: Docker容器
 description: "配置Rancher使用NFS存储"
 tags: "Rancher NFS"
 ---

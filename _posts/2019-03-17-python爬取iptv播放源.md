@@ -2,7 +2,7 @@
 layout: "post"
 title: "Python爬取IPTV播放源"
 date: "2019-03-17 21:31"
-categories: "Python IPTV"
+categories: "IPTV工具"
 description: "Python爬取IPTV播放源"
 tags: "Python IPTV"
 ---

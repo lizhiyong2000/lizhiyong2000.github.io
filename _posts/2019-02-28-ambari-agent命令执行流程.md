@@ -2,7 +2,7 @@
 layout: "post"
 title: "Ambari agent命令执行流程"
 date: "2019-02-28 16:35"
-categories: Ambari
+categories: Hadoop
 description: Ambari agent命令执行流程
 tags: Ambari
 ---

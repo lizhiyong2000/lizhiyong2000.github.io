@@ -2,7 +2,7 @@
 layout: "post"
 title: "利用Rancher搭建Docker和Kubernetes运行环境"
 date: "2019-02-21 10:14"
-categories: Docker Kubernetes
+categories: Docker容器
 description: 使用Atom作为Markdown编辑器
 tags: Docker Kubernetes Rancher
 ---
