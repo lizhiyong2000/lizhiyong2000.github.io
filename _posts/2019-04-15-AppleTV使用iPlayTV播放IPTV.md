@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "AppleTV使用iPlayTV播放IPTV"
-date: "2019-01-31 13:48"
+date: "2019-04-14 13:48"
 categories: IPTV工具
 description: AppleTV使用iPlayTV播放IPTV
 tags: AppleTV iPlayTV
