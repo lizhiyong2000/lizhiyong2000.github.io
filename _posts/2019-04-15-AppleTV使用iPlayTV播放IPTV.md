@@ -192,7 +192,7 @@ http://35848.hlsplay.aodianyun.com/guangdianyun_35848/tv_channel_352.m3u8
 
 
 
-## 添加远程源地址
+### 添加远程源地址
 
 ![](http://carforeasy.cn/AppleTV使用iPlayTV播放IPTV-79ec5bb2.png)
 打开iPlayTV，点击+号，选择 Remote Playlist File，然后第一行输入一个名字，第二行输入直播源的HTTP地址，第三行不用管，直接点 save 即可，并且上面显示的5DAY、7DAY是指自动刷新的时间，如果你选默认的5天，也就是说五天后，iPlayTV 会自动再从提供的URL网络地址再获取一次更新后的源。
@@ -201,7 +201,7 @@ http://35848.hlsplay.aodianyun.com/guangdianyun_35848/tv_channel_352.m3u8
 
 ![](http://carforeasy.cn/AppleTV使用iPlayTV播放IPTV-13b38ba4.png)
 
-## 添加本地源地址
+### 添加本地源地址
 添加本地源地址与远程的其实是一样的，只是添加本地源时使用的URL是本地文件的URL而已。由于本地文件URL无法直接填写，需要使用提供的上传功能获取本地播放列表文件的URL。
 由于使用的是本地文件作为播放列表，里面的播放源是没法更新的，需要更新的话需要手动修改后重新导入。
 ![](http://carforeasy.cn/AppleTV使用iPlayTV播放IPTV-0f232a5c.png)
@@ -209,7 +209,7 @@ http://35848.hlsplay.aodianyun.com/guangdianyun_35848/tv_channel_352.m3u8
 ![](http://carforeasy.cn/AppleTV使用iPlayTV播放IPTV-64fdb764.png)
 
 
-## 播放列表导入结果
+### 播放列表导入结果
 播放列表导入完成后就能在channels中看到频道列表了：
 ![](http://carforeasy.cn/AppleTV使用iPlayTV播放IPTV-7d7570d7.png)
 
