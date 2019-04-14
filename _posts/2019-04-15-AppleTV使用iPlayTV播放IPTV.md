@@ -226,6 +226,8 @@ http://35848.hlsplay.aodianyun.com/guangdianyun_35848/tv_channel_352.m3u8
 https://github.com/lizhiyong2000/stream-tools/blob/master/resource/%E4%B8%AD%E5%A4%AE%E7%94%B5%E8%A7%86%E5%8F%B0-playlist.m3u8
 对应的raw地址为：
 https://raw.githubusercontent.com/lizhiyong2000/stream-tools/master/resource/%E4%B8%AD%E5%A4%AE%E7%94%B5%E8%A7%86%E5%8F%B0-playlist.m3u8
+
+
 
 ## 屏幕截图
 
