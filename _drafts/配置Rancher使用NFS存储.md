@@ -48,6 +48,12 @@ set global validate_password_length=6;
 
 [CentOS 7 下 Yum 安装 MySQL 5.7](https://qizhanming.com/blog/2017/05/10/centos-7-yum-install-mysql-57)
 
+
+systemctl stop firewalld
+systemctl disable firewalld
+
+
+
 ## 参考链接
 
 *  [Extract images frame by frame from a video file using FFMPEG](https://www.bugcodemaster.com/article/extract-images-frame-frame-video-file-using-ffmpeg)
