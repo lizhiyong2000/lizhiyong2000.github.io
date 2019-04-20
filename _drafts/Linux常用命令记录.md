@@ -35,6 +35,26 @@ s/\/\*.*\*\///;
 
 ### 2.2 ss命令
 
++ 查看监听端口
+```
+root@host-103 conf]# ss -lnt
+State       Recv-Q Send-Q                                               Local Address:Port                                                              Peer Address:Port              
+LISTEN      0      128                                                      127.0.0.1:44103                                                                        *:*                  
+LISTEN      0      128                                                              *:1004                                                                         *:*                  
+LISTEN      0      50                                                               *:1006                                                                         *:*                  
+LISTEN      0      128                                                              *:22                                                                           *:*                  
+LISTEN      0      100                                                      127.0.0.1:25                                                                           *:*                  
+LISTEN      0      128                                                              *:8480                                                                         *:*                  
+LISTEN      0      128                                                              *:50020                                                                        *:*                  
+LISTEN      0      128                                                              *:8485                                                                         *:*                  
+LISTEN      0      50                                                              :::3888                                                                        :::*                  
+LISTEN      0      128                                                             :::22                                                                          :::*                  
+LISTEN      0      100                                                            ::1:25                                                                          :::*                  
+LISTEN      0      50                                                              :::44224                                                                       :::*                  
+LISTEN      0      50                                                              :::2181                                                                        :::*
+```
+
+
 ### 2.3 iptables命令
 + 添加端口映射
 ```shell
