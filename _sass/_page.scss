@@ -199,7 +199,7 @@
         list-style: none;
         &.current {
           
-          background: url(../images/menu-li-active-bg.png) left 5px no-repeat;
+          background: url(../image/menu-li-active-bg.png) left 5px no-repeat;
           color: rgba(69, 157, 245, 0.9);
           >a {
             color: white;
@@ -216,13 +216,13 @@
       >li {
         font-weight: bold;
         padding-left: 30px;
-        background: url(../images/menu-li-bg.png) 4px 5px no-repeat;
+        background: url(../image/menu-li-bg.png) 4px 5px no-repeat;
         >ul {
           padding-left: 0;
           margin-left: -30px;
           >li {
             padding-left: 50px;
-            background: url(../images/menu-li-bg2.png) 4px 5px no-repeat;
+            background: url(../image/menu-li-bg2.png) 4px 5px no-repeat;
             >ul {
               padding-left: 0;
               margin-left: -50px;

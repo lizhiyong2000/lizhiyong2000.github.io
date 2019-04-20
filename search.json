@@ -11,14 +11,5 @@ layout: null
   "url"      : "{{ site.baseurl }}{{ post.url }}",
   "date"     : "{{ post.date }}"
   } {% unless forloop.last %},{% endunless %}
-  {% endfor %},
-  {% for wiki in site.wiki %}
-  {
-  "title"    : "{{ wiki.title | escape }}",
-  "categories" : "{{ wiki.categories }}",
-  "tags"     : "{{ wiki.tags | array_to_sentence_string }}",
-  "url"      : "{{ site.baseurl }}{{ wiki.url }}",
-  "date"     : "{{ wiki.date }}"
-  } {% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]

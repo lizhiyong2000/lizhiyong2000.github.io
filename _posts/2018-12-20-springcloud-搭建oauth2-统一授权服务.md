@@ -2,7 +2,7 @@
 layout: "post"
 title: "SpringCloud 搭建OAuth2 统一授权服务"
 date: "2018-12-20 15:25"
-categories: SpringCloud OAuth
+categories: SpringCloud
 description: SpringCloud OAuth2.0
 tags: SpringCloud OAuth
 ---

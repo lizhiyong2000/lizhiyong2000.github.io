@@ -2,7 +2,7 @@
 layout: "post"
 title: "配置Rancher使用NFS存储"
 date: "2019-04-07 16:41"
-categories: "Docker"
+categories: Docker容器
 description: "配置Rancher使用NFS存储"
 tags: "Rancher NFS"
 ---
@@ -29,7 +29,8 @@ $ sudo apt-get install -y nfs-kernel-server
 配置 nfs 目录和读写权限相关配置。
 
 ```
-$ sudo mkdir /opt/data/k8s
+$ cd ~
+$ mkdir nfs
 $ sudo vi /etc/exports
 ```
 
@@ -42,14 +43,15 @@ $ sudo vi /etc/exports
 + 启动服务
 
 ```
-$ sudo systemctl start nfs-kernel-server
+$ sudo /etc/init.d/rpcbind restart
+$ sudo /etc/init.d/nfs-kernel-server restart
 ```
 
 ### 1.2 在其他服务器进行挂载验证
 
 ```
 $ sudo apt-get install -y nfs-common
-$ sudo showmount -e 192.168.2.42
+$ showmount -e 192.168.2.42
 $ sudo mount -t nfs 192.168.2.42:/opt/data/k8s /mnt
 $ sudo umount /mnt
 ```
@@ -131,7 +133,7 @@ spec:
               value: nfs-client-provisioner
               # value: fuseim.pri/ifs
             - name: NFS_SERVER
-              value: 192.168.1.132
+              value: 192.168.2.42
             - name: NFS_PATH
               value: /opt/data/k8s
       volumes:
@@ -194,8 +196,7 @@ spec:
         claimName: test-claim
 ```
 
-### 2.5 配置结果
-![](http://carforeasy.cn/配置Rancher使用NFS存储-f5176818.png)
+
 
 
 ## 3. 参考链接

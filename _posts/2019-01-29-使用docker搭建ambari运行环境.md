@@ -2,7 +2,7 @@
 layout: "post"
 title: "使用Docker搭建Ambari运行环境"
 date: "2019-01-29 10:37"
-categories: Docker Ambari
+categories: Docker容器
 description: 使用Docker搭建Ambari运行环境
 tags: Docker Ambari
 ---
