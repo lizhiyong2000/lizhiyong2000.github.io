@@ -2,7 +2,7 @@
 layout: "post"
 title: "SpringCloud 搭建OAuth2 统一授权服务之JWT集成"
 date: "2018-12-21 15:57"
-categories: SpringCloud OAuth
+categories: SpringCloud
 description: SpringCloud OAuth2.0 JWT集成
 tags: SpringCloud OAuth JWT
 ---

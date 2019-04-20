@@ -23,3 +23,7 @@ date: "2019-02-19 08:40"
 
 # => Now browse to http://localhost:4000
 ```
+
+## 使用多个账户提交到github
+
+git config --global credential.github.com.useHttpPath true
