@@ -1,0 +1,25 @@
+
+
+### chrome
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+
+加入源
+
+sudo gedit /etc/apt/sources.list.d/google.list
+
+
+粘贴
+
+deb http://dl.google.com/linux/chrome/deb/ stable main
+
+
+更新
+
+sudo apt-get update
+
+
+安装
+
+sudo apt-get install google-chrome-stable
