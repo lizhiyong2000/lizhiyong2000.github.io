@@ -4,7 +4,9 @@ title: "Centos7桌面系统美化"
 date: "2019-04-02 16:21"
 ---
 
+## 使用多个账户提交到github
 
+git config --global credential.github.com.useHttpPath true
 
 
 二. 主题目录
