@@ -45,3 +45,7 @@ sudo apt-get install google-chrome-stable
 
 # => Now browse to http://localhost:4000
 ```
+
+
+## 修改文件关联
+sudo gedit /usr/share/applications/defaults.list
