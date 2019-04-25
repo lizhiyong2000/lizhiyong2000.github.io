@@ -1,9 +1,9 @@
 ---
 layout: "post"
-title: "Hadoop集群启用Kerberos后动态增加删除节点"
+title: "Hadoop集群配置Kerberos后动态增加删除节点"
 date: "2019-04-25 18:29"
 categories: Hadoop
-description:  "Hadoop集群启用Kerberos后动态增加删除节点"
+description:  "Hadoop集群配置Kerberos后动态增加删除节点"
 tags: Hadoop
 ---
 
@@ -44,9 +44,9 @@ kerberos的安装配置也与其他节点一致，这里不做描述，后续将
 192.168.2.107 host-107
 192.168.2.108 host-108
 ```
-## HDFS集群添加、删除DataNode节点
+## HDFS添加、删除DataNode节点
 
-### 生成keytab文件
+### Kerberos相关配置
 
 + 添加principal
 
@@ -67,7 +67,9 @@ kerberos的安装配置也与其他节点一致，这里不做描述，后续将
   kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab datanode/host-106@CTYUN.COM'
   kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab HTTP/host-106@CTYUN.COM'
   ```
+
   - host-107
+
   ```
   kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab datanode/host-107@CTYUN.COM'
   kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab HTTP/host-106@CTYUN.COM'
@@ -79,19 +81,24 @@ kerberos的安装配置也与其他节点一致，这里不做描述，后续将
   ```
 
 + 修改keytab权限
+
+```
 chown hdfs:hadoop /etc/security/keytab/hdfs/hdfs.keytab
+```
 
 ### 添加DataNode节点
 
 + 启动datanode
+```
 mkdir -p /var/run/hadoop && chown hdfs:hadoop /var/run/hadoop
 mkdir -p /opt/data/hadoop/datanode && chown hdfs:hadoop /opt/data/hadoop/datanode
 cp /opt/emr-agent/jsvc/jsvc /opt/cdh/hadoop/libexec/
 /opt/cdh/hadoop/sbin/hadoop-daemon.sh --config /opt/cdh/hadoop/etc/hadoop start datanode 2>&1
-
+```
 + NameNode上刷新节点
+```
 /usr/bin/sudo su hdfs -l -s /bin/bash -c 'ulimit -c unlimited ;  /opt/cdh/hadoop/bin/hdfs dfsadmin -refreshNodes'
-
+```
 在UI中查看节点状态：
   ![](http://carforeasy.cn/hadoop集群启用kerberos后动态增加删除节点-6bf4fe13.png)
 
@@ -104,9 +111,10 @@ cp /opt/emr-agent/jsvc/jsvc /opt/cdh/hadoop/libexec/
 </property>  
 ```
 hdfs_excludes中写入要删除的DataNode节点名
+```
 host-106
 host-108
-
+```
 
 + NameNode上刷新节点
 ```sh
@@ -121,7 +129,9 @@ host-108
 
 
 
-### Yarn集群添加NodeManager
+## Yarn添加、删除NodeManager
+
+### Kerberos相关配置
 + 添加principal
   ```shell
   kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey nodemanager/host-106@CTYUN.COM'
@@ -153,7 +163,7 @@ host-108
   chown yarn:hadoop /etc/security/keytab/yarn/yarn.keytab
   ```
 
-  ### 添加NodeManager节点
+### 添加NodeManager节点
 
 + 启动NodeManager
   ```sh
@@ -172,7 +182,7 @@ host-108
   ![](http://carforeasy.cn/hadoop集群启用kerberos后动态增加删除节点-a20b1a58.png)
 
 
-  ### 删除NodeManager节点
+### 删除NodeManager节点
 
   + 在ResourceManager的yarn-site.xml文件中加入如下配置
   ```xml
@@ -182,7 +192,9 @@ host-108
   </property>  
   ```
   yarn_excludes中写入要删除的DataNode节点名
+  ```
   host-108
+  ```
 
 
   + ResourceManager上刷新节点
