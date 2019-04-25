@@ -93,7 +93,7 @@ chown hdfs:hadoop /etc/security/keytab/hdfs/hdfs.keytab
 ```
 mkdir -p /var/run/hadoop && chown hdfs:hadoop /var/run/hadoop
 mkdir -p /opt/data/hadoop/datanode && chown hdfs:hadoop /opt/data/hadoop/datanode
-cp /opt/emr-agent/jsvc/jsvc /opt/cdh/hadoop/libexec/
+cp /opt/jsvc/jsvc /opt/cdh/hadoop/libexec/
 /opt/cdh/hadoop/sbin/hadoop-daemon.sh --config /opt/cdh/hadoop/etc/hadoop start datanode 2>&1
 ```
 
