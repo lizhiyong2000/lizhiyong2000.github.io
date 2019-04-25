@@ -17,11 +17,11 @@ tags: VirtualBox Centos
 
 
 
-##虚拟机复制
+##   虚拟机复制
 
 VirutalBox软件自身提供了复制虚拟机的功能，从当前已有的虚拟机可以通过菜单方便的进行虚拟机的复制。另外，如果仅有虚拟机硬盘文件（vdi），也可以直接从硬盘文件创建新的虚拟机进行复制，下面将分别介绍这两种方法。
 
-###通过复制菜单复制
+###   通过复制菜单复制
 
 通过菜单进行复制和我们在系统中复制文件差不多，在已有的虚拟机上右键点击，选择“复制”，按照步骤进行即可。
 
@@ -32,9 +32,10 @@ VirutalBox软件自身提供了复制虚拟机的功能，从当前已有的虚�
 ![](http://carforeasy.cn/virtualbox复制虚拟机-64114788.png)
 
 
-###通过VDI硬盘文件复制
+###   通过VDI硬盘文件复制
 
 在仅有VDI硬盘文件时，也是可以进行虚拟机复制的。通过创建新的虚拟机，然后挂载复制的VDI硬盘文件即可。不过，在挂载硬盘前需要对复制的硬盘重新设置UUID，不然会因为UUID重复而导致硬盘无法挂载。
+
 + 新建虚拟机
 ![](http://carforeasy.cn/virtualbox复制虚拟机-74a7971f.png)
 
@@ -57,20 +58,24 @@ VirutalBox软件自身提供了复制虚拟机的功能，从当前已有的虚�
 ![](http://carforeasy.cn/virtualbox复制虚拟机-2d11ca57.gif)
 
 
-##虚拟机系统修改（centos为例）
+## 虚拟机系统修改（centos为例）
 虚拟机复制完成后，由于主机名和IP地址都是相同的配置，通常需要进行修改。
-###修改主机名
+### 修改主机名
+
 ```shell
 hostnamectl set-hostname newhost
 ```
-###修改ip地址
+
+### 修改ip地址
 修改 /etc/sysconfig/network-scripts/ifcfg-enpn0s3 进行修改。
 
-###文件系统修复
+### 文件系统修复
 对系统进行修改后会出现文件系统错误，无法启动，进入修复模式后进行修复。
+
 ```shell
 xfs_repair -L /dev/mapper/centos-root
 ```
+
 ![](http://carforeasy.cn/virtualbox复制虚拟机-99afaeb2.gif)
 
 ## 参考链接
