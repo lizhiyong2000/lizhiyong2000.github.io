@@ -89,34 +89,42 @@ chown hdfs:hadoop /etc/security/keytab/hdfs/hdfs.keytab
 ### 添加DataNode节点
 
 + 启动datanode
+
 ```
 mkdir -p /var/run/hadoop && chown hdfs:hadoop /var/run/hadoop
 mkdir -p /opt/data/hadoop/datanode && chown hdfs:hadoop /opt/data/hadoop/datanode
 cp /opt/emr-agent/jsvc/jsvc /opt/cdh/hadoop/libexec/
 /opt/cdh/hadoop/sbin/hadoop-daemon.sh --config /opt/cdh/hadoop/etc/hadoop start datanode 2>&1
 ```
+
 + NameNode上刷新节点
+
 ```
 /usr/bin/sudo su hdfs -l -s /bin/bash -c 'ulimit -c unlimited ;  /opt/cdh/hadoop/bin/hdfs dfsadmin -refreshNodes'
 ```
+
 在UI中查看节点状态：
   ![](http://carforeasy.cn/hadoop集群启用kerberos后动态增加删除节点-6bf4fe13.png)
 
 ### 删除DataNode节点
 + 在hdfs-site.xml文件中加入如下配置
+
 ```xml
 <property>
     <name>dfs.hosts.exclude</name>
     <value>/opt/cdh/hadoop/etc/hadoop/hdfs_excludes</value>
 </property>  
 ```
+
 hdfs_excludes中写入要删除的DataNode节点名
+
 ```
 host-106
 host-108
 ```
 
 + NameNode上刷新节点
+
 ```sh
 /usr/bin/sudo su hdfs -l -s /bin/bash -c 'ulimit -c unlimited ;  /opt/cdh/hadoop/bin/hdfs dfsadmin -refreshNodes'
 ```
@@ -159,6 +167,7 @@ host-108
   ```
 
 + 修改keytab权限
+
   ```sh
   chown yarn:hadoop /etc/security/keytab/yarn/yarn.keytab
   ```
@@ -166,12 +175,14 @@ host-108
 ### 添加NodeManager节点
 
 + 启动NodeManager
+
   ```sh
   mkdir -p /var/run/yarn && chown yarn:hadoop /var/run/yarn
   /usr/bin/sudo su yarn -l -s /bin/bash -c 'ulimit -c unlimited ;  /opt/cdh/hadoop/sbin/yarn-daemon.sh start nodemanager 2>&1'
   ```
 
 + ResourceManager上刷新节点
+
   ```sh
   /usr/bin/sudo su yarn -l -s /bin/bash -c 'kinit -t /etc/security/keytab/yarn/yarn.keytab  resourcemanager/host-105@CTYUN.COM;/opt/cdh/hadoop/bin/yarn --config /opt/cdh/hadoop/etc/hadoop rmadmin -refreshNodes '
 
@@ -185,19 +196,22 @@ host-108
 ### 删除NodeManager节点
 
   + 在ResourceManager的yarn-site.xml文件中加入如下配置
+
   ```xml
   <property>
     <name>yarn.resourcemanager.nodes.exclude-path</name>
     <value>/opt/cdh/hadoop/etc/hadoop/yarn_excludes</value>
   </property>  
   ```
+
   yarn_excludes中写入要删除的DataNode节点名
+
   ```
   host-108
   ```
 
-
   + ResourceManager上刷新节点
+
   ```sh
   /usr/bin/sudo su yarn -l -s /bin/bash -c 'kinit -t /etc/security/keytab/yarn/yarn.keytab  resourcemanager/host-105@CTYUN.COM;/opt/cdh/hadoop/bin/yarn --config /opt/cdh/hadoop/etc/hadoop rmadmin -refreshNodes '
   ```
