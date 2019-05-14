@@ -5,7 +5,6 @@ date: "2019-02-15 14:35"
 ---
 
 ## 1. 安装package control
-lime
 https://packagecontrol.io/installation
 
 下载地址：
@@ -41,12 +40,7 @@ http://static.bolin.site/channel_v3.json
 
 
 
-
-
-
-+ [Sublime Merger](http://www.sublimerge.com/)
 + [Git Conflict Resolver](https://link.jianshu.com/?t=https://github.com/Zeeker/sublime-GitConflictResolver)
-+ [SideBarGit](https://github.com/titoBouzout/SideBarGit)
 + [GitGutter](https://packagecontrol.io/packages/GitGutter)
 
 ## 参考链接
