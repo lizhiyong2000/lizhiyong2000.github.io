@@ -23,7 +23,8 @@ date: "2019-02-15 14:35"
 + [sublime-style-column-selection](https://atom.io/packages/sublime-style-column-selection)
 
 
-## 2. HTML开发插件
+## 2. HTML开发插件install
+
 
 + [autoclose-html](https://atom.io/packages/autoclose-html)
 
