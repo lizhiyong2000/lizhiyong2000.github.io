@@ -57,13 +57,103 @@ http://static.bolin.site/channel_v3.json
 + [Tag插件](https://github.com/SublimeText/Tag)
 + [SublimeCodeIntel插件](https://github.com/SublimeCodeIntel/SublimeCodeIntel)
 + [LiveReload插件](https://github.com/alepez/LiveReload-sublimetext3)
++ [HTML-CSS-JS Prettify插件](https://github.com/victorporof/Sublime-HTMLPrettify)
 
 
 ### 2.3 JS插件
 + [JsFormat插件](https://github.com/jdc0589/JsFormat)
 + [Alignment]()
 + [Babel](https://packagecontrol.io/packages/Babel)
+
+    使用时需要将所有js后缀文件设置语法为Babel
+
+    - 使用截图：
+![](http://carforeasy.cn/SublimeText使用合集-17b1bc25.png)
+
 + [DocBlockr](https://packagecontrol.io/packages/DocBlockr)
+    - 使用截图：
+![](http://carforeasy.cn/SublimeText使用合集-4a4233e6.gif)
+
++ [HyperClick](https://github.com/aziz/SublimeHyperClick)
+    - 使用截图：
+![](http://carforeasy.cn/SublimeText使用合集-7182abe6.gif)
+
++ [jsfmt](https://github.com/ionutvmi/sublime-jsfmt)
+    - 设置：
+```json
+{
+  // autoformat on save
+  "autoformat": false,
+
+  // array of extensions for autoformat
+  "extensions": ["js", "jsx", "sublime-settings", "sublime-keymap"],
+
+  // options for jsfmt
+  "options": {
+    "preset": "jquery",
+    "indent": {
+      "value": "    "
+    },
+    // plugins included
+    "plugins": [
+      "esformatter-jsx",
+    // "esformatter-quotes",
+    // "esformatter-semicolons",
+    // "esformatter-braces",
+    // "esformatter-dot-notation"
+    ],
+    // plugins included
+    "jsx": {
+      "formatJSX": true, //Duh! that's the default
+      "attrsOnSameLineAsTag": false, // move each attribute to its own line
+      "maxAttrsOnTag": 3, // if lower or equal than 3 attributes, they will be kept on a single line
+      "firstAttributeOnSameLine": true, // keep the first attribute in the same line as the tag
+      "formatJSXExpressions": true, // default true, if false jsxExpressions won't be recursively formatted
+      "JSXExpressionsSingleLine": true, // default true, if false the JSXExpressions might span several lines
+      "alignWithFirstAttribute": false, // do not align attributes with the first tag
+      "spaceInJSXExpressionContainers": " ", // default to one space. Make it empty if you don't like spaces between JSXExpressionContainers
+      "removeSpaceBeforeClosingJSX": false, // default false. if true <React.Something /> => <React.Something/>
+      "closingTagOnNewLine": false, // default false. if true attributes on multiple lines will close the tag on a new line
+      "JSXAttributeQuotes": "", // possible values "single" or "double". Leave it as empty string if you don't want to modify the attributes' quotes
+      "htmlOptions": {
+        "brace_style": "collapse",
+        "indent_size": 4,
+        "indent_char": " ",
+        "indent_with_tabs": false,
+        "max_preserve_newlines": 2,
+        "preserve_newlines": true
+      // put here the options for js-beautify.html
+      }
+    }
+  },
+  "options-JSON": {
+    "plugins": [
+      "esformatter-quotes"
+    ],
+    "quotes": {
+      "type": "double"
+    }
+  },
+  "alert-errors": true,
+  // path to nodejs
+  "node-path": "node",
+  // if true it will format the whole file even if you have a selection active
+  "ignore-selection": false
+}
+```
+
+    - 快捷键
+```json
+  {
+    "keys": [
+      "ctrl+q"
+    ],
+    "command": "format_javascript"
+  }
+```
+   - 使用截图：
+![](http://carforeasy.cn/SublimeText使用合集-a0a56e9a.png)
+
 
 ### 2.4 CSS插件
 + [ColorHighlight](https://github.com/Kronuz/ColorHighlight)
