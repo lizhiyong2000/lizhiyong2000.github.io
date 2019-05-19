@@ -80,6 +80,7 @@ http://static.bolin.site/channel_v3.json
 
 + [jsfmt](https://github.com/ionutvmi/sublime-jsfmt)
     - 设置：
+
 ```json
 {
   // autoformat on save
