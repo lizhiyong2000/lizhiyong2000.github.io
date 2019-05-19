@@ -37,6 +37,7 @@ http://static.bolin.site/channel_v3.json
 + [Terminus插件](https://github.com/randy3k/Terminus)
 
     - 快捷键：
+
 ```json
 [
     {
@@ -144,6 +145,7 @@ http://static.bolin.site/channel_v3.json
 ```
 
     - 快捷键
+
 ```json
   {
     "keys": [
@@ -172,7 +174,8 @@ http://static.bolin.site/channel_v3.json
 
 + [MarkdownPreview](https://github.com/facelessuser/MarkdownPreview)
     - 设置：
-```
+
+```json
 {
     "browser": "/Applications/Google Chrome.app",
     "enable_autoreload": true
@@ -180,6 +183,7 @@ http://static.bolin.site/channel_v3.json
 ```
 
     - 快捷键：
+
 ```json
 [
     {
