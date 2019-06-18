@@ -5,6 +5,30 @@ date: "2019-04-02 16:21"
 ---
 
 
+### 添加DNS
+
+nmcli con
+
+nmcli con mod ens33 ipv4.dns "202.96.209.5 202.96.209.133 8.8.8.8 8.8.4.4"
+
+
+sudo yum-config-manager --add-repo https://openresty.org/yum/cn/centos/OpenResty.repo
+sudo yum install openresty
+
+
+sudo yum install epel-release
+sudo yum update
+
+然后安装Redis数据库：
+
+sudo yum -y install redis
+
+
+
+CREATE USER 'user123'@'%' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON * . * TO 'user123'@'%';
+FLUSH PRIVILEGES;
+
 
 mysql> SHOW VARIABLES LIKE 'vali%';
 +--------------------------------------+--------+
