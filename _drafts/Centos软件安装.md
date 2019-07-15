@@ -2,7 +2,16 @@
 layout: "post"
 title: "Centos7软件安装"
 date: "2019-04-02 16:21"
+categories: Linux
+description: Centos7软件安装
+tags: Linux
 ---
+
+* content
+{:toc}
+
+<div class="postImg" style="background-image:url(http://carforeasy.cn/共享VPN连接访问VPN网络-04322f2e.png)"></div>
+> “公司内网VPN连接程序未提供Mac、Linux系统下的客户端，对于需要使用Mac、Linux进行的开发任务，可以通过安装Windows虚拟机，将虚拟机中VPN网络连接共享给宿主机进行访问。”
 
 
 
@@ -120,9 +129,19 @@ alter user 'root'@'localhost' identified by '123456';
 CREATE USER 'user123'@'%' IDENTIFIED BY '123456';
 GRANT ALL PRIVILEGES ON * . * TO 'user123'@'%';
 FLUSH PRIVILEGES;
+
 ```
 
 
+
+### 2.8 NTP
+```
+yum install ntp
+systemctl enable ntpd
+systemctl start ntpd
+timedatectl set-timezone Asia/Shanghai
+timedatectl set-ntp yes
+```
 ## 参考链接
 
 
