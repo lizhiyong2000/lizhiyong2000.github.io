@@ -27,14 +27,13 @@ tags: Hadoop Kerberos
 | host-204  | 192.168.30.204 |      kdc slave        |
 | host-205  | 192.168.30.205 |      other            |
 
-### KDC安装
-### 1.1 安装KDC
++ 安装KDC及client软件包（krb5-server为KDC使用，client可不安装）
 
   ```
   sudo yum install -y krb5-server krb5-lib krb5-workstation
   ```
 
-### 1.2 单台KDC安装配置
+### 1.2 单台KDC配置
 
 #### 1.2.1 KDC配置
 + /var/kerberos/krb5kdc/kadm5.acl
@@ -219,7 +218,7 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
   sudo su hdfs -l -s /bin/bash -c 'kinit -k -t /opt/cdh/hadoop/etc/hadoop/hdfs.keytab HTTP/host-203@CTYUN.COM'
   ```
 
-## 3. Hadoop组件配置
+## 3. Hadoop组件配置示例
 以HDFS namenode为例，配置namenode使用kerberos认证。
 + core-site.xml
   ```xml
