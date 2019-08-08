@@ -18,11 +18,11 @@ tags: Linux
 ## 1. 网络配置
 
 ### 1.1 设置静态IP
-```
+```shell
 vi /etc/sysconfig/network-scripts/ifcfg-ens33
 ```
 
-```
+```ini
 BOOTPROTO="static"
 ONBOOT="yes"
 IPADDR=192.168.30.201
@@ -33,7 +33,7 @@ DNS2=202.96.209.133
 ```
 
 ### 1.2 添加DNS
-```
+```shell
 nmcli con
 
 nmcli con mod ens33 ipv4.dns "202.96.209.5 202.96.209.133 8.8.8.8 8.8.4.4"
@@ -41,7 +41,7 @@ nmcli con mod ens33 ipv4.dns "202.96.209.5 202.96.209.133 8.8.8.8 8.8.4.4"
 
 ### 1.3 关闭firewall
 
-```
+```shell
 systemctl stop firewalld
 systemctl disable firewalld
 ```
@@ -54,26 +54,26 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 ```
 
-```
+```shell
 yum clean all
 yum makecache
 yum update
 ```
 ### 2.2 安装yum工具
 
-```
+```shell
 yum install -y yum-utils
 ```
 
 ### 2.3 安装OpenJDK
 
-```
+```shell
 yum install -y java-1.8.0-openjdk-devel.x86_64
 ```
 
 ### 2.4 安装Python
 
-```
+```shell
 yum install epel-release
 
 yum update
@@ -83,7 +83,7 @@ yum install -y python36
 
 ### 2.5 安装OpenResty
 
-```
+```shell
 yum-config-manager --add-repo https://openresty.org/yum/cn/centos/OpenResty.repo
 
 yum install openresty
@@ -95,7 +95,7 @@ systemctl start openresty
 
 ### 2.6 安装Redis
 
-```
+```shell
 yum install centos-release-scl
 
 yum -y install redis
@@ -105,7 +105,7 @@ systemctl start redis
 ```
 
 ### 2.7 安装MySQL
-```
+```shell
 curl -LO http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
 
 yum localinstall mysql57-community-release-el7-11.noarch.rpm
@@ -135,13 +135,43 @@ FLUSH PRIVILEGES;
 
 
 ### 2.8 NTP
-```
+```shell
 yum install ntp
 systemctl enable ntpd
 systemctl start ntpd
 timedatectl set-timezone Asia/Shanghai
 timedatectl set-ntp yes
+
 ```
+
+### 2.9 Docker
+
+```shell
+yum install -y yum-utils device-mapper-persistent-data lvm2
+
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+yum install docker-ce
+
+
+usermod -aG docker $(whoami)
+
+systemctl enable docker.service
+
+systemctl start docker.service
+```
+
+### 2.10 docker-compose
+
+```shell
+yum install epel-release
+
+yum install -y python-pip
+
+pip install docker-compose
+
+```
+
 ## 参考链接
 
 

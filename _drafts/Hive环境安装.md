@@ -103,7 +103,13 @@ systemctl enable mysqld
 
 systemctl start mysqld
 ```
-
+### 1.3 添加hive用户
+```sql
+CREATE USER 'hive'@'%' IDENTIFIED BY 'hive';
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%';
+DELETE FROM mysql.user WHERE user='';
+flush privileges;
+```
 
 ## 2. Hive安装配置
 
