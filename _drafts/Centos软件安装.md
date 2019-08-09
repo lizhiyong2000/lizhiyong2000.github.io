@@ -147,6 +147,13 @@ timedatectl set-ntp yes
 ### 2.9 Docker
 
 ```shell
+
+systemctl stop firewalld && systemctl disable firewalld
+swapoff -a
+setenforce 0
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
+
 yum install -y yum-utils device-mapper-persistent-data lvm2
 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -164,7 +171,7 @@ systemctl start docker.service
 ### 2.10 docker-compose
 
 ```shell
-yum install epel-release
+yum install -y epel-release
 
 yum install -y python-pip
 
