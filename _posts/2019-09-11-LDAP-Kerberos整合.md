@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "LDAP-Kerberos整合"
+title: "LDAP Kerberos整合"
 date: "2019-09-11 08:15"
 categories: Hadoop
 description: LDAP-Kerberos整合
