@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "LDAP Kerberos整合"
+title: "LDAP Kerberos整合"
 date: "2019-09-11 08:15"
 categories: Hadoop
 description: "LDAP Kerberos整合"
@@ -11,7 +11,7 @@ tags: Kerberos OpenLDAP
 {:toc}
 
 <div class="postImg" style="background-image:url(http://carforeasy.cn/LDAP-e7dcceca.png)"></div>
-> “在Hadoop集群配置中，通常LDAP用于账号管理，使用Kerberos进行认证，本来是两套独立的系统，两套独立的账户，通过配置kereros使用LDAP作为数据库，配置LDAP账户使用SASL方式进行kerberos认证，能将两套账户进行关联统一，结合CAS等方案，可实现一套账户统一认证。”
+> “在Hadoop集群配置中，通常LDAP用于账号管理，使用Kerberos进行认证，本来是两套独立的系统，两套独立的账户，通过配置kereros使用LDAP作为数据库，配置LDAP账户使用SASL方式进行kerberos认证，能将两套账户进行关联统一，结合CAS等方案，可实现一套账户统一认证。”
 
 
 
@@ -19,7 +19,7 @@ tags: Kerberos OpenLDAP
 
 
 ## 1. 环境准备
-机器： centos 7，设置hostname：kdc.test.com，已安装好kerberos
+机器： centos 7，设置hostname：kdc.test.com，已安装好kerberos
 
 下载jxplorer用于访问ldap服务。
 

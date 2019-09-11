@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "Linux系统使用LDAP进行统一用户登录管理认证"
+title: "Linux系统使用LDAP进行统一用户登录管理认证"
 date: "2019-09-11 14:00"
 categories: Hadoop
 description: "Linux系统使用LDAP进行统一用户登录管理认证"
@@ -11,13 +11,13 @@ tags: NSLCD OpenLDAP
 {:toc}
 
 <div class="postImg" style="background-image:url(http://carforeasy.cn/Linux系统使用LDAP进行统一用户登录管理认证-e0607cd8.png)"></div>
-> “在Hadoop集群配置中，通常LDAP用于账号管理，使用Kerberos进行认证，本来是两套独立的系统，两套独立的账户，通过配置kereros使用LDAP作为数据库，配置LDAP账户使用SASL方式进行kerberos认证，能将两套账户进行关联统一，结合CAS等方案，可实现一套账户统一认证。另外，Linux系统用户也可与LDAP账户进行整合，实现统一账户管理。”
+> “在Hadoop集群配置中，通常LDAP用于账号管理，使用Kerberos进行认证，本来是两套独立的系统，两套独立的账户，通过配置kereros使用LDAP作为数据库，配置LDAP账户使用SASL方式进行kerberos认证，能将两套账户进行关联统一，结合CAS等方案，可实现一套账户统一认证。另外，Linux系统用户也可与LDAP账户进行整合，实现统一账户管理。”
 
 
 
 
 
-## 1. LDAP客户端配置
+## 1. LDAP客户端配置
 
 + 安装openldap-clients
 
