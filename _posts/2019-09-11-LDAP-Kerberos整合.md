@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "LDAP-Kerberos整合"
-date: "2018-12-17 16:15"
+date: "2019-09-11 08:15"
 categories: kerberos
 description: LDAP-Kerberos整合
 tags: kerberos
