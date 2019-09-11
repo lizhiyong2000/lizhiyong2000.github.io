@@ -2,9 +2,9 @@
 layout: "post"
 title: "LDAP-Kerberos整合"
 date: "2019-09-11 08:15"
-categories: kerberos
+categories: Hadoop
 description: LDAP-Kerberos整合
-tags: kerberos
+tags: Kerberos OpenLDAP
 ---
 
 * content
