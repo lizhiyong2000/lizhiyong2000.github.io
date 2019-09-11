@@ -440,7 +440,7 @@ $ ldapdelete -x -w 12345678 -D'cn=ldapadmin,ou=people,dc=example,dc=com' "cn=te
 ```
 
 
-## Kerberos安装配置，使用LDAP数据库
+## 3. Kerberos安装配置，使用LDAP数据库
 
 + LDAP中添加kdc账户
 
@@ -559,10 +559,10 @@ Principal "test@TEST.COM" created.
 创建成功后可以看到test用户下多了很多krb开头的属性。
 
 ![](http://carforeasy.cn/LDAP-046b97f8.png)
-## 3. OpenLDAP使用Kerberos进行认证
+## 4. OpenLDAP使用Kerberos进行认证
 
 上述创建的test用户虽然在ldap数据库中只有一个条目，但是ldap账户和kerberos账户却使用单独的密码，可以配置LDAP使用SASL方式利用kerberos进行验认证，这样ldap账户密码就和kerberos账户密码统一起来。
-### 3.1 SASL配置
+### 4.1 SASL配置
 > 需提前配置好krb5.conf，saslauthd和slapd在同一台机器上
 + saslauthd配置
 
@@ -600,7 +600,8 @@ kadmin.local: addprinc -x dn="cn=host/kdc.test.com,ou=services,ou=accounts,dc=te
 kadmin.local: ktadd host/kdc.test.com@TEST.COM
 ```
 
-``` klist -kt /etc/krb5.keytab
+```
+klist -kt /etc/krb5.keytab
 [root@kdc ~]# kinit  host/kdc.test.com@TEST.COM -kt /etc/krb5.keytab
 [root@kdc ~]# testsaslauthd -u test -p 123456
 0: OK "Success."
@@ -608,7 +609,7 @@ kadmin.local: ktadd host/kdc.test.com@TEST.COM
 
 
 
-### 3.2 配置密码使用SASL验证
+### 4.2 配置密码使用SASL验证
 + 使用Base64格式
 > 使用base64格式时userPassword后面两个冒号::
 
@@ -629,6 +630,7 @@ userPassword:: e1NBU0x9dGVzdEBURVNULkNPTQ==
 
 + 使用plain格式
 > 使用plain格式时userPassword后面一个冒号:
+
 ```
 
 dn: cn=test,ou=users,ou=accounts,dc=test,dc=com
@@ -636,17 +638,24 @@ changetype: modify
 replace: userPassword
 userPassword: {SASL}test@TEST.COM
 ```
+
+```
 ldapmodify -x -D "cn=admin,dc=test,dc=com" -W -f test.ldif
+```
 
 + 测试密码修改
 
 kadmin.local: cpw  test 修改为12345678
+
+```
 [root@kdc ~]# testsaslauthd -u test -p 12345678
 0: OK "Success."
 
 ldapsearch -x -D "cn=test,ou=users,ou=accounts,dc=test,dc=com" -W -b "dc=test,dc=com"
+```
 
 + 使用旧密码123456
+
 ```
 [root@kdc ~]# ldapsearch -x -D "cn=test,ou=users,ou=accounts,dc=test,dc=com" -W -b "dc=test,dc=com"
 Enter LDAP Password:
@@ -655,6 +664,7 @@ ldap_bind: Invalid credentials (49)
 
 
 + 使用新密码12345678
+
 ```
 [root@kdc ~]# ldapsearch -x -D "cn=test,ou=users,ou=accounts,dc=test,dc=com" -W -b "dc=test,dc=com"
 Enter LDAP Password:
@@ -965,7 +975,7 @@ result: 0 Success
 # numEntries: 18
 ```
 
-## 4. 参考链接
+## 5. 参考链接
 
 + [OpenLDAP安装与配置](https://www.ilanni.com/?p=13775)
 + [Kerberos + OpenLDAP 配置](http://secfree.github.io/blog/2015/06/29/kerberos-ldap-deploy.html)
