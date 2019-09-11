@@ -274,33 +274,7 @@ olcAccess: {1}to * by dn="cn=admin,dc=test,dc=com" write by * read
 
 ```
 
-+ 日志相关配置
-
-```
-mkdir -p /var/log/slapd
-
-chown ldap:ldap /var/log/slapd/
-
-touch /var/log/slapd/slapd.log
-
-chown ldap . /var/log/slapd/slapd.log
-
-echo "local4.* /var/log/slapd/slapd.log" >> /etc/rsyslog.conf
-systemctl restart rsyslog
-
-
-cat log.ldif
-dn: cn=config
-changetype: modify
-add: olcLogLevel
-olcLogLevel: 32
-
-[root@test1] ~$ ldapmodify -Y EXTERNAL -H ldapi:/// -f log.ldif
-
-```
-
 ### 2.4 组织结构配置
-
 
 + 添加组织结构(base.ldif)
 
