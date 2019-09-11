@@ -24,7 +24,14 @@ sudo launchctl load -w ～/Library/LaunchAgents/frpc.plist
 
 
 
-lsof -iTCP -sTCP:LISTEN -P -n
+sudo lsof -iTCP -sTCP:LISTEN -P -n
+
+### openresty
+HOMEBREW_NO_AUTO_UPDATE=1 brew install openresty/brew/openresty
+
+sudo brew services start openresty
+sudo brew services stop openresty
+
 
 ### realpath not found
 brew install coreutils
