@@ -135,6 +135,7 @@ authconfig --enableldap --enableldapauth --enablemkhomedir --enableforcelegacy -
   ```
 
   - /etc/pam.d/password-auth
+  
   ```
   auth        required      pam_env.so
   auth        required      pam_faildelay.so delay=2000000
