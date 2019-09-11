@@ -412,11 +412,13 @@ ldapsearch -D "cn=admin,dc=test,dc=com" -w 123456 -b "dc=test,dc=com"
 + 修改密码
 
 用户添加好以后，需要给其设定初始密码，运行命令如下：
+
 ```
 $ ldappasswd -x -D 'cn=admin,dc=test,dc=com' -w 123456 "cn=test,ou=users,dc=example,dc=com" -S
 ```
 
 + 修改用户所属组
+
 ```
 cat > add_user_to_groups.ldif << “EOF”
 
@@ -425,21 +427,23 @@ changetype: modify
 add: memberuid
 memberuid: ldapuser1
 EOF
-````
+```
 
 + 删除
 
 删除用户或组条目：
 
+```
 $ ldapdelete -x -w 12345678 -D'cn=ldapadmin,ou=people,dc=example,dc=com' "cn=test,ou=people,dc=example,dc=com"
 
 $ ldapdelete -x -w 12345678 -D'cn=ldapadmin,ou=people,dc=example,dc=com' "cn=test,ou=group,dc=example,dc=com"
-
+```
 
 
 ## Kerberos安装配置，使用LDAP数据库
 
 + LDAP中添加kdc账户
+
 ```
 
 dn: cn=kdc-adm,ou=services,ou=accounts,dc=test,dc=com
@@ -464,6 +468,7 @@ ldapadd -x -D "cn=admin,dc=test,dc=com" -W -f kdcaccounts.ldif
 
 
 + 设置权限
+
 ```
 dn: olcDatabase={2}mdb,cn=config
 changetype: modify
@@ -522,6 +527,7 @@ ldapmodify -Y EXTERNAL -H ldapi:/// -f kdcpermission.ldif
 kdb5_ldap_util stashsrvpw -f /var/kerberos/krb5kdc/ldap.stash "cn=kdc-srv,ou=services,ou=accounts,dc=test,dc=com"
 kdb5_ldap_util stashsrvpw -f /var/kerberos/krb5kdc/ldap.stash "cn=kdc-adm,ou=services,ou=accounts,dc=test,dc=com"
 ```
+
 + 生成数据库
 
 ```
@@ -539,6 +545,7 @@ cn=kerberos,dc=test,dc=com
 
 + 验证
 kerberos使用ldap数据库后可以将kerberos的principal和ldap账户进行关联。
+
 ```
 [root@kdc ~]# kadmin.local
 Authenticating as principal root/admin@TEST.COM with password.
@@ -548,6 +555,7 @@ Enter password for principal "test@TEST.COM":
 Re-enter password for principal "test@TEST.COM":
 Principal "test@TEST.COM" created.
 ```
+
 创建成功后可以看到test用户下多了很多krb开头的属性。
 
 ![](http://carforeasy.cn/LDAP-046b97f8.png)
@@ -565,20 +573,24 @@ yum -y install cyrus-sasl cyrus-sasl-devel cyrus-sasl-gssapi cyrus-sasl-lib
 vim /etc/sysconfig/saslauthd
 
 修改值
+
 ```
 MECH=kerberos5
 ```
+
 重启：systemctl restart saslauthd
 
 + slapd配置
 创建vim /usr/lib64/sasl2/slapd.conf (有使用/etc/sasl2/slapd.conf)文件
 
 内容：
+
 ```
 mech_list: external gssapi plain
 pwcheck_method: saslauthd
 saslauthd_path: /var/run/saslauthd/mux
 ```
+
 重启：systemctl restart slapd
 
 
@@ -601,7 +613,8 @@ kadmin.local: ktadd host/kdc.test.com@TEST.COM
 > 使用base64格式时userPassword后面两个冒号::
 
 将{SASL}test@TEST.COM使用base64加密
-```sh
+
+```
 echo -n "{SASL}test@TEST.COM" | base64
 e1NBU0x9dGVzdEBURVNULkNPTQ==
 ```
