@@ -149,6 +149,14 @@ git config --list  # 查看配置的信息
 git config --global user.name "小弟调调"          # 修改全局名字
 git config --global user.email "wowohoo@qq.com"  # 修改全局邮箱
 git config --global --unset <entry-name>  # 删除全局设置
+
+git config --global --unset-all http.proxy
+git config --global --unset-all https.proxy
+
+git config --global --add http.proxy socks5://127.0.0.1:1080
+git config --global --add https.proxy socks5://127.0.0.1:1080
+
+
 ```
 
 ## 不常见的使用场景
