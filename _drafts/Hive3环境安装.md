@@ -1,0 +1,447 @@
+---
+layout: "post"
+title: "Hive3环境安装"
+date: "2019-09-16 11:52"
+categories: Hadoop
+description: Hive3环境安装
+tags: Hive
+---
+
+* content
+{:toc}
+
+<div class="postImg" style="background-image:url(http://carforeasy.cn/Spark集群环境安装-f99e0f8b.png)" ></div>
+> “本文介绍Hive3环境搭建，在之前安装好的Hadoop 3集群之上搭建Hive环境。”
+
+
+
+
+
+## 1. 环境
+
+### 1.1 设置主机名，配置hosts文件
+
+  准备3台虚拟机(CentOS 7)，一台安装mysql，一台安装MetaStore服务，另一台安装HiveServer2服务。
+
+  ```
+  MySQL : kdc.test.com
+  MetaStore : node1.test.com
+  HiveServer2 : node2.test.com
+  ```
+
+  由于之前安装了Hadoop环境，/etc/hosts文件、NTP配置等不再重复。
+
+### 1.2 设置环境变量
+  系统中安装jdk，将下载的Hive 压缩包解压至/opt/spark，之后为node1
+  、node2两台机器配置环境变量：
+
+  ```
+  mkdir -p /opt/hive
+  tar --strip-components=1 -zxvf apache-hive-3.1.2-bin.tar.gz -C /opt/hive/
+  ```
+
+  + /etc/profile中添加
+
+  ```
+  #java
+  export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+  export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+  export PATH=$PATH:$JAVA_HOME/bin
+
+  #hadoop
+  export HADOOP_HOME=/opt/hadoop
+  export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+  #hive
+  export HIVE_HOME=/opt/spark
+  export PATH=$PATH:$HIVE_HOME/bin
+  ```
+
+
+
+
+## 2. 安装MySQL
+
+### 2.1 安装MySQL并配置
+
+#### 2.1.1  源码包安装MySQL
+mysql采用tar.gz包安装，解压至目录即可，系统为mysql创建mysql:mysql用户和组。
+
++ /etc/my.cnf
+
+```ini
+[client]
+port            = 3306
+socket          = /var/run/mysql/mysqld.sock
+
+# Here follows entries for some specific programs
+
+# The MySQL server
+[mysqld]
+
+basedir=/opt/cdh/mysql
+datadir=/opt/cdh/mysql/data
+
+pid-file                                = /var/run/mysql/mysqld.pid
+#general_log_file               = /var/log/mysql/mysql.log
+log-error                               = /var/log/mysql/mysql-error.log
+port            = 3306
+socket          = /var/run/mysql/mysqld.sock
+
+
+skip-external-locking
+key_buffer_size = 384M
+max_allowed_packet = 1M
+table_open_cache = 512
+sort_buffer_size = 2M
+read_buffer_size = 2M
+read_rnd_buffer_size = 8M
+myisam_sort_buffer_size = 64M
+thread_cache_size = 8
+query_cache_size = 32M
+
+server-id=1
+log-bin=/var/log/mysql/mysql-bin.log
+
+
+skip-name-resolve
+default-storage-engine  = INNODB
+
+character-set-server=utf8
+collation_server=utf8_general_ci
+init_connect='SET NAMES utf8'
+
+max_connections                 = 4096
+max_connect_errors              = 10
+
+```
+
+
+ + /usr/lib/systemd/system/mysqld.service
+
+```ini
+[Unit]
+Description=MySQL Server
+Documentation=man:mysqld(8)
+Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=mysql
+Group=mysql
+
+Type=forking
+
+PIDFile=/var/run/mysql/mysqld.pid
+
+# Disable service start and stop timeout logic of systemd for mysqld service.
+TimeoutSec=0
+
+# Execute pre and post scripts as root
+PermissionsStartOnly=true
+
+# Start main service
+ExecStart=/opt/cdh/mysql/bin/mysqld --user=mysql --daemonize $MYSQLD_OPTS
+
+# Use this to switch malloc implementation
+EnvironmentFile=-/etc/sysconfig/mysql
+
+# Sets open_files_limit
+LimitNOFILE = 5000
+
+```
+
+#### 2.1.2  RPM安装MySQL
+
+```
+curl -LO http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+
+yum -y localinstall mysql57-community-release-el7-11.noarch.rpm
+
+yum -y install mysql-community-server
+
+```
+
+
+### 2.2 启动MySQL
+
+```sh
+
+systemctl daemon-reload
+
+systemctl enable mysqld
+## 第一次启动前初始化数据库
+mysqld --user=mysql --initialize-insecure
+
+systemctl start mysqld
+```
+### 2.3 添加hive用户
+```sql
+CREATE USER 'hive'@'%' IDENTIFIED BY 'hive';
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%';
+DELETE FROM mysql.user WHERE user='';
+flush privileges;
+```
+
+## 3. Hive安装配置
+
+### 3.1 配置文件
++ hive-env.sh
+```sh
+export HADOOP_HOME=/opt/hadoop
+export HIVE_CONF_DIR=/opt/hive/conf
+export HIVE_HOME=/opt/hive
+export HIVE_AUX_JARS_PATH=/opt/hive/lib
+```
+
++ hive-site.xml
+
+```xml
+<configuration  xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <property>
+      <name>hive.exec.scratchdir</name>
+      <value>/user/hive/tmp</value>
+    </property>
+
+    <property>
+      <name>hive.metastore.warehouse.dir</name>
+      <value>/user/hive/warehouse</value>
+    </property>
+
+
+    <property>
+      <name>hive.metastore.uris</name>
+      <value>thrift://node1.test.com:9083</value>
+    </property>
+
+
+    <property>
+      <name>javax.jdo.option.ConnectionDriverName</name>
+      <value>com.mysql.jdbc.Driver</value>
+    </property>
+
+    <property>
+      <name>javax.jdo.option.ConnectionURL</name>
+      <value>jdbc:mysql://kdc.test.com:3306/hive?createDatabaseIfNotExist=true&amp;useSSL=false</value>
+    </property>
+
+    <property>
+      <name>javax.jdo.option.ConnectionUserName</name>
+      <value>hive</value>
+    </property>
+
+    <property>
+      <name>javax.jdo.option.ConnectionPassword</name>
+      <value>hive</value>
+    </property>
+
+
+    <property>
+      <name>hive.server2.thrift.bind.host</name>
+      <value>node2.test.com</value>
+    </property>
+
+    <property>
+      <name>hive.server2.thrift.port</name>
+      <value>10000</value>
+    </property>
+
+    <property>
+        <name>hive.metastore.event.db.notification.api.auth</name>
+        <value>false</value>
+    </property>
+
+    <property>
+        <name>hive.server2.active.passive.ha.enable</name>
+        <value>true</value>
+    </property>
+</configuration>
+```
+
+### 2.1 新建用户及用户组
+
+  为hive组件建立单独的用户hive, 加入hadoop组
+
+  ```
+  useradd hive -g hadoop
+  chown -R hive:hadoop /opt/hive
+  ```
+
+
+
+### 3.2 创建HDFS目录
+
+```sh
+su hdfs -c 'hadoop fs -mkdir -p /user/hive/warehouse'
+su hdfs -c 'hadoop fs -mkdir -p /user/hive/tmp'
+
+su hdfs -c 'hadoop fs -chown -R hive:hadoop /user/hive'
+su hdfs -c 'hadoop fs -chmod -R 777 /user/hive'
+
+#用以下命令检查目录是否创建成功及权限是否正确
+su hdfs -c 'hadoop fs -ls /user/hive/'
+```
+
++ HDFS 配置修改（core-site.xml)
+```xml
+   <property>
+     <name>hadoop.proxyuser.hive.groups</name>
+     <value>*</value>
+   </property>
+
+   <property>
+     <name>hadoop.proxyuser.hive.hosts</name>
+     <value>*</value>
+   </property>
+
+```
++ 之后重启HDFS、YARN服务
+
+### 3.3 拷贝 JDBC jar包文件
+
+将mysql-connector-java.jar文件拷贝至 $HIVE_HOME/lib目录下，并修改好权限。
+
+### 3.4 配置Hive日志
+
++ 新建日志目录
+
+  ```
+  mkdir /var/log/
+  chown spark:hadoop /var/log/spark
+  chmod -R 770 /var/log/spark
+
+  ```
+
++
+```
+cp hive-log4j2.properties.template hive-log4j2.properties
+vi hive-log4j2.properties
+#配置property.hive.log.dir
+property.hive.log.dir = /var/log/hive
+```
+
+
+### 3.4 启动Metastore
+
++ 第一次启动初始化schema
+```sh
+su hive -c 'schematool -dbType mysql -initSchema -verbose'
+```
+
++ 启动metastore
+```sh
+su hive -c 'hive --service metastore  -hiveconf hive.log.file=metastore.log  &'
+```
+
+### 3.5 启动HiveServer2
+
++ 启动HiveServer2
+```sh
+su hive -c 'hiveserver2  -hiveconf hive.log.file=hiveserver2.log &'
+```
+
+### 3.6 结果验证
+```sh
+/usr/bin/sudo su hive -l -s /bin/bash -c '/opt/hive/bin/beeline'
+
+> !connect jdbc:hive2://node2.test.com:10000/default
+> show databases;
+
+```
+
+
+select count(*) from people;
+
+
+hive.server2.enable.doAs
+
+ps -ef|grep -E "spark"|grep -v grep|awk '{print $2}'|xargs kill -s 9
+
+ps -ef|grep -E "hive"|grep -v grep|awk '{print $2}'|xargs kill -s 9
+
+
+
+su hdfs -c 'hdfs dfs -chmod -R 777 /user/hive/tmp'
+
+su hdfs -c 'hdfs dfs -chmod -R 777 /user/hive/tmp/hive/2445d45d-79e3-428b-baf8-6babd074d2f2'
+
+groupadd supergroup
+usermod -a -G supergroup spark
+usermod -a -G supergroup hive
+usermod -a -G supergroup yarn
+usermod -a -G supergroup hdfs
+
+
+## 4. Hive on Spark 配置
+
+
+```xml
+<property>
+    <name>hive.execution.engine</name>
+    <value>spark</value>
+</property>
+<property>
+    <name>spark.home</name>
+    <value>/opt/spark</value>
+</property>
+<property>
+    <name>spark.master</name>
+    <value>yarn-client</value>
+</property>
+<property>
+    <name>spark.executor.memeory</name>
+    <value>1g</value>
+</property>
+<property>
+    <name>spark.driver.memeory</name>
+    <value>1g</value>
+</property>
+```
+
+```
+0: jdbc:hive2://node2.test.com:10000/default> $<3>$<3>select count(*) from people;
+INFO  : Compiling command(queryId=hive_20190917152555_12e97686-29bc-4284-822e-5c8185011a82): select count(*) from people
+INFO  : Concurrency mode is disabled, not creating a lock manager
+INFO  : Semantic Analysis Completed (retrial = false)
+INFO  : Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:_c0, type:bigint, comment:null)], properties:null)
+INFO  : Completed compiling command(queryId=hive_20190917152555_12e97686-29bc-4284-822e-5c8185011a82); Time taken: 2.731 seconds
+INFO  : Concurrency mode is disabled, not creating a lock manager
+INFO  : Executing command(queryId=hive_20190917152555_12e97686-29bc-4284-822e-5c8185011a82): select count(*) from people
+INFO  : Query ID = hive_20190917152555_12e97686-29bc-4284-822e-5c8185011a82
+INFO  : Total jobs = 1
+INFO  : Launching Job 1 out of 1
+INFO  : Starting task [Stage-1:MAPRED] in serial mode
+ERROR : FAILED: Execution Error, return code 30041 from org.apache.hadoop.hive.ql.exec.spark.SparkTask. Failed to create Spark client for Spark session 790a43cc-2f91-4bed-954e-21c33ef9e153
+INFO  : Completed executing command(queryId=hive_20190917152555_12e97686-29bc-4284-822e-5c8185011a82); Time taken: 0.106 seconds
+INFO  : Concurrency mode is disabled, not creating a lock manager
+Error: Error while processing statement: FAILED: Execution Error, return code 30041 from org.apache.hadoop.hive.ql.exec.spark.SparkTask. Failed to create Spark client for Spark session 790a43cc-2f91-4bed-954e-21c33ef9e153 (state=42000,code=30041)
+```
+
+
+```
+hive  --hiveconf  hive.root.logger=DEBUG,console --hiveconf hive.spark.client.connect.timeout=30000ms --hiveconf hive.spark.client.server.connect.timeout=30000ms   -e  "select count(1) from  people"
+```
+
+
+```
+Caused by: java.lang.NoClassDefFoundError: org/apache/spark/SparkConf
+        at org.apache.hadoop.hive.ql.exec.spark.HiveSparkClientFactory.generateSparkConf(HiveSparkClientFactory.java:263)
+        at org.apache.hadoop.hive.ql.exec.spark.RemoteHiveSparkClient.<init>(RemoteHiveSparkClient.java:98)
+        at org.apache.hadoop.hive.ql.exec.spark.HiveSparkClientFactory.createHiveSparkClient(HiveSparkClientFactory.java:76)
+        at org.apache.hadoop.hive.ql.exec.spark.session.SparkSessionImpl.open(SparkSessionImpl.java:87)
+        ... 25 more
+Caused by: java.lang.ClassNotFoundException: org.apache.spark.SparkConf
+        at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+
+```
+
+## 4 参考链接
++ [Hive3.1安装](https://blog.csdn.net/aguang_vip/article/details/81583661)

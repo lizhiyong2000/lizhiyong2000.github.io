@@ -197,6 +197,21 @@ bin/hadoop fs -ls /user/hive/tmp
 
 ```
 
++ HDFS 配置修改（core-site.xml)
+```xml
+   <property>
+     <name>hadoop.proxyuser.hive.groups</name>
+     <value>*</value>
+   </property>
+
+   <property>
+     <name>hadoop.proxyuser.hive.hosts</name>
+     <value>*</value>
+   </property>
+
+```
+之后重启HDFS服务
+
 ### 2.3 拷贝 JDBC jar包文件
 
 将mysql-connector-java.jar文件拷贝至 $HIVE_HOME/lib目录下，并修改好权限。

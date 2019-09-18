@@ -108,9 +108,9 @@ systemctl start redis
 ```shell
 curl -LO http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
 
-yum localinstall mysql57-community-release-el7-11.noarch.rpm
+yum -y localinstall mysql57-community-release-el7-11.noarch.rpm
 
-yum install mysql-community-server
+yum -y install mysql-community-server
 
 systemctl enable mysqld
 systemctl start mysqld
@@ -122,12 +122,13 @@ systemctl start mysqld
 
 ```
 set global validate_password_policy=0;
-set global validate_password_length=6;
+set global validate_password_length=4;
 
 alter user 'root'@'localhost' identified by '123456';
 
 CREATE USER 'user123'@'%' IDENTIFIED BY '123456';
-GRANT ALL PRIVILEGES ON * . * TO 'user123'@'%';
+
+GRANT ALL PRIVILEGES ON * . * TO 'user123'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 ```
@@ -177,6 +178,14 @@ yum install -y python-pip
 
 pip install docker-compose
 
+```
+
+
+### 2.10 SS服务器
+```
+wget --no-check-certificate -O shadowsocks.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+chmod +x shadowsocks.sh
+./shadowsocks.sh 2>&1 | tee shadowsocks.log
 ```
 
 ## 参考链接
