@@ -798,12 +798,9 @@ Query-4  | 82.08  |
 
 ```scala
 package com.test
-
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
-
-
 object UserConsumingDataStatisticsParquet {
     def main(args: Array[String]) {
         if (args.length < 1) {
@@ -820,33 +817,25 @@ object UserConsumingDataStatisticsParquet {
         val userDF = sqlCtx.read.parquet(args(0))
         userDF.createOrReplaceTempView("user")
 
-
         val orderDF = sqlCtx.read.parquet(args(1))
         orderDF.createOrReplaceTempView("orders")
-
 
         //cache the DF in memory with serializer should make the program run much faster
         userDF.persist(StorageLevel.MEMORY_ONLY_SER)
         orderDF.persist(StorageLevel.MEMORY_ONLY_SER)
-
 
         //The number of people who have orders in the year 2015
         val count = orderDF.filter(orderDF("orderDate").contains("2015")).join(
             userDF, orderDF("userID").equalTo(userDF("userID"))).count()
         println("The number of people who have orders in the year 2015:" + count)
 
-
         //total orders produced in the year 2014
         val countOfOrders2014 = sqlCtx.sql("SELECT * FROM orders where  orderDate like '2014%'").count()
         println("total orders produced in the year 2014:" + countOfOrders2014)
 
-
-
         //Orders that are produced by user with ID 1 information overview
         val countOfOrdersForUser1 = sqlCtx.sql("SELECT o.orderID,o.productID, o.price,u.userID FROM orders o,user u where u.userID = 1 and u.userID = o.userID").show()
         println("Orders produced by user with ID 1 showed.")
-
-
 
         //Calculate the max,min,avg prices for the orders that are producted by user with ID 10
         val orderStatsForUser10 = sqlCtx.sql("SELECT max(o.price) as maxPrice, min(o.price) as minPrice,avg(o.price) as avgPrice,u.userID FROM orders o, user u where u.userID = 10 and u.userID = o.userID group by u.userID")
@@ -875,25 +864,15 @@ target/spark-example-1.0-SNAPSHOT.jar hdfs://master.test.com:8020/sample_user_da
 
 ```
 Job 0 finished: parquet at UserConsumingDataStatisticsParquet.scala:21, took 2.768159 s
-
 Job 1 finished: parquet at UserConsumingDataStatisticsParquet.scala:25, took 1.965211 s
-
 Job 2 finished: count at UserConsumingDataStatisticsParquet.scala:36, took 88.654541 s
 The number of people who have orders in the year 2015:6249355
-
 Job 3 finished: count at UserConsumingDataStatisticsParquet.scala:41, took 60.676918 s
 total orders produced in the year 2014:6251708
-
 Job 4 finished: show at UserConsumingDataStatisticsParquet.scala:47, took 70.043645 s
-
 Job 5 finished: show at UserConsumingDataStatisticsParquet.scala:47, took 0.105641 s
-
 Job 6 finished: show at UserConsumingDataStatisticsParquet.scala:47, took 0.123206 s
-
-
 Job 7 finished: show at UserConsumingDataStatisticsParquet.scala:47, took 0.502567 s
-
-
 Job 8 finished: show at UserConsumingDataStatisticsParquet.scala:47, took 0.397689 s
 +--------+---------+-----+------+
 | orderID|productID|price|userID|
@@ -903,9 +882,7 @@ Job 8 finished: show at UserConsumingDataStatisticsParquet.scala:47, took 0.3976
 |25038167|        6| 1239|     1|
 |64521701|        8| 1428|     1|
 +--------+---------+-----+------+
-
 Orders produced by user with ID 1 showed.
-
 Job 9 finished: collect at UserConsumingDataStatisticsParquet.scala:55, took 65.390210 s
 Minimum Price=461;Maximum Price=1512;Average Price=955.6
 ```
@@ -923,23 +900,15 @@ Query-4  | 65.39  |
 
 #### 3.4.1 TEXT格式
 
-
-
-
-
-
-
 ```
 su hive -l -s /bin/bash -c '/opt/hive/bin/beeline'
 > !connect jdbc:hive2://node2.test.com:10000/default
 ```
 
-
 + 创建数据表
 
 ```sql
 drop table users;
-
 create table users(userID STRING, gender STRING, age INT, registerDate STRING, role STRING, region STRING) row format delimited fields terminated by ' ' stored as textfile;
 load data inpath '/sample_user_data.txt' overwrite into table users;
 select count(*) from users;
@@ -948,13 +917,12 @@ drop table orders;
 create table orders (orderID STRING, orderDate STRING, productID INT, price INT, userID STRING) row format delimited fields terminated by ' ' stored as textfile;
 load data inpath '/sample_consuming_data.txt' overwrite into table orders;
 select count(*) from orders;
-
 ```
 
 + 测试SQL
 
 序号|   测试SQL|  
---|---|--
+:--:|---|--
 Query-1  | select count(*) from users u join orders o on o.userID=u.userID where o.orderDate like '2015%' |  
 Query-2  | select count(*) from orders where  orderDate like '2014%'|  
 Query-3  |  SELECT o.orderID,o.productID, o.price,u.userID FROM orders o,users u where u.userID = 1 and u.userID = o.userID |  
@@ -968,17 +936,12 @@ Query-4  |  SELECT max(o.price) as maxPrice, min(o.price) as minPrice,avg(o.pric
 
 ```sql
 drop table users2;
-
 create EXTERNAL table users2(userID STRING, gender STRING, age INT, registerDate STRING, role STRING, region STRING)  stored as PARQUETFILE LOCATION '/sample_user_data';
-
-
 select count(*) from users2;
 
 drop table orders2;
 create EXTERNAL table orders2 (orderID STRING, orderDate STRING, productID INT, price INT, userID STRING) row format delimited fields terminated by ' ' stored as PARQUETFILE LOCATION '/sample_consuming_data';
-
 select count(*) from orders2;
-
 ```
 
 + 测试SQL

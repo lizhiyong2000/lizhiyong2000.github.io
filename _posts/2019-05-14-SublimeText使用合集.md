@@ -39,11 +39,11 @@ tags: SublimeText
 #### [Terminus插件](https://github.com/randy3k/Terminus)
 
   + 快捷键：
-  
+
 ```json
 [
   {
-    "keys": ["ctrl*shift*t"], 
+    "keys": ["ctrl*shift*t"],
     "command": "toggle_terminus_panel"
   }
 ]
@@ -168,7 +168,7 @@ tags: SublimeText
 ### 2.4 CSS插件
 
 #### [ColorHighlight](https://github.com/Kronuz/ColorHighlight)
-    
+
 + 使用截图：
 ![](http://carforeasy.cn/SublimeText使用合集-06d0be0e.png)
 
@@ -196,16 +196,56 @@ tags: SublimeText
 ```json
 [
     {
-        "keys": ["alt*m"], 
-        "command": "markdown_preview", 
+        "keys": ["alt*m"],
+        "command": "markdown_preview",
         "args": {"target": "browser", "parser":"markdown"}
     }
 ]
 ```
 
 + 使用截图：
-  
+
 ![](http://carforeasy.cn/SublimeText使用合集-5d052d7a.png)
+
+## 3. 使用技巧
+
+### 3.1 文本排序&查找重复行&删除重复行
+
++ 1. 排序
+
+按F9或者选择菜单：Edit > Sort Lines，对每行文本进行排序
+
++ 2. 查找重复行
+
+排序好后，按Ctrl+F，调出查找面板
+
++ 3. 查找字符串：
+
+
+```
+^(.+)$[\r\n](^\1$[\r\n]{0, 1})+
+```
+
+注意：确保正则模式开关打开；若不可用，按Alt+R进行切换
+点击Find
+
++ 4. 删除重复行
+
+排序好后，按Ctrl+H，调出替换面板
+查找字符串：
+
+```
+^(.+)$[\r\n](^\1$[\r\n]{0, 1})+
+```
+
+注意：确保正则模式开关打开；若不可用，按Alt+R进行切换
+
+替换字符串：
+```
+\1\n
+```
+点击Replace
+
 
 ## 参考链接
 
