@@ -33,21 +33,21 @@ Spark|  2.4.4 |
 + 数据示例
 本案例中，我们将分析包含1亿条人口信息的结构化数据。数据包含三列，第一列是 ID，第二列是性别信息 (F -> 女，M -> 男)，第三列是人口的身高信息，单位是 cm。
 
-| id  | gender  | height  |
-------------|----------------|----------------|
-| 1          | M              | 212            |
-| 2          | M              | 140            |
-| 3          | F              | 131            |
-| 4          | F              | 182            |
-| 5          | M              | 167            |
-| 6          | M              | 163            |
-| 7          | M              | 130            |
-| 8          | M              | 153            |
-| 9          | M              | 186            |
-| 10         | M              | 210            |
-
+  ```
+  1 M 212
+  2 M 140
+  3 F 131
+  4 F 182
+  5 M 167
+  6 M 163
+  7 M 130
+  8 M 153
+  9 M 186
+  10 M 210
+  ```
 
 + 数据生成代码（text格式）
+
 ```scala
 import java.io.{File, FileWriter}
 
@@ -122,19 +122,15 @@ object PeopleInfoGenParquet {
     val sqlCtx = new SQLContext(sc)
     // this is used to implicitly convert an RDD to a DataFrame.
 
-
     val schemaArray = schemaString.split(",")
     val schema = StructType(schemaArray.map(fieldName => StructField(fieldName, StringType, true)))
 
     val rowRDD: RDD[Row] = peopleDataRDD.map(_.split(" ")).map(
       eachRow => Row(eachRow(0), eachRow(1), eachRow(2)))
 
-
     val peopleDF = sqlCtx.createDataFrame(rowRDD, schema)
 
     peopleDF.write.parquet("/sample_people_info")
-
-
   }
 }
 ```
@@ -223,19 +219,15 @@ object PeopleDataStatistics {
     // this is used to implicitly convert an RDD to a DataFrame.
     import sqlCtx.implicits._
 
-
     val schemaArray = schemaString.split(",")
     val schema = StructType(schemaArray.map(fieldName => StructField(fieldName, StringType, true)))
 
     val rowRDD: RDD[Row] = peopleDataRDD.map(_.split(" ")).map(
       eachRow => Row(eachRow(0), eachRow(1), eachRow(2)))
 
-
     val peopleDF = sqlCtx.createDataFrame(rowRDD, schema)
 
     peopleDF.createOrReplaceTempView("people")
-
-
     //select count(*) from people where height > 180 and gender='M'
 
     //get the male people whose height is more than 180
@@ -243,19 +235,16 @@ object PeopleDataStatistics {
     println("Men whose height are more than 180: " + higherMale180.count())
     println("<Display #1>")
 
-
     //get the female people whose height is more than 170
     val higherFemale170 = sqlCtx.sql("select id,gender, height from people where height > 170 and gender='F'")
     println("Women whose height are more than 170: " + higherFemale170.count())
     println("<Display #2>")
-
 
     //Grouped the people by gender and count the number
     peopleDF
       .groupBy(peopleDF("gender")).count().show()
     println("People Count Grouped By Gender")
     println("<Display #3>")
-
 
     //Men whose height is more than 210
     peopleDF
@@ -265,13 +254,11 @@ object PeopleDataStatistics {
     println("Men whose height is more than 210")
     println("<Display #4>")
 
-
     //Sorted the people by height in descend order,Show top 50 people
     peopleDF.sort($"height".desc).take(50)
       .foreach { row => println(row(0) + "," + row(1) + "," + row(2)) }
     println("Sorted the people by height in descend order,Show top 50 people")
     println("<Display #5>")
-
 
     //The Average height for Men
     peopleDF
@@ -281,14 +268,12 @@ object PeopleDataStatistics {
     println("The Average height for Men")
     println("<Display #6>")
 
-
     //The Max height for Women
     peopleDF
       .filter(peopleDF("gender").equalTo("F"))
       .agg("height" -> "max").show()
     println("The Max height for Women:")
     println("<Display #7>")
-
 
     //......
     println("All the statistics actions are finished on structured People data.")
@@ -337,33 +322,27 @@ object PeopleDataStatisticsParquet {
 
     import sqlCtx.implicits._
 
-
     val schemaArray = schemaString.split(",")
     val schema = StructType(schemaArray.map(fieldName => StructField(fieldName, StringType, true)))
 
-
     val peopleDF = sqlCtx.read.parquet("/sample_people_info")
     peopleDF.createOrReplaceTempView("people")
-
 
     //get the male people whose height is more than 180
     val higherMale180 = sqlCtx.sql("select id,gender, height from people where height > 180 and gender='M'")
     println("Men whose height are more than 180: " + higherMale180.count())
     println("<Display #1>")
 
-
     //get the female people whose height is more than 170
     val higherFemale170 = sqlCtx.sql("select id,gender, height from people where height > 170 and gender='F'")
     println("Women whose height are more than 170: " + higherFemale170.count())
     println("<Display #2>")
-
 
     //Grouped the people by gender and count the number
     peopleDF
       .groupBy(peopleDF("gender")).count().show()
     println("People Count Grouped By Gender")
     println("<Display #3>")
-
 
     //Men whose height is more than 210
     peopleDF
@@ -373,13 +352,11 @@ object PeopleDataStatisticsParquet {
     println("Men whose height is more than 210")
     println("<Display #4>")
 
-
     //Sorted the people by height in descend order,Show top 50 people
     peopleDF.sort($"height".desc).take(50)
       .foreach { row => println(row(0) + "," + row(1) + "," + row(2)) }
     println("Sorted the people by height in descend order,Show top 50 people")
     println("<Display #5>")
-
 
     //The Average height for Men
     peopleDF
@@ -389,14 +366,12 @@ object PeopleDataStatisticsParquet {
     println("The Average height for Men")
     println("<Display #6>")
 
-
     //The Max height for Women
     peopleDF
       .filter(peopleDF("gender").equalTo("F"))
       .agg("height" -> "max").show()
     println("The Max height for Women:")
     println("<Display #7>")
-
 
     println("All the statistics actions are finished on structured People data.")
   }
@@ -438,9 +413,7 @@ su hive -l -s /bin/bash -c '/opt/hive/bin/beeline'
 
 ```sql
 drop table people2;
-
 create table people2(id STRING,gender STRING,height STRING) row format delimited fields terminated by ' ' stored as textfile;
-
 load data inpath '/sample_people_info.txt' overwrite into table people2;
 select count(*) from people2;
 
@@ -465,7 +438,6 @@ Query-7  |  select max(height) from people2 where gender='F' |
 drop table people;
 CREATE EXTERNAL TABLE people(id STRING,gender STRING,height STRING) STORED AS PARQUETFILE LOCATION '/sample_people_info';
 select count(*) from people;
-
 ```
 
 序号|   测试SQL|  
@@ -495,6 +467,7 @@ Query-7  | 52.97 | 47.06
 
 
 ### 2.5 单表测试结果对比
+
 序号|   Spark(TEXT)|  Spark(Parquet)|   Hive(TEXT)|  Hive(Parquet)
 --|---|--|---|--
 Query-1  | 33.51 | 5.76| 60.92 | 44.92
@@ -560,7 +533,6 @@ object UserDataGenerator {
     //how many records to be generated
     private val MAX_RECORDS = 10000000
 
-
     def main(args: Array[String]): Unit = {
         generateDataFile(FILE_PATH, MAX_RECORDS)
     }
@@ -584,11 +556,8 @@ object UserDataGenerator {
                 //generate the role of the user
 
                 var roleIndex: Int = rand.nextInt(ROLE_ID_ARRAY.length)
-
                 var role = ROLE_ID_ARRAY(roleIndex)
-
                 //generate the region where the user is
-
                 var regionIndex: Int = rand.nextInt(REGION_ID_ARRAY.length)
 
                 var region = REGION_ID_ARRAY(regionIndex)
@@ -626,7 +595,6 @@ object UserDataGenerator {
 
 ```scala
 import java.io.FileWriter
-
 import scala.util.Random
 
 object ConsumingDataGenerator {
@@ -690,10 +658,7 @@ object ConsumingDataGenerator {
 
 ```shell
 su hdfs -c 'hadoop fs -copyFromLocal /root/sample_user_data.txt /sample_user_data.txt'
-
 su hdfs -c 'hadoop fs -copyFromLocal /root/sample_consuming_data.txt /sample_consuming_data.txt'
-
-
 su hdfs -c 'hadoop fs -ls /'
 ```
 
@@ -717,16 +682,12 @@ target/spark-example-1.0-SNAPSHOT.jar hdfs://master.test.com:8020/sample_user_da
 
 ```scala
 package com.test
-
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
 
-
-
 object UserConsumingDataStatistics {
     def main(args: Array[String]) {
-
         println("args.length:" + args.length)
 
         if (args.length < 1) {
@@ -756,17 +717,14 @@ object UserConsumingDataStatistics {
             return
         }
 
-
         //cache the DF in memory with serializer should make the program run much faster
         userDF.persist(StorageLevel.MEMORY_ONLY_SER)
         orderDF.persist(StorageLevel.MEMORY_ONLY_SER)
-
 
         //The number of people who have orders in the year 2015
         val count = orderDF.filter(orderDF("orderDate").contains("2015")).join(
             userDF, orderDF("userID").equalTo(userDF("userID"))).count()
         println("The number of people who have orders in the year 2015:" + count)
-
 
         //total orders produced in the year 2014
         val countOfOrders2014 = sqlCtx.sql("SELECT * FROM orders where  orderDate like '2014%'").count()
@@ -777,8 +735,6 @@ object UserConsumingDataStatistics {
         //Orders that are produced by user with ID 1 information overview
         val countOfOrdersForUser1 = sqlCtx.sql("SELECT o.orderID,o.productID, o.price,u.userID FROM orders o,user u where u.userID = 1 and u.userID = o.userID").show()
         println("Orders produced by user with ID 1 showed.")
-
-
 
         //Calculate the max,min,avg prices for the orders that are producted by user with ID 10
         val orderStatsForUser10 = sqlCtx.sql("SELECT max(o.price) as maxPrice, min(o.price) as minPrice,avg(o.price) as avgPrice,u.userID FROM orders o, user u where u.userID = 10 and u.userID = o.userID group by u.userID")
@@ -802,25 +758,16 @@ target/spark-example-1.0-SNAPSHOT.jar hdfs://master.test.com:8020/sample_user_da
 ```
 
 + 测试结果
+
 ```shell
 Job 0 finished: count at UserConsumingDataStatistics.scala:45, took 103.472787 s
 The number of people who have orders in the year 2015:6249355
-
-
 Job 1 finished: count at UserConsumingDataStatistics.scala:50, took 74.912479 s
-
 total orders produced in the year 2014:6251708
-
-
 Job 2 finished: show at UserConsumingDataStatistics.scala:56, took 74.572010 s
-
-
 Job 3 finished: show at UserConsumingDataStatistics.scala:56, took 0.111601 s
-
 Job 4 finished: show at UserConsumingDataStatistics.scala:56, took 0.109862 s
-
 Job 5 finished: show at UserConsumingDataStatistics.scala:56, took 0.481688 s
-
 2019-09-19 16:08:25,699 INFO scheduler.DAGScheduler: Job 6 finished: show at UserConsumingDataStatistics.scala:56, took 0.309017 s
 +--------+---------+-----+------+
 | orderID|productID|price|userID|
@@ -830,11 +777,7 @@ Job 5 finished: show at UserConsumingDataStatistics.scala:56, took 0.481688 s
 |75084459|        2|  101|     1|
 | 8477710|        9|  425|     1|
 +--------+---------+-----+------+
-
 Orders produced by user with ID 1 showed.
-
-
-
 Job 7 finished: collect at UserConsumingDataStatistics.scala:64, took 82.077812 s
 Minimum Price=461;Maximum Price=1512;Average Price=955.6
 ```
