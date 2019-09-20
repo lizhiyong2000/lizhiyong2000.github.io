@@ -25,6 +25,7 @@ tags: SparkSQL Hive Presto
 --   |  --- |--
 Hive |  2.3.0 |  
 Spark|  2.4.4 |  
+Presto|  0。225 |  
 
 ## 2 单表测试
 
