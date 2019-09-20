@@ -1,10 +1,10 @@
 ---
 layout: "post"
-title: "SparkSQL与HiveSQL对比测试"
+title: "SparkSQL与HiveSQL、Presto对比测试"
 date: "2019-09-19 18:52"
 categories: Hadoop
-description: SparkSQL与HiveSQL对比测试
-tags: SparkSQL Hive
+description: SparkSQL与HiveSQL、Presto对比测试
+tags: SparkSQL Hive Presto
 ---
 
 * content
@@ -466,17 +466,79 @@ Query-6  | 55.06| 49.17
 Query-7  | 52.97 | 47.06
 
 
-### 2.5 单表测试结果对比
+### 2.5 Presto SQL查询测试
 
-序号|   Spark(TEXT)|  Spark(Parquet)|   Hive(TEXT)|  Hive(Parquet)
---|---|--|---|--
-Query-1  | 33.51 | 5.76| 60.92 | 44.92
-Query-2  | 27.83 | 3.09| 67.31 | 43.85
-Query-3  | 0.52  | 0.60| 61.54 | 42.35
-Query-4  | 0.19  | 0.15| 37.85  | 0.53
-Query-5  | 31.05 | 8.29| 59.40 | 63.30
-Query-6  | 29.46 | 7.38| 55.06| 49.17
-Query-7  | 26.86 | 4.63| 52.97 | 47.06
+Presto 通过Hive connector进行查询，使用与Hive一致的数据表。
+
+#### 2.5.1 TEXT文件
+
+```sql
+drop table people2;
+create table people2(id STRING,gender STRING,height STRING) row format delimited fields terminated by ' ' stored as textfile;
+load data inpath '/sample_people_info.txt' overwrite into table people2;
+select count(*) from people2;
+
+```
+
+
+序号|   测试SQL|  
+--|---|--
+Query-1  | select count(*) from people2 where cast(height as integer) > 180 and gender='M'  |  
+Query-2  | select count(*) from people2 where cast(height as integer) > 170 and gender='F'  |  
+Query-3  |  select count(*) from people2 group by gender |  
+Query-4  |  select id, gender, height from people2 where gender='M' and cast(height as integer) > 210 limit 50 |  
+Query-5  |   select id, gender, height from people2 order by  cast(height as integer) desc limit 50|  
+Query-6  |  select avg(cast(height as integer)) from people2 where gender='M' |  
+Query-7  |  select max(cast(height as integer)) from people2 where gender='F' |  
+
+
+#### 2.5.2 Parquet格式
+
+创建parquet存储的外表
+
+```sql
+drop table people;
+CREATE EXTERNAL TABLE people(id STRING,gender STRING,height STRING) STORED AS PARQUETFILE LOCATION '/sample_people_info';
+select count(*) from people;
+```
+
+序号|   测试SQL|  
+--|---|--
+Query-1  | select count(*) from people where cast(height as integer) > 180 and gender='M'  |  
+Query-2  | select count(*) from people where cast(height as integer) > 170 and gender='F'  |  
+Query-3  |  select count(*) from people group by gender |  
+Query-4  |  select id, gender, height from people where gender='M' and cast(height as integer) > 210 limit 50 |  
+Query-5  |   select id, gender, height from people order by  cast(height as integer) desc limit 50|  
+Query-6  |  select avg(cast(height as integer)) from people where gender='M' |  
+Query-7  |  select max(cast(height as integer)) from people where gender='F' |  
+
+#### 2.5.3 Hive SQL测试结果
+
+
+
+
+序号|   Presto(TEXT)|  Presto(Parquet)
+--|---|--
+Query-1  | 16.93 | 6.20
+Query-2  | 12.02 | 6.41
+Query-3  | 12.32 | 4.43
+Query-4  | 1.52  | 4.35
+Query-5  | 15.90 | 13.67
+Query-6  | 10.36 | 6.92
+Query-7  | 8.32 | 7.94
+
+
+### 2.6 单表测试结果对比
+
+序号|   Spark(TEXT)|  Spark(Parquet)|   Hive(TEXT)|  Hive(Parquet)|   Presto(TEXT)|  Presto(Parquet)
+--|---|--|---|--|---|--
+Query-1  | 33.51 | 5.76| 60.92 | 44.92| 16.93 | 6.20
+Query-2  | 27.83 | 3.09| 67.31 | 43.85| 12.02 | 6.41
+Query-3  | 0.52  | 0.60| 61.54 | 42.35| 12.32 | 4.43
+Query-4  | 0.19  | 0.15| 37.85  | 0.53| 1.52  | 4.35
+Query-5  | 31.05 | 8.29| 59.40 | 63.30| 15.90 | 13.67
+Query-6  | 29.46 | 7.38| 55.06| 49.17 | 10.36 | 6.92
+Query-7  | 26.86 | 4.63| 52.97 | 47.06| 8.32 | 7.94
 
 
 ## 3 多表测试
@@ -967,17 +1029,55 @@ Query-2  | 107.354 | 73.401
 Query-3  | 403.658 | 101.742
 Query-4  | 278.132  | 178.679
 
+### 3.5 Presto查询测试
 
+#### 3.5.1 TEXT格式
+
++ 测试SQL
+
+序号|   测试SQL|  
+:--:|---|--
+Query-1  | select count(*) from users u join orders o on o.userID=u.userID where o.orderDate like '2015%' |  
+Query-2  | select count(*) from orders where  orderDate like '2014%'|  
+Query-3  |  SELECT o.orderID,o.productID, o.price,u.userID FROM orders o,users u where u.userID = '1' and u.userID = o.userID |  
+Query-4  |  SELECT max(o.price) as maxPrice, min(o.price) as minPrice,avg(o.price) as avgPrice,u.userID FROM orders o, users u where u.userID = '10' and u.userID = o.userID group by u.userID; |  
+
+
+
+#### 3.5.2 Parquet格式
+
++ 测试SQL
+
+序号|   测试SQL|  
+--|---|--
+Query-1  | select count(*) from users2 u join orders2 o on o.userID=u.userID where o.orderDate like '2015%' |  
+Query-2  | select count(*) from orders2 where  orderDate like '2014%'|  
+Query-3  |  SELECT o.orderID,o.productID, o.price,u.userID FROM orders2 o,users2 u where u.userID = '1' and u.userID = o.userID |  
+Query-4  |  SELECT max(o.price) as maxPrice, min(o.price) as minPrice,avg(o.price) as avgPrice,u.userID FROM orders2 o, users2 u where u.userID = '10' and u.userID = o.userID group by u.userID |  
+
+
+
+#### 3.4.3 Presto SQL测试结果
+
+
+
+
+序号|   Presto(TEXT)|  Presto(Parquet)
+--|---|--
+Query-1  | 45.69 | 21.60
+Query-2  | 33.26 | 7.56
+Query-3  | 37.40 | 15.81
+Query-4  | 38.00  | 10.91
 
 ### 3.5 多表测试结果对比
 
 
-序号|   Spark(TEXT)|  Spark(Parquet)|   Hive(TEXT)|  Hive(Parquet)
---|---|--|---|--
-Query-1  | 103.47 | 88.66| 253.341 | 160.117
-Query-2  | 74.91 | 60.68| 107.354 | 73.401
-Query-3  | 75.59  | 71.14| 403.658 | 101.742
-Query-4  | 82.08  | 65.39| 278.132  | 178.679
+序号|   Spark(TEXT)|  Spark(Parquet)|   Hive(TEXT)|  Hive(Parquet)|   Presto(TEXT)|  Presto(Parquet)
+--|---|--|---|--|---|--
+Query-1  | 103.47 | 88.66| 253.341 | 160.117| 45.69 | 21.60
+Query-2  | 74.91 | 60.68| 107.354 | 73.401| 33.26 | 7.56
+Query-3  | 75.59  | 71.14| 403.658 | 101.742| 37.40 | 15.81
+Query-4  | 82.08  | 65.39| 278.132  | 178.679| 38.00  | 10.91
 
 
 
