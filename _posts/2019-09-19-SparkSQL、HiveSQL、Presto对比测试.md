@@ -11,7 +11,7 @@ tags: SparkSQL Hive Presto
 {:toc}
 
 <div class="postImg" style="background-image:url(http://carforeasy.cn/SparkSQL与HiveSQL对比测试-881741ef.png)" ></div>
-> “Spark为结构化数据处理引入了一个称为Spark SQL的编程模块。它提供了一个称为DataFrame（数据框）的编程抽象，DF的底层仍然是RDD，并且可以充当分布式SQL查询引擎。本文将对相同的数据使用Spark SQL和Hive SQL进行简单的对比测试。”
+> “Spark为结构化数据处理引入了一个称为Spark SQL的编程模块。它提供了一个称为DataFrame（数据框）的编程抽象，DF的底层仍然是RDD，并且可以充当分布式SQL查询引擎。本文将对相同的数据使用Spark SQL和Hive SQL以及Presto进行简单的对比测试。”
 
 
 
