@@ -10,7 +10,7 @@ tags: Hadoop Kerberos Ranger
 * content
 {:toc}
 
-<div class="postImg" style="background-image:url(http://carforeasy.cn/Presto安装部署-4745cd1d.png)" ></div>
+<div class="postImg" style="background-image:url(http://carforeasy.cn/Hadoop集群开启Kerberos并集成Ranger-2e4027ea.png)" ></div>
 > “本文介绍在之前安装好的Hadoop 3集群之上开启Kerberos认证，并安装Ranger进行Hadoop集群的权限控制。”
 
 
@@ -275,6 +275,22 @@ total 16
         <name>yarn.nodemanager.principal</name>
         <value>yarn/_HOST@TEST.COM</value>
     </property>
+    <property>
+        <name>yarn.nodemanager.container-executor.class</name>
+        <value>org.apache.hadoop.yarn.server.nodemanager.LinuxContainerExecutor</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.linux-container-executor.group</name>
+        <value>hadoop</value>
+    </property>
+
+
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler</value>
+    </property>
+
+
 
 ```
 
@@ -332,6 +348,30 @@ DataNode采用JSVC启动，将jsvc拷贝至/opt/hadoop/bin，添加可执行权�
 ```
 export JSVC_HOME=/opt/hadoop/bin
 export HDFS_DATANODE_SECURE_USER="hdfs"
+```
+
+#### 1.3.6 配置nodemanager containerexecutor
+
++ container-executor.cfg
+
+```
+yarn.nodemanager.linux-container-executor.group=hadoop
+banned.users=bin
+min.user.id=1000
+allowed.system.users=##comma separated list of system users who CAN run applications
+feature.tc.enabled=false
+```
+
++ 修改文件及目录权限
+
+```
+chown root:hadoop /opt/hadoop/bin/container-executor
+chmod 6050 /opt/hadoop/bin/container-executor
+
+chown root:hadoop /opt/hadoop/etc/hadoop/container-executor.cfg
+chown root:hadoop /opt/hadoop/etc/hadoop/
+chown root:hadoop /opt/hadoop/etc/
+chown root:hadoop /opt/hadoop/
 ```
 
 ### 1.4 服务重启及验证
@@ -417,6 +457,18 @@ ps -ef|grep -E "resourcemanager|nodemanager"|grep -v grep|awk '{print $2}'|xargs
 
 #### 1.4.3.1 Yarn集群验证
 
+```
+[root@master ~]# klist
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: hdfs/master.test.com@TEST.COM
+
+[root@master ~]hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.2.jar wordcount -Dmapreduce.job.queuename=default hdfs://master.test.com:8020/wordcount.txt /tmp/result2
+
+[root@master ~]# hdfs dfs -cat /tmp/result2/part-r-00000
+count   2
+hadoop  1
+test    2
+```
 ## 2. Ranger安装及配置
 
 ### 2.1 ranger编译
@@ -693,8 +745,52 @@ drwxr-xr-x   - test supergroup          0 2019-09-30 09:49 /ranger/test
 
 ### 3.2 Yarn安装Ranger插件
 
-#### 3.2.1 ranger-yarn-plugin安装
+#### 3.2.1 ranger添加hdfs服务
+
+首先在ranger中添加yarn-test这个服务，配置如下：
+
+![](http://carforeasy.cn/Hadoop集群开启Kerberos并集成Ranger-839659a5.png)
+
+#### 3.2.2 ranger-yarn-plugin安装
+
+将ranger-2.1.0-SNAPSHOT-yarn-plugin.tar.gz在resourcemanager节点上解压，修改install.properties:
+
+```ini
+POLICY_MGR_URL=http://kdc.test.com:6080
+REPOSITORY_NAME=yarn-test
+COMPONENT_INSTALL_DIR_NAME=/opt/hadoop
+CUSTOM_USER=yarn
+CUSTOM_GROUP=hadoop
+```
+
+之后运行enable-yarn-plugin.sh进行安装。
+安装完成后需要重启resourcemanager服务。
 #### 3.2.2 权限测试
+
+在Ranger中为Yarn配置策略，仅允许yarn用户提交任务：
+
+![](http://carforeasy.cn/Hadoop集群开启Kerberos并集成Ranger-97df8b73.png)
+
+再次使用test用户提交任务，报错：
+
+```
+org.apache.hadoop.yarn.exceptions.YarnException: org.apache.hadoop.security.AccessControlException: User test does not have permission to submit application_1570680466442_0005 to queue default
+        at org.apache.hadoop.yarn.ipc.RPCUtil.getRemoteException(RPCUtil.java:38)
+        at org.apache.hadoop.yarn.server.resourcemanager.RMAppManager.createAndPopulateNewRMApp(RMAppManager.java:427)
+        at org.apache.hadoop.yarn.server.resourcemanager.RMAppManager.submitApplication(RMAppManager.java:320)
+        at org.apache.hadoop.yarn.server.resourcemanager.ClientRMService.submitApplication(ClientRMService.java:647)
+        at org.apache.hadoop.yarn.api.impl.pb.service.ApplicationClientProtocolPBServiceImpl.submitApplication(ApplicationClientProtocolPBServiceImpl.java:277)
+        at org.apache.hadoop.yarn.proto.ApplicationClientProtocol$ApplicationClientProtocolService$2.callBlockingMethod(ApplicationClientProtocol.java:563)
+        at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:523)
+        at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:991)
+        at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:872)
+        at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:818)
+        at java.security.AccessController.doPrivileged(Native Method)
+        at javax.security.auth.Subject.doAs(Subject.java:422)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1729)
+        at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2678)
+```
+
 
 
 ## 4. 参考链接
@@ -702,3 +798,4 @@ drwxr-xr-x   - test supergroup          0 2019-09-30 09:49 /ranger/test
 + [Cloudera Manager 配置 LDAP 集成 Kerberos](http://www.yanglajiao.com/article/u011026329/79171996)
 + [Hadoop集群上搭建Ranger](https://www.qingtingip.com/h_241390.html)
 + [在kerberos-HA环境下的ranger编译安装](https://xiuechen.github.io/2017/04/13/在kerberos-HA环境下的ranger编译安装/)
++ [Hadoop YARN：调度性能优化实践](https://www.infoq.cn/article/dh5UpM_fJrtj1IgxQDsq)
