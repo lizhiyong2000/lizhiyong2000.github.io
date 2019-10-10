@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "Hadoop集群开启Kerberos并集成Ranger"
-date: "2019-09-30 14:43"
+date: "2019-10-10 14:43"
 categories: Hadoop
 description: Hadoop集群开启Kerberos并集成Ranger
 tags: Hadoop Kerberos Ranger
@@ -432,7 +432,7 @@ ps -ef|grep -E "resourcemanager|nodemanager"|grep -v grep|awk '{print $2}'|xargs
 
 #### 1.4.3 Kerberos功能验证
 
-#### 1.4.3.1 HDFS集群验证
+##### 1.4.3.1 HDFS集群验证
 
 + 使用WebUI进行验证
 ![](http://carforeasy.cn/Hadoop集群开启Kerberos并集成Ranger-0e95f2a9.png)
@@ -455,7 +455,7 @@ ps -ef|grep -E "resourcemanager|nodemanager"|grep -v grep|awk '{print $2}'|xargs
   curl -s -i --negotiate -u:anyUser  http://master.test.com:50070/webhdfs/v1/?op=LISTSTATUS
   ```
 
-#### 1.4.3.1 Yarn集群验证
+##### 1.4.3.2 Yarn集群验证
 
 ```
 [root@master ~]# klist
