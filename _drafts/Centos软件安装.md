@@ -181,24 +181,6 @@ pip install docker-compose
 ```
 
 
-### 2.10 SS服务器
-```
-wget --no-check-certificate -O shadowsocks.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
-chmod +x shadowsocks.sh
-./shadowsocks.sh 2>&1 | tee shadowsocks.log
-```
-
-```
-yum -y install python-devel python-pip
-wget https://github.com/dounine/obfsproxy/raw/master/obfsproxy-0.2.13.tar.gz
-tar -zxvf obfsproxy-0.2.13.tar.gz
-cd obfsproxy-0.2.13 && python setup.py install
-./bin/obfsproxy obfs3 --dest=127.0.0.1:14960 server 0.0.0.0:14961 &
-
-
-./bin/obfsproxy obfs3 --dest=136.244.112.170:14961 client 127.0.0.1:14960 &
-```
-
 ## 参考链接
 
 
