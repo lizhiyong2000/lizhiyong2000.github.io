@@ -20,7 +20,7 @@ tags: Hadoop Knox CAS SSO
 
 ## 1. Knox安装
 
-## 1.1 安装Knox
+### 1.1 安装Knox
 
 可以直接从[Knox网站](https://cwiki.apache.org/confluence/display/KNOX/Apache+Knox+Releases)下载knox-1.3.0.zip解压即可。
 
@@ -31,7 +31,7 @@ git clone https://gitbox.apache.org/repos/asf/knox.git
 mvn -Ppackage,release clean install -DskipTests=true
 ```
 
-## 1.2 基础配置
+### 1.2 基础配置
 
 由于之前Hadoop集群开启了Kerberos认证，并采用了Kerberos + LDAP统一认证，需要为Knox生成keytab，并在gateway-site.xml配置。
 
