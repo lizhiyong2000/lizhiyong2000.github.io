@@ -2,7 +2,7 @@
 layout: "post"
 title: "使用Atom作为Markdown编辑器"
 date: "2018-12-17 16:15"
-categories: Markdown
+categories: IDE
 description: 使用Atom作为Markdown编辑器
 tags: Markdown Atom
 ---

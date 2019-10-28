@@ -16,3 +16,11 @@ db.getCollection('playitems').distinct("thumb_resolution").sort()
 ```
 db.getCollection('playitems').find({$and:[{thumb_resolution:{$exists:false}}, { $where: 'this.thumb.length > 0' }]}).count()
 ```
+
+
+
+
+
+```
+db.getCollection('playitems').find({$and:[{thumb_resolution:{$exists:false}}, { $where: 'this.thumb_failed_count > 0' }]}).count()
+```
