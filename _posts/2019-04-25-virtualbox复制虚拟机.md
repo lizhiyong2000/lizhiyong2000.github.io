@@ -2,7 +2,7 @@
 layout: "post"
 title: "VirtualBox复制虚拟机"
 date: "2019-04-25 09:57"
-categories: VirtualBox
+categories: 操作系统
 description: VirtualBox复制虚拟机
 tags: VirtualBox Centos
 ---

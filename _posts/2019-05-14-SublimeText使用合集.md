@@ -2,7 +2,7 @@
 layout: "post"
 title: "SublimeText使用合集"
 date: "2019-05-14 15:35"
-categories: SublimeText
+categories: IDE
 description: SublimeText使用合集
 tags: SublimeText
 ---

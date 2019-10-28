@@ -2,7 +2,7 @@
 layout: "post"
 title: "PostgreSQL数据库使用"
 date: "2019-02-27 08:23"
-categories: PostgreSQL
+categories: 数据库
 description: PostgreSQL数据库使用
 tags: PostgreSQL
 ---
