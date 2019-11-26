@@ -1,4 +1,11 @@
 
++ gradle全局代理
+~/.gradle/gradle.properties
+
+systemProp.https.proxyPort=1080
+systemProp.http.proxyHost=localhost
+systemProp.https.proxyHost=localhost
+systemProp.http.proxyPort=1080
 
 
 + gradle jar存储目录
