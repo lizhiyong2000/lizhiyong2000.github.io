@@ -1,0 +1,212 @@
+header {
+  position: relative;
+  height: 100px;
+  padding-top: 30px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  background: #0767c8;
+  background: -webkit-linear-gradient(top, #086ed5, #055db5);
+  background: linear-gradient(to bottom, #086ed5, #055db5);
+  border-bottom: 1px solid #044e97;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  a {
+    color: rgba(255, 255, 255, 0.5);
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+    &:hover {
+      color: rgba(69, 157, 245, 0.9);
+    }
+  }
+  .headImg {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    margin-left: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    //background: #0767c8;
+    //background: -webkit-linear-gradient(top, #086ed5, #055db5);
+    //background: linear-gradient(to bottom, #086ed5, #055db5);
+    background: url("/images/head.jpg") no-repeat;
+    background-size: 40px;
+  }
+  .wrapper {
+    width: 1140px;
+    margin: 0 auto;
+    line-height: 52px;
+    .brand {
+      font-weight: 600;
+      font-size: 36px;
+      color: #ffffff;
+    }
+    small {
+      font-family: Merriweather-Light,
+      -apple-system,
+      Verdana,
+      "PingFang SC",
+      "Helvetica Neue",
+      Arial,
+      "Hiragino Sans GB",
+      "Microsoft YaHei",
+      "WenQuanYi Micro Hei",
+      sans-serif;
+      margin-left: 26px;
+      font-size: 14px;
+      color: #bdd3ea;
+    }
+    .menu {
+      display: none;
+    }
+    nav {
+      float: right;
+      ul {
+        font-size: 0;
+        margin: 0;
+        padding: 0;
+        li {
+          list-style: none;
+          font-size: 14px;
+          display: inline-block;
+          -webkit-transition: 0.2s ease;
+          transition: 0.2s ease;
+          a {
+            display: inline-block;
+            padding: 0 15px;
+            height: 30px;
+            line-height: 30px;
+            &:hover {
+              color: #ffffff;
+            }
+            i {
+              margin-right: 5px;
+            }
+          }
+          > .active {
+            color: #ffffff;
+            font-weight: 700;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 770px) {
+  header {
+    .wrapper {
+      width: 90%;
+      line-height: 50px;
+      .brand {
+        margin-left: 10px;
+        font-size: 20px;
+      }
+      small {
+        margin-left: 15px;
+        font-size: 12px;
+      }
+      .menu {
+        display: none;
+      }
+      nav {
+        ul {
+          li {
+            a {
+              padding: 0 10px;
+              height: 30px;
+              line-height: 30px;
+              i {
+                margin-right: 4px;
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  header {
+    margin-bottom: 15px;
+    .wrapper {
+      width: 95%;
+      margin: 0 auto;
+      line-height: 48px;
+      position: relative;
+      z-index: 101;
+      .brand {
+        margin-left: 10px;
+        font-size: 20px;
+      }
+      small {
+        display: none;
+      }
+      .menu {
+        display: inline-block;
+        position: absolute;
+        z-index: -102;
+        right: 0;
+        top: 10px;
+        cursor: pointer;
+        padding: 5px 10px;
+        background: #104d8a;
+        border: 1px solid #0a6ccc;
+        border-radius: 4px;
+        color: #f8f8f2;
+        font-size: 17px;
+        -webkit-transition: 0.4s ease;
+        transition: 0.4s ease;
+      }
+      > .active {
+        background: #1480ea;
+        color: #fff;
+      }
+      .nav-show {
+        visibility: visible;
+        transform: scale(1);
+        opacity: 1;
+      }
+      nav {
+        position: absolute;
+        z-index: 100;
+        right: 0;
+        top: 60px;
+        text-align: center;
+        visibility: hidden;
+        transform-origin: 100% 0%;
+        transform: scale(0.1);
+        opacity: 0;
+        transition: 0.2s cubic-bezier(0.5, 0.1, 0.51, 1.38);
+        ul {
+          border-radius: 0 0 4px;
+          background: rgba(51, 51, 51, 0.72);
+          li {
+            font-size: 14px;
+            display: block;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            a {
+              color: white;
+              display: block;
+              padding: 2px 28px;
+              height: 40px;
+              line-height: 40px;
+            }
+            &:last-of-type {
+              border: none;
+            }
+            > .active {
+              background-color: black;
+              border-radius: 0;
+              box-shadow: none;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
