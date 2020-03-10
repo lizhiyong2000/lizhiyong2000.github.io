@@ -51,33 +51,33 @@ kerberos的安装配置也与其他节点一致，这里不做描述，后续将
 + 添加principal
 
   ```
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey datanode/host-106@CTYUN.COM'
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey HTTP/host-106@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey datanode/host-106@TEST.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey HTTP/host-106@TEST.COM'
 
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey datanode/host-107@CTYUN.COM'
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey HTTP/host-107@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey datanode/host-107@TEST.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey HTTP/host-107@TEST.COM'
 
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey datanode/host-108@CTYUN.COM'
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey HTTP/host-108@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey datanode/host-108@TEST.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey HTTP/host-108@TEST.COM'
   ```
 + 导出keytab文件
 
   - host-106
   ```
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab datanode/host-106@CTYUN.COM'
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab HTTP/host-106@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab datanode/host-106@TEST.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab HTTP/host-106@TEST.COM'
   ```
 
   - host-107
 
   ```
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab datanode/host-107@CTYUN.COM'
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab HTTP/host-106@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab datanode/host-107@TEST.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab HTTP/host-106@TEST.COM'
   ```
   - host-108
   ```
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab datanode/host-108@CTYUN.COM'
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab HTTP/host-108@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab datanode/host-108@TEST.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/hdfs/hdfs.keytab HTTP/host-108@TEST.COM'
   ```
 
 + 修改keytab权限
@@ -142,28 +142,28 @@ host-108
 ### Kerberos相关配置
 + 添加principal
   ```shell
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey nodemanager/host-106@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey nodemanager/host-106@TEST.COM'
 
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey nodemanager/host-107@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey nodemanager/host-107@TEST.COM'
 
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'addprinc -randkey nodemanager/host-108@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'addprinc -randkey nodemanager/host-108@TEST.COM'
   ```
 
 + 导出keytab文件
   - host-106
 
   ```shell
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/yarn/yarn.keytab nodemanager/host-106@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/yarn/yarn.keytab nodemanager/host-106@TEST.COM'
   ```
 
   - host-107
 
   ```shell
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/yarn/yarn.keytab nodemanager/host-107@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/yarn/yarn.keytab nodemanager/host-107@TEST.COM'
   ```
   - host-108
   ```shell
-  kadmin -p root/admin@CTYUN.COM -w 123456 -q 'xst -k /etc/security/keytab/yarn/yarn.keytab nodemanager/host-108@CTYUN.COM'
+  kadmin -p root/admin@TEST.COM -w 123456 -q 'xst -k /etc/security/keytab/yarn/yarn.keytab nodemanager/host-108@TEST.COM'
   ```
 
 + 修改keytab权限
@@ -184,10 +184,10 @@ host-108
 + ResourceManager上刷新节点
 
   ```sh
-  /usr/bin/sudo su yarn -l -s /bin/bash -c 'kinit -t /etc/security/keytab/yarn/yarn.keytab  resourcemanager/host-105@CTYUN.COM;/opt/cdh/hadoop/bin/yarn --config /opt/cdh/hadoop/etc/hadoop rmadmin -refreshNodes '
+  /usr/bin/sudo su yarn -l -s /bin/bash -c 'kinit -t /etc/security/keytab/yarn/yarn.keytab  resourcemanager/host-105@TEST.COM;/opt/cdh/hadoop/bin/yarn --config /opt/cdh/hadoop/etc/hadoop rmadmin -refreshNodes '
 
 
-  /usr/bin/sudo su yarn -l -s /bin/bash -c 'kinit -t /etc/security/keytab/yarn/yarn.keytab  resourcemanager/host-105@CTYUN.COM;/opt/cdh/hadoop/bin/yarn node -list '
+  /usr/bin/sudo su yarn -l -s /bin/bash -c 'kinit -t /etc/security/keytab/yarn/yarn.keytab  resourcemanager/host-105@TEST.COM;/opt/cdh/hadoop/bin/yarn node -list '
   ```
 在UI中查看节点状态：
   ![](http://carforeasy.cn/hadoop集群启用kerberos后动态增加删除节点-a20b1a58.png)
@@ -213,7 +213,7 @@ host-108
   + ResourceManager上刷新节点
 
   ```sh
-  /usr/bin/sudo su yarn -l -s /bin/bash -c 'kinit -t /etc/security/keytab/yarn/yarn.keytab  resourcemanager/host-105@CTYUN.COM;/opt/cdh/hadoop/bin/yarn --config /opt/cdh/hadoop/etc/hadoop rmadmin -refreshNodes '
+  /usr/bin/sudo su yarn -l -s /bin/bash -c 'kinit -t /etc/security/keytab/yarn/yarn.keytab  resourcemanager/host-105@TEST.COM;/opt/cdh/hadoop/bin/yarn --config /opt/cdh/hadoop/etc/hadoop rmadmin -refreshNodes '
   ```
 
   在UI中查看节点状态：
