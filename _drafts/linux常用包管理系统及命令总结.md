@@ -52,8 +52,18 @@ yum clean, yum clean all (= yum clean packages; yum clean oldheaders) 清除缓�
 
 1.查看有没安装某个rpm包(支持模糊匹配)
 
+<<<<<<< HEAD
 rpm -aq jen*  
 
 2.查看rpm包安装的文件与目录（多了一个l）
 
 rpm -aql jenkins*
+=======
+rpm -aq |grep openresty
+
+rpm -q openresty-1.13.6.2-1.el7.centos.x86_64
+
+2.查看rpm包安装的文件与目录（多了一个l）
+
+rpm -ql openresty-1.13.6.2-1.el7.centos.x86_64
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
