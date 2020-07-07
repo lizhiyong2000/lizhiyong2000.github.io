@@ -39,7 +39,11 @@ tags: Hadoop Kerberos
 + /var/kerberos/krb5kdc/kadm5.acl
 
   ```
+<<<<<<< HEAD
+  */admin@CTYUN.COM	*
+=======
   */admin@TEST.COM	*
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
   ```
 
 + /var/kerberos/krb5kdc/kdc.conf
@@ -50,7 +54,11 @@ tags: Hadoop Kerberos
   kdc_tcp_ports = 88
 
   [realms]
+<<<<<<< HEAD
+  CTYUN.COM = {
+=======
   TEST.COM = {
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
    #master_key_type = aes256-cts
    acl_file = /var/kerberos/krb5kdc/kadm5.acl
    dict_file = /usr/share/dict/words
@@ -77,25 +85,42 @@ tags: Hadoop Kerberos
    forwardable = true
    rdns = false
    pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
+<<<<<<< HEAD
+   default_realm = CTYUN.COM
+   default_ccache_name = KEYRING:persistent:%{uid}
+
+  [realms]
+   CTYUN.COM = {
+=======
    default_realm = TEST.COM
    default_ccache_name = KEYRING:persistent:%{uid}
 
   [realms]
    TEST.COM = {
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
     kdc = host-203
     admin_server = host-203
    }
 
   [domain_realm]
+<<<<<<< HEAD
+   .ctyun.com = CTYUN.COM
+   ctyun.com = CTYUN.COM
+=======
    .test.com = TEST.COM
    test.com = TEST.COM
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
   ```
 
 #### 1.2.3 启动KDC
 + 初始化认证数据库
 
   ```
+<<<<<<< HEAD
+   sudo kdb5_util create -s -r CTYUN.COM
+=======
    sudo kdb5_util create -s -r TEST.COM
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
   ```
 
 + 启动KDC服务，加入自启动
@@ -118,7 +143,11 @@ KDC maseter配置与单台时配置相同，仅需陪置crontab定时任务，�
 kdclist="host-204"
 /usr/sbin/kdb5_util dump /var/kerberos/krb5kdc/slave_datatrans
 
+<<<<<<< HEAD
+/usr/bin/kinit -k host/host-203@CTYUN.COM
+=======
 /usr/bin/kinit -k host/host-203@TEST.COM
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
 
 for kdc in $kdclist
 do
@@ -132,13 +161,22 @@ KDC slave配置与master配置相同，启动kdc服务后，配置kpropd：
 + /var/kerberos/krb5kdc/kpropd.acl
 
 ```
+<<<<<<< HEAD
+host/host-203@CTYUN.COM
+host/host-204@CTYUN.COM
+=======
 host/host-203@TEST.COM
 host/host-204@TEST.COM
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
 ```
 
 + 启动kpropd
 ```
+<<<<<<< HEAD
+kinit -k  host/host-204@CTYUN.COM
+=======
 kinit -k  host/host-204@TEST.COM
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
 kpropd -a /var/kerberos/krb5kdc/kpropd.acl
 
 ```
@@ -153,7 +191,11 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
   [libdefaults]
     renew_lifetime = 7d
     forwardable = true
+<<<<<<< HEAD
+    default_realm = CTYUN.COM
+=======
     default_realm = TEST.COM
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
     ticket_lifetime = 24h
     dns_lookup_realm = false
     dns_lookup_kdc = false
@@ -162,11 +204,19 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
     #default_tkt_enctypes = None
 
   [domain_realm]
+<<<<<<< HEAD
+    ctyun.com = CTYUN.COM
+    .ctyun.com = CTYUN.COM
+
+  [realms]
+   CTYUN.COM = {
+=======
     test.com = TEST.COM
     .test.com = TEST.COM
 
   [realms]
    TEST.COM = {
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
       master_kdc = host-203
       admin_server = host-203
       kdc = host-203
@@ -177,6 +227,15 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
 ## 2. 认证信息配置
 + 添加princinple
   ```
+<<<<<<< HEAD
+  sudo kadmin.local -q "addprinc hdfs/host-203@CTYUN.COM"
+  sudo kadmin.local -q "addprinc HTTP/host-203@CTYUN.COM"
+  ```
++ 生成keytab
+  ```
+  sudo kadmin -p root/admin  -q "xst -k hdfs.keytab hdfs/host-203@CTYUN.COM"
+  sudo kadmin -p root/admin  -q "xst -k hdfs.keytab HTTP/host-203@CTYUN.COM"
+=======
   sudo kadmin.local -q "addprinc hdfs/host-203@TEST.COM"
   sudo kadmin.local -q "addprinc HTTP/host-203@TEST.COM"
   ```
@@ -184,6 +243,7 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
   ```
   sudo kadmin -p root/admin  -q "xst -k hdfs.keytab hdfs/host-203@TEST.COM"
   sudo kadmin -p root/admin  -q "xst -k hdfs.keytab HTTP/host-203@TEST.COM"
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
   ```
 + 查看生成的keytab
   ```
@@ -191,6 +251,24 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
   Keytab name: FILE:hdfs.keytab
   KVNO Timestamp           Principal
   ---- ------------------- ------------------------------------------------------
+<<<<<<< HEAD
+    2 2019-04-01T18:32:31 hdfs/host-203@CTYUN.COM (aes256-cts-hmac-sha1-96)
+    2 2019-04-01T18:32:31 hdfs/host-203@CTYUN.COM (aes128-cts-hmac-sha1-96)
+    2 2019-04-01T18:32:32 hdfs/host-203@CTYUN.COM (des3-cbc-sha1)
+    2 2019-04-01T18:32:32 hdfs/host-203@CTYUN.COM (arcfour-hmac)
+    2 2019-04-01T18:32:32 hdfs/host-203@CTYUN.COM (camellia256-cts-cmac)
+    2 2019-04-01T18:32:32 hdfs/host-203@CTYUN.COM (camellia128-cts-cmac)
+    2 2019-04-01T18:32:32 hdfs/host-203@CTYUN.COM (des-hmac-sha1)
+    2 2019-04-01T18:32:32 hdfs/host-203@CTYUN.COM (des-cbc-md5)
+    2 2019-04-01T19:07:36 HTTP/host-203@CTYUN.COM (aes256-cts-hmac-sha1-96)
+    2 2019-04-01T19:07:37 HTTP/host-203@CTYUN.COM (aes128-cts-hmac-sha1-96)
+    2 2019-04-01T19:07:37 HTTP/host-203@CTYUN.COM (des3-cbc-sha1)
+    2 2019-04-01T19:07:37 HTTP/host-203@CTYUN.COM (arcfour-hmac)
+    2 2019-04-01T19:07:37 HTTP/host-203@CTYUN.COM (camellia256-cts-cmac)
+    2 2019-04-01T19:07:37 HTTP/host-203@CTYUN.COM (camellia128-cts-cmac)
+    2 2019-04-01T19:07:37 HTTP/host-203@CTYUN.COM (des-hmac-sha1)
+    2 2019-04-01T19:07:38 HTTP/host-203@CTYUN.COM (des-cbc-md5)
+=======
     2 2019-04-01T18:32:31 hdfs/host-203@TEST.COM (aes256-cts-hmac-sha1-96)
     2 2019-04-01T18:32:31 hdfs/host-203@TEST.COM (aes128-cts-hmac-sha1-96)
     2 2019-04-01T18:32:32 hdfs/host-203@TEST.COM (des3-cbc-sha1)
@@ -207,6 +285,7 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
     2 2019-04-01T19:07:37 HTTP/host-203@TEST.COM (camellia128-cts-cmac)
     2 2019-04-01T19:07:37 HTTP/host-203@TEST.COM (des-hmac-sha1)
     2 2019-04-01T19:07:38 HTTP/host-203@TEST.COM (des-cbc-md5)
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
   ```
 
 + 客户端中使用keytab
@@ -214,8 +293,13 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
   sudo kadmin -p root/admin
   ```
   ```
+<<<<<<< HEAD
+  sudo su hdfs -l -s /bin/bash -c 'kinit -k -t /opt/cdh/hadoop/etc/hadoop/hdfs.keytab hdfs/host-203@CTYUN.COM'
+  sudo su hdfs -l -s /bin/bash -c 'kinit -k -t /opt/cdh/hadoop/etc/hadoop/hdfs.keytab HTTP/host-203@CTYUN.COM'
+=======
   sudo su hdfs -l -s /bin/bash -c 'kinit -k -t /opt/cdh/hadoop/etc/hadoop/hdfs.keytab hdfs/host-203@TEST.COM'
   sudo su hdfs -l -s /bin/bash -c 'kinit -k -t /opt/cdh/hadoop/etc/hadoop/hdfs.keytab HTTP/host-203@TEST.COM'
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
   ```
 
 ## 3. Hadoop组件配置示例
@@ -235,6 +319,15 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
     <property>
         <name>hadoop.security.auth_to_local</name>
         <value>
+<<<<<<< HEAD
+          RULE:[2:$1@$0](hdfs/.*@.*CTYUN.COM)s/.*/hdfs/
+          RULE:[2:$1@$0](nn/.*@.*CTYUN.COM)s/.*/hdfs/
+          RULE:[2:$1@$0](jn/.*@.*CTYUN.COM)s/.*/hdfs/
+          RULE:[2:$1@$0](dn/.*@.*CTYUN.COM)s/.*/hdfs/
+          RULE:[2:$1@$0](nm/.*@.*CTYUN.COM)s/.*/yarn/
+          RULE:[2:$1@$0](rm/.*@.*CTYUN.COM)s/.*/yarn/
+          RULE:[2:$1@$0](jhs/.*@.*CTYUN.COM)s/.*/mapred/
+=======
           RULE:[2:$1@$0](hdfs/.*@.*TEST.COM)s/.*/hdfs/
           RULE:[2:$1@$0](nn/.*@.*TEST.COM)s/.*/hdfs/
           RULE:[2:$1@$0](jn/.*@.*TEST.COM)s/.*/hdfs/
@@ -242,6 +335,7 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
           RULE:[2:$1@$0](nm/.*@.*TEST.COM)s/.*/yarn/
           RULE:[2:$1@$0](rm/.*@.*TEST.COM)s/.*/yarn/
           RULE:[2:$1@$0](jhs/.*@.*TEST.COM)s/.*/mapred/
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
           DEFAULT
         </value>
     </property>
@@ -257,17 +351,29 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
 
      <property>
          <name>dfs.namenode.kerberos.principal</name>
+<<<<<<< HEAD
+         <value>hdfs/host-203@CTYUN.COM</value>
+=======
          <value>hdfs/host-203@TEST.COM</value>
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
      </property>
 
      <property>
          <name>dfs.namenode.kerberos.https.principal</name>
+<<<<<<< HEAD
+         <value>HTTP/host-203@CTYUN.COM</value>
+=======
          <value>HTTP/host-203@TEST.COM</value>
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
      </property>
 
      <property>
          <name>dfs.web.authentication.kerberos.principal</name>
+<<<<<<< HEAD
+         <value>HTTP/host-203@CTYUN.COM</value>
+=======
          <value>HTTP/host-203@TEST.COM</value>
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
      </property>
   ```
 
@@ -279,7 +385,11 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
       doNotPrompt=true
       useKeyTab=true
       keyTab="/opt/cdh/hadoop/etc/hadoop/hdfs.keytab"
+<<<<<<< HEAD
+      principal="hdfs/host-203@CTYUN.COM"
+=======
       principal="hdfs/host-203@TEST.COM"
+>>>>>>> dca06faa3ba2236b0ade43fabfb0c43245d1be19
       storeKey=true
       useTicketCache=false;
   };
