@@ -10,4 +10,4 @@ $InputTCPServerRun 514
 $template Remote,"/var/log/host/%fromhost-ip%/%$YEAR%-%$MONTH%-%$DAY%.log"                           
 :fromhost-ip, !isequal, "127.0.0.1" ?Remote
 
-*.*        @@10.224.80.43
+*.*        @@192.168.1.100
