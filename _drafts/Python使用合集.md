@@ -1,7 +1,8 @@
 [django使用xlwt导出excel文件实例代码](https://www.jb51.net/article/134523.htm)
 
+## PIP使用
 
-#### 让PIP源使用国内镜像
+### 让PIP源使用国内镜像
 
 
 
@@ -44,8 +45,50 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 trusted-host=mirrors.aliyun.com
 ```
 
+## pyenv使用
 
 
+### pyenv tkinter问题
+
+```
+pyenv uninstall 3.6.8
+※ env \
+ PATH="$(brew --prefix tcl-tk)/bin:$PATH" \
+ LDFLAGS="-L$(brew --prefix tcl-tk)/lib" \
+ CPPFLAGS="-I$(brew --prefix tcl-tk)/include" \
+ PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig" \
+ CFLAGS="-I$(brew --prefix tcl-tk)/include" \
+ PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I$(brew --prefix tcl-tk)/include' --with-tcltk-libs='-L$(brew --prefix tcl-tk)/lib -ltcl8.6 -ltk8.6'" \
+ pyenv install 3.6.8
+```
+
+验证结果：
+
+
+```
+ python -m tkinter -c "tkinter._test()"
+```
+
+### pyenv使用cache安装
+
+将对应的包下载至~/.pyenv/cache，文件名不能错。
+
+```
+ ➜  cache mv ~/Downloads/Python-3.6.8.tar.xz ./
+ ➜  cache env \
+  PATH="$(brew --prefix tcl-tk)/bin:$PATH" \
+  LDFLAGS="-L$(brew --prefix tcl-tk)/lib" \
+  CPPFLAGS="-I$(brew --prefix tcl-tk)/include" \
+  PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig" \
+  CFLAGS="-I$(brew --prefix tcl-tk)/include" \
+  PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I$(brew --prefix tcl-tk)/include' --with-tcltk-libs='-L$(brew --prefix tcl-tk)/lib -ltcl8.6 -ltk8.6'" \
+  pyenv install 3.6.8
+ python-build: use openssl@1.1 from homebrew
+ python-build: use readline from homebrew
+ Installing Python-3.6.8...
+ python-build: use readline from homebrew
+ python-build: use zlib from xcode sdk
+```
 
 
 ### 参考链接
