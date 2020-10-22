@@ -1,16 +1,4 @@
 
-
-软件重新签名：
-
-codesign --force --deep --sign - /Applications/name.app
-
-
-
-
-
-
-
-
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -22,16 +10,16 @@ codesign --force --deep --sign - /Applications/name.app
     <string>frpc</string>
     <key>ProgramArguments</key>
     <array>
-    <string>/usr/local/frp/frpc</string>
+    <string>/usr/local/bin/frpc</string>
     <string>-c</string>
-    <string>/usr/local/frp/frpc.ini</string>
+    <string>/usr/local/etc/frp/frpc.ini</string>
     </array>
   </dict>
 </plist>
 ```
 
 ```
-sudo launchctl load -w ～/Library/LaunchAgents/frpc.plist
+sudo launchctl load -w ~/Library/LaunchAgents/frpc.plist
 ```
 
 
