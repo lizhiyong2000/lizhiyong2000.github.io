@@ -1,6 +1,38 @@
+### Homebrew切换国内源
+
++ 替换为阿里源
+
+```shell
+# 替换brew.git:
+cd "$(brew --repo)"
+git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git
+# 替换homebrew-core.git:
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
+# 应用生效
+brew update
+# 替换homebrew-bottles:
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' >> ~/.bash_profile
+source ~/.bash_profile
+```
 
 
-软件重新签名：
+### LaunchPad图标重置
+
+```shell
+sudo find /private/var/folders/ \( -name com.apple.dock.iconcache -or -name com.apple.iconservices \) -exec rm -rfv {} \;
+
+sudo rm -rf /Library/Caches/com.apple.iconservices.store;
+
+defaults write com.apple.dock ResetLaunchPad -bool true
+
+killall Dock
+
+killall Finder
+```
+
+
+### 软件重新签名：
 
 codesign --force --deep --sign - /Applications/name.app
 
@@ -9,7 +41,7 @@ codesign --force --deep --sign - /Applications/name.app
 
 
 
-
+### FRP自启动
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -34,7 +66,7 @@ codesign --force --deep --sign - /Applications/name.app
 sudo launchctl load -w ～/Library/LaunchAgents/frpc.plist
 ```
 
-
+### 查看监听端口
 
 sudo lsof -iTCP -sTCP:LISTEN -P -n
 

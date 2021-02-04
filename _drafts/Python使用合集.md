@@ -1,5 +1,20 @@
 [django使用xlwt导出excel文件实例代码](https://www.jb51.net/article/134523.htm)
 
+## 源码安装Python
+
+```
+yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make libffi-devel
+
+./configure --prefix=/usr/local/python3
+make && make install
+
+ln -s /usr/local/python3/bin/python3.8 /usr/bin/python3
+
+ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3
+
+```
+
+
 ## PIP使用
 
 ### 让PIP源使用国内镜像
