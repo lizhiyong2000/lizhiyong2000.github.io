@@ -77,14 +77,12 @@ tags: Hadoop Kerberos
    forwardable = true
    rdns = false
    pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
+
    default_realm = TEST.COM
    default_ccache_name = KEYRING:persistent:%{uid}
 
   [realms]
    TEST.COM = {
-    kdc = host-203
-    admin_server = host-203
-   }
 
   [domain_realm]
    .test.com = TEST.COM
@@ -139,7 +137,6 @@ host/host-204@TEST.COM
 + 启动kpropd
 ```
 kinit -k  host/host-204@TEST.COM
-
 kpropd -a /var/kerberos/krb5kdc/kpropd.acl
 
 ```
@@ -214,6 +211,7 @@ kpropd -a /var/kerberos/krb5kdc/kpropd.acl
   ```
   sudo kadmin -p root/admin
   ```
+
   ```
   sudo su hdfs -l -s /bin/bash -c 'kinit -k -t /opt/cdh/hadoop/etc/hadoop/hdfs.keytab hdfs/host-203@TEST.COM'
   sudo su hdfs -l -s /bin/bash -c 'kinit -k -t /opt/cdh/hadoop/etc/hadoop/hdfs.keytab HTTP/host-203@TEST.COM'

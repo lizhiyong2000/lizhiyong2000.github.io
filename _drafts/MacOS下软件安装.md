@@ -16,7 +16,6 @@ echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew
 source ~/.bash_profile
 ```
 
-<<<<<<< HEAD
 
 ### LaunchPad图标重置
 
@@ -44,8 +43,6 @@ codesign --force --deep --sign - /Applications/name.app
 
 ### FRP自启动
 
-=======
->>>>>>> 94f9caf443104529f7372667ef775ccd9ec9ff26
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
