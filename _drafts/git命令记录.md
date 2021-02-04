@@ -1308,10 +1308,6 @@ git config --global excludesfile /Users/lizhiyong/.gitignore
     fetch = +refs/heads/*:refs/remotes/origin/*
 ```
 
-
-
-
-
 + 完美解决github访问速度慢
 
 其实 `git clone` 或者 `git push` 特别慢，并不是因为 `http://github.com` 的这个域名被限制了。而是 `http://github.global.ssl.fastly.Net` 这个域名被限制了。那么首先查到这个域名的ip，然后在hosts文件中进行 `ip -> 域名` 映射就可以了。

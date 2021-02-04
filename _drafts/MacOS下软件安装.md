@@ -16,6 +16,7 @@ echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew
 source ~/.bash_profile
 ```
 
+<<<<<<< HEAD
 
 ### LaunchPad图标重置
 
@@ -43,6 +44,8 @@ codesign --force --deep --sign - /Applications/name.app
 
 ### FRP自启动
 
+=======
+>>>>>>> 94f9caf443104529f7372667ef775ccd9ec9ff26
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -54,16 +57,16 @@ codesign --force --deep --sign - /Applications/name.app
     <string>frpc</string>
     <key>ProgramArguments</key>
     <array>
-    <string>/usr/local/frp/frpc</string>
+    <string>/usr/local/bin/frpc</string>
     <string>-c</string>
-    <string>/usr/local/frp/frpc.ini</string>
+    <string>/usr/local/etc/frp/frpc.ini</string>
     </array>
   </dict>
 </plist>
 ```
 
 ```
-sudo launchctl load -w ～/Library/LaunchAgents/frpc.plist
+sudo launchctl load -w ~/Library/LaunchAgents/frpc.plist
 ```
 
 ### 查看监听端口

@@ -8,7 +8,7 @@ Threads_connected
 
 
 
-
+show variables like '%interactive_timeout%';
 
 set global interactive_timeout=600
 
